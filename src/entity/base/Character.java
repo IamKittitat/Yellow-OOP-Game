@@ -1,5 +1,4 @@
 package entity.base;
 
-public class Character {
-
+public abstract class Character extends Entity{
 }
