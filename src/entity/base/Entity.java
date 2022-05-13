@@ -5,11 +5,14 @@ import sharedObject.IRenderable;
 public abstract class Entity implements IRenderable{
 	private String name;
 	private String detail;
-	private double x,y;
+	private double xPos,yPos;
 	private int z;
 	private boolean visible,removed;
 	
-	protected Entity(){
+	public Entity(String name,String detail,double x,double y){
+		setName(name);
+		setDetail(detail);
+		setX( );
 		visible = true;
 		removed = false;
 	}
