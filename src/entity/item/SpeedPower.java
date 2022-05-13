@@ -9,8 +9,8 @@ public class SpeedPower extends SpecialPower{
 	
 	public SpeedPower(int x,int y) {
 		super();
-		this.name = "Speed Power";
-		this.detail = "The Speed Power";
+		this.name = GameConstant.SPEED_BUFF_NAME;
+		this.detail = GameConstant.SPEED_BUFF_DETAIL;
 		setXPos(x);
 		setYPos(y);
 		setEaten(false);
@@ -25,13 +25,13 @@ public class SpeedPower extends SpecialPower{
 	}
 
 	@Override
-	public void gainPower(Entity entity) {
+	public void gainPower(Entity collector,Entity other) {
 		// Set pacmanSpeed += BUFF_SPEED
 
 	}
 
 	@Override
-	public void clearPower(Entity entity) {
+	public void clearPower(Entity collector,Entity other) {
 		// Set pacmanSpeed = PACMAN_SPEED
 	}
 }

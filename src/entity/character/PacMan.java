@@ -4,7 +4,7 @@ import constant.Color;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
-import entity.base.Item;
+import entity.base.SpecialPower;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
@@ -16,14 +16,14 @@ public class PacMan extends Character {
 
 	public PacMan(Color color) {
 		super(color);
-		this.name = "PacMan";
-		this.detail = "The PacMan";
+		this.name = GameConstant.PACMAN_NAME;
+		this.detail = GameConstant.PACMAN_DETAIL;
 		setXPos(GameConstant.PACMAN_SPAWN_X);
 		setYPos(GameConstant.PACMAN_SPAWN_Y);
 		setSpeed(GameConstant.PACMAN_SPEED);
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
-		setAngle(GameConstant.FIRST_PACMAN_DIRECTION);
+		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
 		setCanBeEaten(false);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
@@ -44,14 +44,22 @@ public class PacMan extends Character {
 	}
 
 	public void die() {
-		// ลด life
-		// ถ้าชีวิตเหลือ 0 เรียก endGame pacman lose
-		// ล้างบัพ
-		// เรียก reborn
+		this.setLife(this.getLife() - 1);
+		if( this.getLife() <= 0) {
+			// call endgame for pacman lose
+			return;
+		}
+		this.reborn();
 	}
 
 	public void reborn() {
-		// setXPos,setYPos
+		if(this.getPower() != null) {
+			this.setPower(null);
+		}
+
+		setXPos(GameConstant.PACMAN_SPAWN_X);
+		setYPos(GameConstant.PACMAN_SPAWN_Y);
+		this.setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
 	}
 
 	public void collideWith(Entity entity) {
@@ -65,8 +73,8 @@ public class PacMan extends Character {
 		 */
 	}
 
-	public void powerUp(Item item) {
-		// use item power (gainpower)
+	public void powerUp(SpecialPower specialPower) {
+		specialPower.gainPower(getPower(), getPower());
 	}
 
 	@Override

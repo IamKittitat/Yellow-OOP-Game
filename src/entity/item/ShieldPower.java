@@ -9,8 +9,8 @@ public class ShieldPower extends SpecialPower{
 	
 	public ShieldPower(int x,int y) {
 		super();
-		this.name = "Shield Power";
-		this.detail = "The Shield Power";
+		this.name = GameConstant.SHIELD_BUFF_NAME;
+		this.detail = GameConstant.SHIELD_BUFF_DETAIL;
 		setXPos(x);
 		setYPos(y);
 		setEaten(false);
@@ -25,13 +25,13 @@ public class ShieldPower extends SpecialPower{
 	}
 
 	@Override
-	public void gainPower(Entity entity) {
+	public void gainPower(Entity collector,Entity other) {
 		// pacman : canEatGhost;
 		// ghost : canEatPacMan;
 	}
 
 	@Override
-	public void clearPower(Entity entity) {
+	public void clearPower(Entity collector,Entity other) {
 		// pacman : canEatGhost;
 		// ghost : canEatPacMan;
 	}

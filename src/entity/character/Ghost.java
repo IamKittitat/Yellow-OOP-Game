@@ -13,12 +13,12 @@ public class Ghost extends Character {
 
 	public Ghost(Color color) {
 		super(color);
-		this.name = "Ghost";
-		this.detail = "The Ghost";
+		this.name = GameConstant.GHOST_NAME;
+		this.detail = GameConstant.GHOST_DETAIL;
 		setXPos(GameConstant.GHOST_SPAWN_X);
 		setYPos(GameConstant.GHOST_SPAWN_Y);
 		setSpeed(GameConstant.GHOST_SPEED);
-		setAngle(GameConstant.FIRST_GHOST_DIRECTION);
+		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
 		setCanEatPacMan(false);
 	}
 

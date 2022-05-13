@@ -9,8 +9,8 @@ public class StarvePower extends SpecialPower{
 	
 	public StarvePower(int x,int y) {
 		super();
-		this.name = "Special Power";
-		this.detail = "The Special Power";
+		this.name = GameConstant.STARVE_BUFF_NAME;
+		this.detail = GameConstant.STARVE_BUFF_DETAIL;
 		setXPos(x);
 		setYPos(y);
 		setEaten(false);
@@ -24,12 +24,12 @@ public class StarvePower extends SpecialPower{
 	}
 
 	@Override
-	public void gainPower(Entity entity) {
+	public void gainPower(Entity collector,Entity other) {
 		// Set pacmanCanEatPellet = false
 	}
 
 	@Override
-	public void clearPower(Entity entity) {
+	public void clearPower(Entity collector,Entity other) {
 		// Set pacmanCanEatPallet = true
 	}
 }

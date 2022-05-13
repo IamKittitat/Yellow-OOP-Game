@@ -7,8 +7,8 @@ public abstract class SpecialPower extends Item {
 		return duration;
 	}
 
-	public abstract void gainPower(Entity entity);
+	public abstract void gainPower(Entity collector,Entity other);
 
-	public abstract void clearPower(Entity entity);
+	public abstract void clearPower(Entity collector,Entity other);
 
 }
