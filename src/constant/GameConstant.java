@@ -1,7 +1,7 @@
 package constant;
 
 public class GameConstant {
-	public static final int PACMAN_SPEED = 5;
+//	public static final int PACMAN_SPEED;
 //	public static final int GHOST_SPED;
 //	public static final int BUFF_SPEED;
 //	public static final int DEBUFF_SPEED;
