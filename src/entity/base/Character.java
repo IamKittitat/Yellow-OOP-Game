@@ -5,15 +5,13 @@ import logic.GameLogic;
 import constant.CharacterColor;
 
 public abstract class Character extends Entity {
-	private CharacterColor color;
 	protected int speed;
 	protected Direction direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
 
-	public Character(CharacterColor color) {
+	public Character() {
 		super();
-		setColor(color);
 	}
 	
 	protected abstract void forward();
@@ -25,14 +23,6 @@ public abstract class Character extends Entity {
 	protected abstract void reborn();
 
 	public abstract void collideWith(Entity entity);
-	
-	public CharacterColor getColor() {
-		return color;
-	}
-
-	public void setColor(CharacterColor color) {
-		this.color = color;
-	}
 
 	public int getSpeed() {
 		return speed;

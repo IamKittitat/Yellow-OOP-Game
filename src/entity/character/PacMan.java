@@ -85,6 +85,7 @@ public class PacMan extends ControlCharacter {
 			}
 		} else if (entity instanceof SpecialPower) {
 			this.setPower((SpecialPower) entity);
+			System.out.println(this.getPower());
 			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}

@@ -7,6 +7,8 @@ import entity.base.Character;
 import entity.base.ControlCharacter;
 import entity.base.Entity;
 import entity.base.Item;
+import entity.base.Pellet;
+import entity.base.SpecialPower;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -16,6 +18,7 @@ import logic.GameLogic;
 
 public class Ghost extends ControlCharacter {
 	private boolean canEatPacMan;
+
 	public Ghost(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
@@ -42,11 +45,19 @@ public class Ghost extends ControlCharacter {
 	}
 
 	public void collideWith(Entity entity) {
-		/*
-		 * Check ว่าชนกับอะไร ชนกับ pacman: check ว่ากินpacmanได้ไหม? กินได้: เรียก
-		 * reborn ของpacman, ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้:
-		 * เรียก die ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ item: setPower, เรียกคสม item
-		 */
+		if (entity instanceof PacMan) {
+			if (canEatPacMan) {
+				((Character) entity).die();
+			} else {
+				if (canBeEaten()) {
+					this.die();
+				}
+			}
+		} else if (entity instanceof SpecialPower) {
+			this.setPower((SpecialPower) entity);
+			System.out.println(this.getPower());
+			// ((SpecialPower) entity).gainPower(null, null);
+		}
 	}
 
 	public void update() {

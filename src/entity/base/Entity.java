@@ -6,12 +6,17 @@ public abstract class Entity implements IRenderable {
 	protected String name;
 	protected String detail;
 	protected double xPos, yPos;
+	protected double radius;
 	private int z;
 	private boolean visible, removed;
 
 	public Entity() {
 		visible = true;
 		removed = false;
+	}
+	
+	protected boolean isCollide(Entity other){
+		return Math.hypot(this.xPos-other.xPos, this.yPos-other.yPos) <= this.radius+other.radius;
 	}
 
 	@Override
