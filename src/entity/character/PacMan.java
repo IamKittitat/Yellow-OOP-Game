@@ -32,7 +32,7 @@ public class PacMan extends ControlCharacter {
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
 		setPower(null);
-		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
@@ -56,7 +56,7 @@ public class PacMan extends ControlCharacter {
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(GameConstant.PACMAN_SPEED);
 		setPower(null);
-		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatGhost(false);
 		setCanEatPellet(true);

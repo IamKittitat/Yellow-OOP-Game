@@ -16,7 +16,6 @@ import logic.GameLogic;
 
 public class Ghost extends ControlCharacter {
 	private boolean canEatPacMan;
-
 	public Ghost(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
@@ -24,7 +23,7 @@ public class Ghost extends ControlCharacter {
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
@@ -37,7 +36,7 @@ public class Ghost extends ControlCharacter {
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
