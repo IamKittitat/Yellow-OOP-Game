@@ -62,7 +62,7 @@ public class Ghost extends ControlCharacter {
 
 	public void update() {
 		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay()) {
+		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
 			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.I))
 					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.L))
 					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.K))

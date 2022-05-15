@@ -35,7 +35,6 @@ public class GameCanvas extends Canvas {
 	public void paintComponent() {
 		gc.setFill(Color.BLUE);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-//		System.out.println("paint");
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
 			entity.draw(gc);
 		}

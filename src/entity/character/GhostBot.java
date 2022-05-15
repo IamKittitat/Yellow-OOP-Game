@@ -10,6 +10,7 @@ import entity.base.Entity;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import logic.GameLogic;
 
 public class GhostBot extends Character {
@@ -65,11 +66,13 @@ public class GhostBot extends Character {
 	}
 
 	public void update() {
-		ArrayList<Direction> validWays = GameLogic.validWay();
+		ArrayList<Direction> validWays = GameLogic.validWay(this.xPos,this.yPos);
 		if (validWays.contains(this.direction)) {
+			System.out.println("update");
 			forward();
 		} else {
 			int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size() - 1);
+			System.out.println("turn");
 			turn(validWays.get(randomNum));
 		}
 
@@ -83,7 +86,8 @@ public class GhostBot extends Character {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-
+		gc.setFill(Color.GREEN);
+		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
 	}
 
 	private void changeDirection() {

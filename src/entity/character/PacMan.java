@@ -99,7 +99,7 @@ public class PacMan extends ControlCharacter {
 
 	public void update() {
 		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay()) {
+		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
 			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))
 					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
 					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))
