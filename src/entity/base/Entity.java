@@ -5,7 +5,7 @@ import sharedObject.IRenderable;
 public abstract class Entity implements IRenderable {
 	protected String name;
 	protected String detail;
-	private double xPos, yPos;
+	protected double xPos, yPos;
 	private int z;
 	private boolean visible, removed;
 

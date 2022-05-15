@@ -5,8 +5,8 @@ import constant.Color;
 
 public abstract class Character extends Entity {
 	private Color color;
-	private int speed;
-	private int direction;
+	protected int speed;
+	protected int direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
 

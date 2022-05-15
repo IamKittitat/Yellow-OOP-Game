@@ -15,11 +15,12 @@ public class Ghost extends Character {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
 		this.detail = GameConstant.GHOST_DETAIL;
-		setXPos(GameConstant.GHOST_SPAWN_X);
-		setYPos(GameConstant.GHOST_SPAWN_Y);
+		this.xPos = GameConstant.GHOST_SPAWN_X;
+		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
 		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
-		setCanEatPacMan(false);
+		setCanBeEaten(false);
+		setCanEatPacMan(true);
 	}
 
 	// MAY MOVE FORWARD, TURN TO CHARACTER CLASS OR INTERFACE
@@ -35,9 +36,7 @@ public class Ghost extends Character {
 
 	public void die() {
 		/*
-		 * 	ล้างบัพ
-			Set ค่าใหม่
-			เรียก reborn
+		 * ล้างบัพ Set ค่าใหม่ เรียก reborn
 		 */
 	}
 
@@ -47,13 +46,9 @@ public class Ghost extends Character {
 
 	public void collideWith(Entity entity) {
 		/*
-			Check ว่าชนกับอะไร
-			ชนกับ pacman: check ว่ากินpacmanได้ไหม?
-			กินได้: เรียก reborn ของpacman, ล้างบัพitem,
-			กินไม่ได้: check ว่าถูกกินได้ไหม?
-			ถูกกินได้: เรียก die
-			ถูกกินไม่ได้: เดินผ่านไปเลย
-			ชนกับ item: setPower, เรียกคสม item
+		 * Check ว่าชนกับอะไร ชนกับ pacman: check ว่ากินpacmanได้ไหม? กินได้: เรียก
+		 * reborn ของpacman, ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้:
+		 * เรียก die ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ item: setPower, เรียกคสม item
 		 */
 	}
 

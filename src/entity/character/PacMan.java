@@ -1,10 +1,12 @@
 package entity.character;
 
 import constant.Color;
+import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
 import entity.base.SpecialPower;
+import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
@@ -18,25 +20,25 @@ public class PacMan extends Character {
 		super(color);
 		this.name = GameConstant.PACMAN_NAME;
 		this.detail = GameConstant.PACMAN_DETAIL;
-		setXPos(GameConstant.PACMAN_SPAWN_X);
-		setYPos(GameConstant.PACMAN_SPAWN_Y);
+		this.xPos = GameConstant.PACMAN_SPAWN_X;
+		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(GameConstant.PACMAN_SPEED);
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
+		setPower(null);
 		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
-		setCanBeEaten(false);
+		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
 	}
 
 	private void forward() {
-		// change x and y , with speed and angle
+		this.xPos += Math.sin(Math.toRadians(this.direction)) * this.speed;
+		this.yPos -= Math.cos(Math.toRadians(this.direction)) * this.speed;
 	}
 
-	private void turn(KeyCode key) {
-		// check direction of pacman
-		// if not the same
-		// change direction to key code map
+	private void turn(Direction direction) {
+		this.setDirection(direction);
 	}
 
 	public boolean isDead() {
@@ -45,7 +47,7 @@ public class PacMan extends Character {
 
 	public void die() {
 		this.setLife(this.getLife() - 1);
-		if( this.getLife() <= 0) {
+		if (this.getLife() <= 0) {
 			// call endgame for pacman lose
 			return;
 		}
@@ -53,13 +55,14 @@ public class PacMan extends Character {
 	}
 
 	public void reborn() {
-		if(this.getPower() != null) {
-			this.setPower(null);
-		}
-
-		setXPos(GameConstant.PACMAN_SPAWN_X);
-		setYPos(GameConstant.PACMAN_SPAWN_Y);
-		this.setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		this.xPos = GameConstant.PACMAN_SPAWN_X;
+		this.yPos = GameConstant.PACMAN_SPAWN_Y;
+		setSpeed(GameConstant.PACMAN_SPEED);
+		setPower(null);
+		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setCanBeEaten(false);
+		setCanEatGhost(false);
+		setCanEatPellet(true);
 	}
 
 	public void collideWith(Entity entity) {
@@ -73,14 +76,31 @@ public class PacMan extends Character {
 		 */
 	}
 
-	public void powerUp(SpecialPower specialPower) {
-		specialPower.gainPower(getPower(), getPower());
-	}
-
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void update() {
+		for(KeyCode nextKey : InputUtility.getFirstPlayerKeyPressed()) {
+			if(validNextKey(nextKey)) {
+				
+			}
+		}
+		if (InputUtility.getKeyPressed(KeyCode.W)) {
+			forward();
+		}
+		if (InputUtility.getKeyPressed(KeyCode.A)) {
+			turn(true);
+		} else if (InputUtility.getKeyPressed(KeyCode.D)) {
+			turn(false);
+		}
+
+	}
+	
+	private boolean validNextKey(keyCode nextKey) {
+		
 	}
 
 	public int getLife() {
