@@ -30,9 +30,7 @@ public class BattleGameScene extends VBox {
 	}
 
 	public void addListerner() {
-		System.out.println("checked");
 		this.setOnKeyPressed((KeyEvent event) -> {
-			System.out.println("y");
 			InputUtility.setKeyPressed(event.getCode(), true);
 
 		});
