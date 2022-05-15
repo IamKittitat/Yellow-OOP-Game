@@ -1,6 +1,6 @@
 package constant;
 
-public enum Angle {
+public enum Direction {
 	NORTH,
 	EAST,
 	SOUTH,

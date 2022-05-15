@@ -2,70 +2,59 @@ package entity.base;
 
 import sharedObject.IRenderable;
 
-public abstract class Entity implements IRenderable{
-	private String name;
-	private String detail;
-	private double xPos,yPos;
+public abstract class Entity implements IRenderable {
+	protected String name;
+	protected String detail;
+	protected double xPos, yPos;
 	private int z;
-	private boolean visible,removed;
-	
-	public Entity(String name,String detail,double x,double y){
-		setName(name);
-		setDetail(detail);
-		setX( );
+	private boolean visible, removed;
+
+	public Entity() {
 		visible = true;
 		removed = false;
 	}
-	
+
 	@Override
-	public boolean isRemoved(){
+	public boolean isRemoved() {
 		return removed;
 	}
-	
+
 	@Override
-	public boolean isVisible(){
+	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	@Override
-	public int getZ(){
+	public int getZ() {
 		return z;
+	}
+	
+	public void setZ(int z) {
+		this.z = z;
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDetail() {
 		return detail;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public double getXPos() {
+		return xPos;
 	}
 
-	public double getX() {
-		return x;
+	public void setXPos(double x) {
+		this.xPos = x;
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	public double getYPos() {
+		return yPos;
 	}
 
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public void setZ(int z) {
-		this.z = z;
+	public void setYPos(double y) {
+		this.yPos = y;
 	}
 
 	public void setVisible(boolean visible) {
