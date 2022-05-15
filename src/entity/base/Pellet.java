@@ -3,14 +3,15 @@ package entity.base;
 import constant.GameConstant;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
+import sharedObject.RenderableHolder;
 
 public class Pellet extends Item {
 
 	public Pellet(int x, int y) {
 		this.name = GameConstant.PELLET_NAME;
 		this.detail = GameConstant.PELLET_DETAIL;
-		setXPos(x);
-		setYPos(y);
+		this.xPos = x;
+		this.yPos = y;
 		setEaten(false);
 		super.getEatenBy().add("PacMan");
 	}
@@ -18,8 +19,7 @@ public class Pellet extends Item {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-
+		// gc.drawImage( RenderableHolder.pellets, this.xPos, this.yPos);
 	}
 
 }
