@@ -1,6 +1,7 @@
 package entity.base;
 
 import constant.Direction;
+import logic.GameLogic;
 import constant.Color;
 
 public abstract class Character extends Entity {
@@ -12,8 +13,19 @@ public abstract class Character extends Entity {
 
 	public Character(Color color) {
 		super();
+		setColor(color);
 	}
+	
+	protected abstract void forward();
 
+	protected abstract void turn(Direction direction);
+	
+	public abstract void die();
+	
+	protected abstract void reborn();
+
+	public abstract void collideWith(Entity entity);
+	
 	public Color getColor() {
 		return color;
 	}

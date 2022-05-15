@@ -4,13 +4,17 @@ import constant.Color;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
+import entity.base.ControlCharacter;
 import entity.base.Entity;
+import entity.base.Item;
+import entity.base.Pellet;
+import entity.base.SpecialPower;
 import input.InputUtility;
 import logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
-public class PacMan extends Character {
+public class PacMan extends ControlCharacter {
 	private int life;
 	private int score;
 	private boolean canEatPellet;
@@ -32,15 +36,6 @@ public class PacMan extends Character {
 		setCanEatPellet(true);
 	}
 
-	private void forward() {
-		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-	}
-
-	private void turn(Direction direction) {
-		this.setDirection(direction);
-	}
-
 	public boolean isDead() {
 		return this.getLife() <= 0;
 	}
@@ -54,7 +49,7 @@ public class PacMan extends Character {
 		this.reborn();
 	}
 
-	private void reborn() {
+	protected void reborn() {
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(GameConstant.PACMAN_SPEED);
@@ -74,6 +69,22 @@ public class PacMan extends Character {
 		 * item
 		 * 
 		 */
+		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
+			if (canEatGhost) {
+				((Character) entity).die();
+			} else {
+				if (canBeEaten()) {
+					this.die();
+				}
+			}
+		} else if (entity instanceof Pellet) {
+			if (canEatPellet) {
+				this.setScore(this.getScore() + 1);
+			}
+		} else if (entity instanceof SpecialPower) {
+			this.setPower((SpecialPower) entity);
+			// ((SpecialPower) entity).gainPower(null, null);
+		}
 	}
 
 	@Override
@@ -89,13 +100,13 @@ public class PacMan extends Character {
 					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
 					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))
 					|| (way == Direction.WEST && InputUtility.getFirstPlayerKeyPressed(KeyCode.A))) {
-				turn(way);
+				this.turn(way);
 				alreadyTurned = true;
 			}
-			if(way == this.direction) {
-				forward();
-			}			
-			if(alreadyTurned) {
+			if (way == this.direction) {
+				this.forward();
+			}
+			if (alreadyTurned) {
 				break;
 			}
 		}

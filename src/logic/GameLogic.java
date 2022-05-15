@@ -39,7 +39,9 @@ public class GameLogic {
 	}
 	
 	public static void spawnNewPower() {
-		
+		// Get random place (x,y)
+		// Get random buff(x,y)
+		// New + add to renderable Holder
 	}
 	
 	public static SpecialPower randomPower() {
@@ -67,8 +69,20 @@ public class GameLogic {
 		return null;
 	}
 	
+	private static boolean ghostWin() {
+		// pacman life <= 0;
+		return false;
+		
+	}
 	
-//	> ใครชนะ
-//	> endgame
-//	> เลือกตัวละคร
+	private static boolean pacManWin() {
+		// all pellet collected
+		return false;
+	}
+	
+	public static boolean gameEnd() {
+		// check pacman or ghost win
+		// ???????
+		return false;
+	}
 }

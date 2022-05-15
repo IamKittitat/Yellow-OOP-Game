@@ -28,7 +28,11 @@ public abstract class Entity implements IRenderable {
 	public int getZ() {
 		return z;
 	}
-
+	
+	public void setZ(int z) {
+		this.z = z;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -51,10 +55,6 @@ public abstract class Entity implements IRenderable {
 
 	public void setYPos(double y) {
 		this.yPos = y;
-	}
-
-	public void setZ(int z) {
-		this.z = z;
 	}
 
 	public void setVisible(boolean visible) {
