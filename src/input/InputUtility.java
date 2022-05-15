@@ -17,7 +17,6 @@ public class InputUtility {
 	public static void setKeyPressed(KeyCode keyCode, boolean pressed) {
 		if (pressed) {
 			if ((keyCode == KeyCode.W) || (keyCode == KeyCode.A) || (keyCode == KeyCode.S) || (keyCode == KeyCode.D)) {
-				// if direction same as key dont change
 				firstPlayerKey = keyCode;
 			}
 			if ((keyCode == KeyCode.UP) || (keyCode == KeyCode.RIGHT) || (keyCode == KeyCode.DOWN) || (keyCode == KeyCode.LEFT)) {

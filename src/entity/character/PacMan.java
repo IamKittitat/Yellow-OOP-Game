@@ -5,8 +5,8 @@ import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
-import entity.base.SpecialPower;
 import input.InputUtility;
+import logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
@@ -33,8 +33,8 @@ public class PacMan extends Character {
 	}
 
 	private void forward() {
-		this.xPos += Math.sin(Math.toRadians(this.direction)) * this.speed;
-		this.yPos -= Math.cos(Math.toRadians(this.direction)) * this.speed;
+		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
+		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 	}
 
 	private void turn(Direction direction) {
@@ -54,7 +54,7 @@ public class PacMan extends Character {
 		this.reborn();
 	}
 
-	public void reborn() {
+	private void reborn() {
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(GameConstant.PACMAN_SPEED);
@@ -81,26 +81,24 @@ public class PacMan extends Character {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public void update() {
-		for(KeyCode nextKey : InputUtility.getFirstPlayerKeyPressed()) {
-			if(validNextKey(nextKey)) {
-				
+		boolean alreadyTurned = false;
+		for (Direction way : GameLogic.validWay()) {
+			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))
+					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
+					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))
+					|| (way == Direction.WEST && InputUtility.getFirstPlayerKeyPressed(KeyCode.A))) {
+				turn(way);
+				alreadyTurned = true;
+			}
+			if(way == this.direction) {
+				forward();
+			}			
+			if(alreadyTurned) {
+				break;
 			}
 		}
-		if (InputUtility.getKeyPressed(KeyCode.W)) {
-			forward();
-		}
-		if (InputUtility.getKeyPressed(KeyCode.A)) {
-			turn(true);
-		} else if (InputUtility.getKeyPressed(KeyCode.D)) {
-			turn(false);
-		}
-
-	}
-	
-	private boolean validNextKey(keyCode nextKey) {
-		
 	}
 
 	public int getLife() {

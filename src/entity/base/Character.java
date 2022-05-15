@@ -6,7 +6,7 @@ import constant.Color;
 public abstract class Character extends Entity {
 	private Color color;
 	protected int speed;
-	protected int direction;
+	protected Direction direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
 
@@ -30,25 +30,12 @@ public abstract class Character extends Entity {
 		this.speed = speed;
 	}
 
-	public int getDirection() {
+	public Direction getDirection() {
 		return direction;
 	}
 
 	public void setDirection(Direction direction) {
-		switch (direction) {
-		case NORTH:
-			this.direction = 0;
-			break;
-		case EAST:
-			this.direction = 90;
-			break;
-		case SOUTH:
-			this.direction = 180;
-			break;
-		case WEST:
-			this.direction = 270;
-			break;
-		}
+		this.direction = direction;
 	}
 
 	public SpecialPower getPower() {

@@ -1,12 +1,15 @@
 package entity.character;
 
 import constant.Color;
+import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Item;
+import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import logic.GameLogic;
 
 public class Ghost extends Character {
 	private boolean canEatPacMan;
@@ -23,24 +26,20 @@ public class Ghost extends Character {
 		setCanEatPacMan(true);
 	}
 
-	// MAY MOVE FORWARD, TURN TO CHARACTER CLASS OR INTERFACE
 	private void forward() {
-		// change x and y , with speed and angle
+		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
+		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 	}
 
-	private void turn(KeyCode key) {
-		// check direction of pacman
-		// if not the same
-		// change direction to key code map
+	private void turn(Direction direction) {
+		this.setDirection(direction);
 	}
 
 	public void die() {
-		/*
-		 * ล้างบัพ Set ค่าใหม่ เรียก reborn
-		 */
+		this.reborn();
 	}
 
-	public void reborn() {
+	private void reborn() {
 		// setXPos,setYPos
 	}
 
@@ -51,11 +50,26 @@ public class Ghost extends Character {
 		 * เรียก die ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ item: setPower, เรียกคสม item
 		 */
 	}
-
-	public void powerUp(Item item) {
-		// use item power (gainpower)
+	
+	public void update() {
+		boolean alreadyTurned = false;
+		for (Direction way : GameLogic.validWay()) {
+			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.UP))
+					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.RIGHT))
+					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.DOWN))
+					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.LEFT))) {
+				turn(way);
+				alreadyTurned = true;
+			}
+			if(way == this.direction) {
+				forward();
+			}			
+			if(alreadyTurned) {
+				break;
+			}
+		}
 	}
-
+	
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub

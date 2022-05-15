@@ -16,7 +16,6 @@ public class Pellet extends Item {
 		super.getEatenBy().add("PacMan");
 	}
 	
-
 	@Override
 	public void draw(GraphicsContext gc) {
 		// gc.drawImage( RenderableHolder.pellets, this.xPos, this.yPos);
