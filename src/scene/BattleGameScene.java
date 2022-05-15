@@ -1,11 +1,13 @@
 package scene;
 
+import gui.GameCanvas;
 import gui.GameControlPane;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 
 public class BattleGameScene extends VBox{
 	private GameControlPane gameControlPane;
+	private GameCanvas gameCanvas;
 
 	public BattleGameScene() {
 		super();
@@ -15,8 +17,9 @@ public class BattleGameScene extends VBox{
 		this.setPadding(new Insets(10));
 		
 		this.gameControlPane = new GameControlPane();
+		this.gameCanvas = new GameCanvas();
 		
-		this.getChildren().add(gameControlPane);
+		this.getChildren().addAll(gameControlPane,gameCanvas);
 	}
 
 }
