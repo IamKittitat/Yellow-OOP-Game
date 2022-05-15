@@ -27,16 +27,13 @@ public class GhostBot extends Character {
 		setCanEatPacMan(true);
 	}
 
-	@Override
 	protected void forward() {
-		// TODO Auto-generated method stub
-
+		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
+		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 	}
 
-	@Override
 	protected void turn(Direction direction) {
-		// TODO Auto-generated method stub
-
+		this.setDirection(direction);
 	}
 
 	public void die() {
@@ -75,7 +72,7 @@ public class GhostBot extends Character {
 			int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size() - 1);
 			turn(validWays.get(randomNum));
 		}
-		
+
 //		if ((this.canBeEaten() != LastCanBeEaten) && (this.canBeEaten() == true)) {
 //			changeDirection();
 //		}
