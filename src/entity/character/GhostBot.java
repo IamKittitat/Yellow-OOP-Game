@@ -1,6 +1,8 @@
 package entity.character;
 
-import constant.Color;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
@@ -13,8 +15,8 @@ import logic.GameLogic;
 public class GhostBot extends Character {
 	private boolean canEatPacMan;
 
-	public GhostBot(Color color) {
-		super(color);
+	public GhostBot() {
+		super();
 		this.name = GameConstant.GHOST_BOT_NAME;
 		this.detail = GameConstant.GHOST_BOT_DETAIL;
 		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
@@ -28,7 +30,7 @@ public class GhostBot extends Character {
 	@Override
 	protected void forward() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -52,34 +54,33 @@ public class GhostBot extends Character {
 		setCanEatPacMan(true);
 	}
 
-	}
-
 	@Override
 	public void collideWith(Entity entity) {
-		/*
-		 * Check ว่าชนกับอะไร ชนกับ pacman: check ว่ากินpacmanได้ไหม? กินได้: เรียก
-		 * reborn ของpacman, ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้:
-		 * เรียก die ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ item: setPower, เรียกคสม item
-		 */
+		if (entity instanceof PacMan) {
+			if (canEatPacMan) {
+				((Character) entity).die();
+			} else {
+				if (canBeEaten()) {
+					this.die();
+				}
+			}
+		}
 	}
 
 	public void update() {
-//		boolean alreadyTurned = false;
-//		for (Direction way : GameLogic.validWay()) {
-//			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.UP))
-//					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.RIGHT))
-//					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.DOWN))
-//					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.LEFT))) {
-//				turn(way);
-//				alreadyTurned = true;
-//			}
-//			if(way == this.direction) {
-//				forward();
-//			}			
-//			if(alreadyTurned) {
-//				break;
-//			}
+		ArrayList<Direction> validWays = GameLogic.validWay();
+		if (validWays.contains(this.direction)) {
+			forward();
+		} else {
+			int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size() - 1);
+			turn(validWays.get(randomNum));
+		}
+		
+//		if ((this.canBeEaten() != LastCanBeEaten) && (this.canBeEaten() == true)) {
+//			changeDirection();
 //		}
+
+		// update 1 time when can be eaten == true
 	}
 
 	@Override
