@@ -1,6 +1,6 @@
 package entity.character;
 
-import constant.Color;
+import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
@@ -10,12 +10,14 @@ import entity.base.Item;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import logic.GameLogic;
 
 public class Ghost extends ControlCharacter {
 	private boolean canEatPacMan;
 
-	public Ghost(Color color) {
+	public Ghost(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
 		this.detail = GameConstant.GHOST_DETAIL;
@@ -70,7 +72,8 @@ public class Ghost extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-
+		gc.setFill(Color.PINK);
+		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
 	}
 
 	public boolean canEatPacMan() {

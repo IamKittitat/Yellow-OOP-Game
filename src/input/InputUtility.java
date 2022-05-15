@@ -16,6 +16,7 @@ public class InputUtility {
 
 	public static void setKeyPressed(KeyCode keyCode, boolean pressed) {
 		if (pressed) {
+			System.out.println(keyCode);
 			if ((keyCode == KeyCode.W) || (keyCode == KeyCode.A) || (keyCode == KeyCode.S) || (keyCode == KeyCode.D)) {
 				firstPlayerKey = keyCode;
 			}
@@ -23,5 +24,6 @@ public class InputUtility {
 				secondPlayerKey = keyCode;
 			}
 		}
+		System.out.println(keyCode);
 	}
 }

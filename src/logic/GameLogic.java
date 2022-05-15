@@ -1,8 +1,10 @@
 package logic;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.SpecialPower;
@@ -20,7 +22,12 @@ public class GameLogic {
 
 	public static ArrayList<Direction> validWay(){
 		// check with map + x pos,y pos : what way its not the wall
-		return null;
+		ArrayList<Direction> direction = new ArrayList<Direction>();
+		direction.add(Direction.EAST);
+		direction.add(Direction.SOUTH);
+		direction.add(Direction.NORTH);
+		direction.add(Direction.WEST);
+		return direction;
 	}
 	
 	public static int directionToInt(Direction direction) {
@@ -36,6 +43,14 @@ public class GameLogic {
 		default:
 			return 0;
 		}
+	}
+	
+	public static Color CharacterColorToColor (CharacterColor color) {
+		switch (color) {
+		case YELLOW:
+			return Color.yellow;
+		}
+		return null;
 	}
 	
 	public static void spawnNewPower() {

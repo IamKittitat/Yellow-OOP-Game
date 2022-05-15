@@ -1,12 +1,13 @@
 package entity.base;
 
-import constant.Color;
+import constant.CharacterColor;
 import constant.Direction;
+import javafx.scene.paint.Color;
 import logic.GameLogic;
 
 public abstract class ControlCharacter extends Character{
 
-	public ControlCharacter(Color color) {
+	public ControlCharacter(CharacterColor color) {
 		super(color);
 	}
 	

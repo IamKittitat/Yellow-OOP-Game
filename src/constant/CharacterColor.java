@@ -1,5 +1,6 @@
 package constant;
 
-public enum Color {
+public enum CharacterColor {
 	// Color to change for pacman and ghost
+	YELLOW
 }

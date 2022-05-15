@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class SceneHolder {
 	private Stage bindStage;
-	public MainMenuScene mainMenuScene;
+	public BattleGameScene mainMenuScene;
 
 	// public PlayMenuScene playMenuScene;
 	public SceneHolder(final Stage bindStage) {
@@ -14,7 +14,7 @@ public class SceneHolder {
 	}
 
 	public void initialize() {
-		this.switchScene(new Scene(this.mainMenuScene = new MainMenuScene()));
+		this.switchScene(new Scene(this.mainMenuScene = new BattleGameScene()));
 	}
 
 	public void switchScene(final Scene nextScene) {

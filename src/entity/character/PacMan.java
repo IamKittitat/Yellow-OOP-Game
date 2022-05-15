@@ -1,6 +1,6 @@
 package entity.character;
 
-import constant.Color;
+import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
@@ -13,6 +13,8 @@ import input.InputUtility;
 import logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.ArcType;
+import javafx.scene.paint.Color;
 
 public class PacMan extends ControlCharacter {
 	private int life;
@@ -20,7 +22,7 @@ public class PacMan extends ControlCharacter {
 	private boolean canEatPellet;
 	private boolean canEatGhost;
 
-	public PacMan(Color color) {
+	public PacMan(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.PACMAN_NAME;
 		this.detail = GameConstant.PACMAN_DETAIL;
@@ -90,7 +92,8 @@ public class PacMan extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-
+		gc.setFill(Color.YELLOW);
+		gc.fillArc(xPos, yPos, 10, 10, 45, 300, ArcType.ROUND);
 	}
 
 	public void update() {
