@@ -53,10 +53,10 @@ public class Ghost extends ControlCharacter {
 	public void update() {
 		boolean alreadyTurned = false;
 		for (Direction way : GameLogic.validWay()) {
-			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.UP))
-					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.RIGHT))
-					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.DOWN))
-					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.LEFT))) {
+			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.I))
+					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.L))
+					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.K))
+					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.J))) {
 				turn(way);
 				alreadyTurned = true;
 			}

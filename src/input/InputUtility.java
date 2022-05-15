@@ -20,7 +20,7 @@ public class InputUtility {
 			if ((keyCode == KeyCode.W) || (keyCode == KeyCode.A) || (keyCode == KeyCode.S) || (keyCode == KeyCode.D)) {
 				firstPlayerKey = keyCode;
 			}
-			if ((keyCode == KeyCode.UP) || (keyCode == KeyCode.RIGHT) || (keyCode == KeyCode.DOWN) || (keyCode == KeyCode.LEFT)) {
+			if ((keyCode == KeyCode.I) || (keyCode == KeyCode.L) || (keyCode == KeyCode.K) || (keyCode == KeyCode.J)) {
 				secondPlayerKey = keyCode;
 			}
 		}
