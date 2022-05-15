@@ -1,5 +1,7 @@
 package entity.base;
 
+import java.util.ArrayList;
+
 public abstract class SpecialPower extends Item {
 	protected int duration;
 
@@ -7,8 +9,8 @@ public abstract class SpecialPower extends Item {
 		return duration;
 	}
 
-	public abstract void gainPower(Entity collector,Entity other);
+	public abstract void gainPower(Character collector, ArrayList<Character> other);
 
-	public abstract void clearPower(Entity collector,Entity other);
+	public abstract void clearPower(Character collector, ArrayList<Character> other);
 
 }

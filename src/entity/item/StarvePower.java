@@ -1,8 +1,11 @@
 package entity.item;
 
+import java.util.ArrayList;
+
 import constant.GameConstant;
-import entity.base.Entity;
+import entity.base.Character;
 import entity.base.SpecialPower;
+import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 
 public class StarvePower extends SpecialPower{
@@ -11,8 +14,8 @@ public class StarvePower extends SpecialPower{
 		super();
 		this.name = GameConstant.STARVE_BUFF_NAME;
 		this.detail = GameConstant.STARVE_BUFF_DETAIL;
-		setXPos(x);
-		setYPos(y);
+		this.xPos = x;
+		this.yPos = y;
 		setEaten(false);
 		super.getEatenBy().add("Ghost");
 		this.duration = GameConstant.STARVE_BUFF_DURATION;
@@ -24,12 +27,14 @@ public class StarvePower extends SpecialPower{
 	}
 
 	@Override
-	public void gainPower(Entity collector,Entity other) {
-		// Set pacmanCanEatPellet = false
+	public void gainPower(Character collector,ArrayList<Character> other) {
+		PacMan otherPacMan = (PacMan) other.get(0);
+		otherPacMan.setCanEatPellet(false);
 	}
 
 	@Override
-	public void clearPower(Entity collector,Entity other) {
-		// Set pacmanCanEatPallet = true
+	public void clearPower(Character collector,ArrayList<Character> other) {
+		PacMan otherPacMan = (PacMan) other.get(0);
+		otherPacMan.setCanEatPellet(false);
 	}
 }

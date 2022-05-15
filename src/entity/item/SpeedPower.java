@@ -1,8 +1,12 @@
 package entity.item;
 
+import java.util.ArrayList;
+
 import constant.GameConstant;
-import entity.base.Entity;
+import entity.base.Character;
 import entity.base.SpecialPower;
+import entity.character.Ghost;
+import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 
 public class SpeedPower extends SpecialPower{
@@ -11,8 +15,8 @@ public class SpeedPower extends SpecialPower{
 		super();
 		this.name = GameConstant.SPEED_BUFF_NAME;
 		this.detail = GameConstant.SPEED_BUFF_DETAIL;
-		setXPos(x);
-		setYPos(y);
+		this.xPos = x;
+		this.yPos = y;
 		setEaten(false);
 		super.getEatenBy().add("PacMan");
 		super.getEatenBy().add("Ghost");
@@ -21,17 +25,20 @@ public class SpeedPower extends SpecialPower{
 	
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
+		// gc.drawImage(RenderableHolder.speedPower, this.xPos, this.yPos);
 	}
 
 	@Override
-	public void gainPower(Entity collector,Entity other) {
-		// Set pacmanSpeed += BUFF_SPEED
-
+	public void gainPower(Character collector,ArrayList<Character> other) {
+		collector.setSpeed(GameConstant.BUFF_SPEED);
 	}
 
 	@Override
-	public void clearPower(Entity collector,Entity other) {
-		// Set pacmanSpeed = PACMAN_SPEED
+	public void clearPower(Character collector,ArrayList<Character> other) {
+		if (collector instanceof PacMan) {
+			collector.setSpeed(GameConstant.PACMAN_SPEED);
+		} else if (collector instanceof Ghost) {
+			collector.setSpeed(GameConstant.GHOST_SPEED);
+		}
 	}
 }
