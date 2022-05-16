@@ -8,6 +8,7 @@ import entity.base.Entity;
 import entity.base.Map;
 import entity.base.Pellet;
 import entity.base.PelletHolder;
+import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
@@ -23,6 +24,7 @@ public class GameController {
 	public static GhostBot ghostBot1;
 	public static GhostBot ghostBot2;
 	public static PelletHolder pelletHolder;
+	public static SpecialPowerHolder specialPowerHolder;
 	public static GameControlPane gameControlPane;
 
 	public GameController() {
@@ -37,12 +39,14 @@ public class GameController {
 		ghostBot1 = new GhostBot();
 		ghostBot2 = new GhostBot();
 		pelletHolder = new PelletHolder();
+		specialPowerHolder = new SpecialPowerHolder();
 		gameControlPane = new GameControlPane();
 
 		addNewObject(pacMan);
 		addNewObject(ghost);
 
 		addNewObject(pelletHolder);
+		addNewObject(specialPowerHolder);
 //		addNewObject(ghostBot1);
 //		addNewObject(ghostBot2);
 
