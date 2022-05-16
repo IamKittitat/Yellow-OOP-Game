@@ -9,6 +9,7 @@ import entity.base.Entity;
 import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
+import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -83,9 +84,28 @@ public class Ghost extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.PINK);
-//		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
-		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
+//		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
+		int state = ((int)GameCanvas.counter/5) %4;
+		switch (state) {
+		case 0: {
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos-10, yPos-10,20,20);
+			return;
+		}
+		case 1: {
+			gc.drawImage(RenderableHolder.ghostPNG2, xPos-10, yPos-10,20,20);
+			return;
+		}
+		case 2: {
+			gc.drawImage(RenderableHolder.ghostPNG3, xPos-10, yPos-10,20,20);
+			return;
+		}
+		case 3: {
+			gc.drawImage(RenderableHolder.ghostPNG4, xPos-10, yPos-10,20,20);
+			return;
+		}
+		default:
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos-10, yPos-10,20,20);
+		}
 	}
 
 	public boolean canEatPacMan() {

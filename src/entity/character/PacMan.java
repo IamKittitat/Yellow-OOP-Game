@@ -9,6 +9,7 @@ import entity.base.Entity;
 import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
+import gui.GameCanvas;
 import input.InputUtility;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
@@ -29,11 +30,11 @@ public class PacMan extends ControlCharacter {
 		this.detail = GameConstant.PACMAN_DETAIL;
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
-		setSpeed(GameConstant.PACMAN_SPEED);
+		setSpeed(0);
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
 		setPower(null);
-		setDirection(null);
+		setDirection(Direction.EAST);
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
@@ -94,12 +95,44 @@ public class PacMan extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.YELLOW);
-		gc.fillArc(xPos, yPos, 10, 10, 45, 300, ArcType.ROUND);
-		gc.drawImage(RenderableHolder.pacManIcon, xPos, yPos,50,50);
+		int state = ((int)GameCanvas.counter/5) %4;
+//		int angle = GameLogic.directionToInt(getDirection());
+//		gc.translate(xPos, yPos);
+//		gc.rotate(angle);
+//		gc.translate(0, 0);
+//		System.out.println(GameLogic.directionToInt(getDirection()));
+		switch (state) {
+		case 0: {
+			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
+//			gc.rotate(-angle);
+			return;
+		}
+		case 1: {
+			gc.drawImage(RenderableHolder.pacManPNG2, xPos-10, yPos-10,20,20);
+//			gc.rotate(-angle);
+			return;
+		}
+		case 2: {
+			gc.drawImage(RenderableHolder.pacManPNG3, xPos-10, yPos-10,20,20);
+//			gc.rotate(-angle);
+			return;
+		}
+		case 3: {
+			gc.drawImage(RenderableHolder.pacManPNG4, xPos-10, yPos-10,20,20);
+//			gc.rotate(-angle);
+			return;
+		}
+		default:
+			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
+//			gc.rotate(-angle);
+		}
 	}
 
 	public void update() {
+		if(!this.isStarted() && !InputUtility.getFirstPlayerKeyPressed(null)) {
+			this.setSpeed(GameConstant.PACMAN_SPEED);
+			this.setStarted(true);
+		}
 		boolean alreadyTurned = false;
 		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
 			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))

@@ -17,7 +17,14 @@ public class RenderableHolder {
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 	public static Image pacManIcon;
-	public static Image ghostPNG;
+	public static Image ghostPNG1;
+	public static Image ghostPNG2;
+	public static Image ghostPNG3;
+	public static Image ghostPNG4;
+	public static Image pacManPNG1;
+	public static Image pacManPNG2;
+	public static Image pacManPNG3;
+	public static Image pacManPNG4;
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -40,8 +47,14 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-//		pacManIcon = new Image(new File("pacman-1.gif").toURI().toString());
-		ghostPNG = new Image(ClassLoader.getSystemResource("ghost.png").toString());
+		ghostPNG1 = new Image(ClassLoader.getSystemResource("ghost-1.png").toString());
+		ghostPNG2 = new Image(ClassLoader.getSystemResource("ghost-2.png").toString());
+		ghostPNG3 = new Image(ClassLoader.getSystemResource("ghost-3.png").toString());
+		ghostPNG4 = new Image(ClassLoader.getSystemResource("ghost-4.png").toString());
+		pacManPNG1 = new Image(ClassLoader.getSystemResource("pacman-1.png").toString());
+		pacManPNG2 = new Image(ClassLoader.getSystemResource("pacman-2.png").toString());
+		pacManPNG3 = new Image(ClassLoader.getSystemResource("pacman-3.png").toString());
+		pacManPNG4 = new Image(ClassLoader.getSystemResource("pacman-4.png").toString());
 		
 	}
 

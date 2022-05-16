@@ -17,6 +17,7 @@ public class GameCanvas extends Canvas {
 	private static GraphicsContext gc;
 	private AnimationTimer gameLoop;
 	private GameController controller;
+	public static int counter;
 
 	public GameCanvas() {
 		super(500, 400);
@@ -27,6 +28,8 @@ public class GameCanvas extends Canvas {
 		this.setWidth(900);
 		this.setHeight(450);
 		this.setVisible(true);
+		
+		this.counter = 0;
 
 		controller = new GameController();
 		this.loop();
@@ -35,6 +38,7 @@ public class GameCanvas extends Canvas {
 	public void paintComponent() {
 		gc.setFill(Color.BLUE);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+		counter++;
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
 			entity.draw(gc);
 		}

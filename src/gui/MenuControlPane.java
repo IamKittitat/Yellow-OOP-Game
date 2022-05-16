@@ -62,19 +62,28 @@ public class MenuControlPane extends VBox {
 
 	private void initializeCustomizeButton() {
 		// TODO Auto-generated method stub
-		this.customizeButton = new MenuButton("Customize",new Scene(new CustomiseScene()));
+		this.customizeButton = new MenuButton("Customize");
 	}
 
 	private void initializePacManGameButton() {
 		// TODO Auto-generated method stub
-		this.pacManGameButton = new MenuButton("Pac-man vs Pac-man",new Scene(new PacManGameScene()));
+		this.pacManGameButton = new MenuButton("Pac-man vs Pac-man");
 
 	}
 
 	private void initializeBattleGameButton() {
 		// TODO Auto-generated method stub
-		this.battleGameButton = new MenuButton("BATTLE!",new Scene(new BattleGameScene()));
+//		this.battleGameButton = new MenuButton("BATTLE!",new Scene(new BattleGameScene()));
+		this.battleGameButton = new MenuButton("BATTLE!");
 		this.battleGameButton.setPrefHeight(85);
+		this.battleGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Main.sceneHolder.switchScene(new Scene(new BattleGameScene()));
+			}
+		});
 	}
 
 	private void initializeGameText() {

@@ -17,7 +17,6 @@ public class MainMenuScene extends BorderPane{
 		
 		this.menuControlPane = new MenuControlPane();
 		this.setLeft(menuControlPane);
-		this.setRight(new ImageView(RenderableHolder.pacManIcon));
 		// TODO Auto-generated constructor stub
 		
 	}
