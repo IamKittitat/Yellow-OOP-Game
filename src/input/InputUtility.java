@@ -13,7 +13,15 @@ public class InputUtility {
 	public static KeyCode getSecondPlayerKeyPressed() {
 		return secondPlayerKey;
 	}
+	
+	public static void setFirstPlayerKeyNull() {
+		firstPlayerKey = null;
+	}
 
+	public static void setSecondPlayerKeyNull() {
+		secondPlayerKey = null;
+	}
+	
 	public static void setKeyPressed(KeyCode keyCode, boolean pressed) {
 		if (pressed) {
 			System.out.println(keyCode);

@@ -62,8 +62,9 @@ public class PacMan extends ControlCharacter {
 		setSpeed(0);
 		setStarted(false);
 		setPower(null);
-		setDirection(null);
+		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
 		setCanBeEaten(false);
+		InputUtility.setFirstPlayerKeyNull();
 		setCanEatGhost(false);
 		setCanEatPellet(true);
 	}
@@ -79,7 +80,9 @@ public class PacMan extends ControlCharacter {
 			}
 		} else if (entity instanceof Pellet) {
 			if (canEatPellet) {
+				((Pellet) entity).setRemoved(true);
 				this.setScore(this.getScore() + 1);
+				System.out.println(this.getScore());				
 			}
 		} else if (entity instanceof SpecialPower) {
 			this.setPower((SpecialPower) entity);
@@ -125,6 +128,7 @@ public class PacMan extends ControlCharacter {
 		boolean alreadyTurned = false;
 
 		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
+			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
 			this.setStarted(true);
 		}

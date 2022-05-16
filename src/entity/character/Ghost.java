@@ -45,7 +45,8 @@ public class Ghost extends ControlCharacter {
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
 		setStarted(false);
-		setDirection(null);
+		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		InputUtility.setSecondPlayerKeyNull();
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}

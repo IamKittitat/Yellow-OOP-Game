@@ -6,6 +6,7 @@ import java.util.List;
 import constant.CharacterColor;
 import entity.base.Entity;
 import entity.base.Map;
+import entity.base.Pellet;
 import entity.base.PelletHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
@@ -53,11 +54,27 @@ public class GameController {
 	public void logicUpdate() {
 		pacMan.update();
 		ghost.update();
+//		ghostBot1.update();
+//		ghostBot2.update();
 		if (pacMan.isCollide(ghost)) {
 			System.out.println("Check collide");
 			pacMan.collideWith(ghost);
 		}
-//		ghostBot1.update();
-//		ghostBot2.update();
+		for(Pellet pellet : pelletHolder.getAllPellets()) {
+//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
+			if(!pellet.isRemoved() && pacMan.isCollide(pellet)) {
+//				System.out.println("pellets");
+				pacMan.collideWith(pellet);				
+			}
+		}
+//		System.out.println(pacMan.getXPos()+", "+pacMan.getYPos());
+//		ArrayList<Integer> LocationNearPacMan = GameLogic.getLocationNearPacMan(pacMan);
+//		System.out.println(LocationNearPacMan.toString());
+//		for(int x=LocationNearPacMan.get(0);x<=LocationNearPacMan.get(1);x++) {
+//			for(int y=LocationNearPacMan.get(2);y<=LocationNearPacMan.get(3);y++) {
+//				pelletHolder.getAllPellets()
+//			}
+//		}
+
 	}
 }

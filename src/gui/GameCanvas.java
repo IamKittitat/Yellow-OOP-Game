@@ -43,7 +43,10 @@ public class GameCanvas extends Canvas {
 			counter -= 20;
 		}
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			entity.draw(gc);
+			if (entity.isVisible() && !entity.isRemoved()) {
+				entity.draw(gc);
+			}
+//			entity.draw(gc);
 		}
 	}
 

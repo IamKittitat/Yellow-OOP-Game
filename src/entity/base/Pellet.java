@@ -22,7 +22,7 @@ public class Pellet extends Item {
 	public void draw(GraphicsContext gc) {
 		// gc.drawImage( RenderableHolder.pellets, this.xPos, this.yPos);
 		gc.setFill(Color.WHITE);
-		gc.fillRect(xPos*24+12-this.radius, yPos*24+12-this.radius, this.radius*2, this.radius*2);
+		gc.fillRect(xPos-this.radius, yPos-this.radius, this.radius*2, this.radius*2);
 	}
 
 }

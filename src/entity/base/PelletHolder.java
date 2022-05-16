@@ -17,7 +17,7 @@ public class PelletHolder extends Entity implements IRenderable {
 			for (int x = 0; x < 38; x++) {
 				// System.out.println(getTerrain(x,y));
 				if (GameLogic.getMapState(x, y).equals("G")) {
-					allPellets.add(new Pellet(x, y));
+					allPellets.add(new Pellet(x*24+12, y*24+12));
 				}
 			}
 		}
@@ -34,7 +34,9 @@ public class PelletHolder extends Entity implements IRenderable {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		for (Pellet p : this.getAllPellets()) {
-			p.draw(gc);
+			if (p.isVisible() && !p.isRemoved()) {
+				p.draw(gc);
+			}
 		}
 	}
 

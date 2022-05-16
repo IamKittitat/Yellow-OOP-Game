@@ -126,6 +126,19 @@ public class GameLogic {
 		return null;
 	}
 
+	public static ArrayList<Integer> getLocationNearPacMan(PacMan pacMan) {
+		int startedX = Math.max((int) (Math.round((pacMan.getXPos() - 12) / 24) - 2), 0);
+		int endedX = Math.min((int) (Math.round((pacMan.getXPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_WIDTH);
+		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2),0);
+		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2),GameConstant.SCREEN_PLAY_HEIGHT);
+		ArrayList<Integer> location = new ArrayList<>();
+		location.add(startedX);
+		location.add(endedX);
+		location.add(startedY);
+		location.add(endedY);
+		return location;
+	}
+
 	public static Color CharacterColorToColor(CharacterColor color) {
 		switch (color) {
 		case YELLOW:

@@ -52,5 +52,6 @@ public class GameConstant {
 
 	public static final int SCREEN_SIZE_WIDTH = 900;
 	public static final int SCREEN_SIZE_HEIGHT = 500;
-
+	public static final int SCREEN_PLAY_WIDTH = 37;
+	public static final int SCREEN_PLAY_HEIGHT = 17;
 }
