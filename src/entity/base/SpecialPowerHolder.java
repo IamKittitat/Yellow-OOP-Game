@@ -8,7 +8,7 @@ import logic.GameLogic;
 import sharedObject.IRenderable;
 
 public class SpecialPowerHolder extends Entity implements IRenderable {
-	private ArrayList<SpecialPower> allSpecialPowers;
+	private static ArrayList<SpecialPower> allSpecialPowers;
 
 	public SpecialPowerHolder() {
 		super();
@@ -25,11 +25,11 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 		}
 	}
 
-	public void update() {
-		this.getAllSpecialPowers().add(GameLogic.randomPower());
-	}
+//	public void update() {
+//		this.getAllSpecialPowers().add(GameLogic.randomPower());
+//	}
 
-	public ArrayList<SpecialPower> getAllSpecialPowers() {
+	public static ArrayList<SpecialPower> getAllSpecialPowers() {
 		return allSpecialPowers;
 	}
 

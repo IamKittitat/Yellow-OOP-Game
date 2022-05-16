@@ -32,6 +32,7 @@ public class RevengePower extends SpecialPower {
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
+		System.out.println("Gain Revenge Power");
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(false);
 		collectedPacMan.setCanEatGhost(true);

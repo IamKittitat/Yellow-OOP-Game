@@ -10,6 +10,7 @@ import constant.GameConstant;
 import entity.base.ControlCharacter;
 import entity.base.Map;
 import entity.base.SpecialPower;
+import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.PacMan;
 import entity.item.RevengePower;
@@ -146,27 +147,44 @@ public class GameLogic {
 		}
 		return null;
 	}
-
-	public static void spawnNewPower() {
-		// Get random place (x,y)
-		// Get random buff(x,y)
-		// New + add to renderable Holder
+	
+	public static boolean timeToRandomNewPower(long currentSecondtime,long startSecondTime) {
+		long diffTime = currentSecondtime - startSecondTime;
+		if((diffTime)%5 == 0 && diffTime !=0 && !GameController.alreadyRandomPower) {
+			GameController.alreadyRandomPower = true;
+			return true;
+		}
+		if((diffTime)%5 != 0) {
+			GameController.alreadyRandomPower = false;
+			return false;
+		}
+		return false;
+		
 	}
 
-	public static SpecialPower randomPower() {
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 7 + 1);
+	public static void spawnNewPower() {
+		int xRandomPos = 132;
+		int yRandomPos = 36;
+		SpecialPower randomPower = randomPower(xRandomPos,yRandomPos);
+		System.out.println(randomPower.getName());
+		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
+	}
+	
+
+	public static SpecialPower randomPower(int x, int y) {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 		switch (randomNum) {
 		case 0:
-			RevengePower revengePower = null;
+			RevengePower revengePower = new RevengePower(x,y);
 			return revengePower;
 		case 1:
-			ShieldPower shieldPower = null;
+			ShieldPower shieldPower = new ShieldPower(x,y);
 			return shieldPower;
 		case 2:
-			SpeedPower speedPower = null;
+			SpeedPower speedPower = new SpeedPower(x,y);
 			return speedPower;
 		case 3:
-			StarvePower starvePower = null;
+			StarvePower starvePower = new StarvePower(x,y);
 			return starvePower;
 
 		}
@@ -194,4 +212,5 @@ public class GameLogic {
 		// ???????
 		return false;
 	}
+
 }

@@ -33,6 +33,7 @@ public class SpeedPower extends SpecialPower{
 
 	@Override
 	public void gainPower(Character collector,ArrayList<Character> other) {
+		System.out.println("Gain Speed Power");
 		collector.setSpeed(GameConstant.BUFF_SPEED);
 	}
 

@@ -13,6 +13,7 @@ import entity.base.Pellet;
 import entity.base.SpecialPower;
 import gui.GameCanvas;
 import input.InputUtility;
+import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
@@ -71,6 +72,8 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void collideWith(Entity entity) {
+		ArrayList<Character> otherCharacter = new ArrayList<Character>();
+		otherCharacter.add(GameController.ghost); // fixed here
 		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
 			if (canEatGhost) {
 				((Character) entity).die();
@@ -86,8 +89,10 @@ public class PacMan extends ControlCharacter {
 				System.out.println(this.getScore());				
 			}
 		} else if (entity instanceof SpecialPower) {
+			((SpecialPower) entity).gainPower(GameController.pacMan,otherCharacter);
+			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
-			System.out.println(this.getPower());
+			System.out.println(this.getPower().getName());
 			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}

@@ -8,10 +8,12 @@ import entity.base.Entity;
 import entity.base.Map;
 import entity.base.Pellet;
 import entity.base.PelletHolder;
+import entity.base.SpecialPower;
 import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
+import gui.GameCanvas;
 import gui.GameControlPane;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
@@ -26,6 +28,9 @@ public class GameController {
 	public static PelletHolder pelletHolder;
 	public static SpecialPowerHolder specialPowerHolder;
 	public static GameControlPane gameControlPane;
+	public static boolean alreadyRandomPower = false;
+	final long startNanoTime = System.nanoTime();
+	final long startSecondTime = startNanoTime / 1000000000;
 
 	public GameController() {
 		super();
@@ -58,13 +63,17 @@ public class GameController {
 		RenderableHolder.getInstance().add(entity);
 	}
 
-	public void logicUpdate() {
+	public void logicUpdate(long currentSecondtime) {
 		pacMan.update();
 		ghost.update();
 		gameControlPane.updateLives();
 		gameControlPane.updateScore();
 //		ghostBot1.update();
 //		ghostBot2.update();
+		if (GameLogic.timeToRandomNewPower(currentSecondtime,startSecondTime)) {
+			GameLogic.spawnNewPower();
+		}
+
 		if (pacMan.isCollide(ghost)) {
 //			System.out.println("collide");
 			pacMan.collideWith(ghost);
@@ -74,6 +83,16 @@ public class GameController {
 			if(!pellet.isRemoved() && pacMan.isCollide(pellet)) {
 //				System.out.println("pellets");
 				pacMan.collideWith(pellet);				
+			}
+		}
+		for(SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
+//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
+			if(!specialPower.isRemoved() && pacMan.isCollide(specialPower) && specialPower.getEatenBy().contains(pacMan.getName())) {
+//				System.out.println("pellets");
+				pacMan.collideWith(specialPower);				
+			} else if(!specialPower.isRemoved() && ghost.isCollide(specialPower) && specialPower.getEatenBy().contains(ghost.getName()))  {
+//				System.out.println("pellets");
+				ghost.collideWith(specialPower);				
 			}
 		}
 

@@ -31,6 +31,7 @@ public class StarvePower extends SpecialPower{
 
 	@Override
 	public void gainPower(Character collector,ArrayList<Character> other) {
+		System.out.println("Gain Starve Power");
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
 	}

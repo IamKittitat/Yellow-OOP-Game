@@ -33,6 +33,7 @@ public class ShieldPower extends SpecialPower {
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
+		System.out.println("Gain Shield Power");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);
