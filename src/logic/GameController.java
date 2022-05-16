@@ -32,10 +32,10 @@ public class GameController {
 		ghostBot1 = new GhostBot();
 		ghostBot2 = new GhostBot();
 		
-		addNewObject(pacMan);
+//		addNewObject(pacMan);
 		addNewObject(ghost);
-		addNewObject(ghostBot1);
-		addNewObject(ghostBot2);
+//		addNewObject(ghostBot1);
+//		addNewObject(ghostBot2);
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -46,9 +46,9 @@ public class GameController {
 	}
 	
 	public void logicUpdate(){
-		pacMan.update();
+//		pacMan.update();
 		ghost.update();
-		ghostBot1.update();
-		ghostBot2.update();
+//		ghostBot1.update();
+//		ghostBot2.update();
 	}
 }

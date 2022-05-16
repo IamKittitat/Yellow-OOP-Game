@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
+import entity.base.Map;
 import entity.base.SpecialPower;
 import entity.character.PacMan;
 import entity.item.RevengePower;
@@ -23,18 +24,52 @@ public class GameLogic {
 	public static ArrayList<Direction> validWay(double xPos, double yPos) {
 		// check with map + x pos,y pos : what way its not the wall
 		ArrayList<Direction> direction = new ArrayList<Direction>();
-
-		if (xPos < 200) {
-			direction.add(Direction.EAST);
+		System.out.println(xPos+"," + yPos);
+		if(getMapStateFromXYPosition(xPos, yPos-24).equals("G")) {
+			direction.add(Direction.NORTH);
 		}
-		if (yPos < 300) {
+		if(getMapStateFromXYPosition(xPos, yPos+24).equals("G")) {
 			direction.add(Direction.SOUTH);
 		}
-		direction.add(Direction.NORTH);
-		direction.add(Direction.WEST);
+		if(getMapStateFromXYPosition(xPos-24, yPos).equals("G")) {
+			direction.add(Direction.WEST);
+		}
+		if(getMapStateFromXYPosition(xPos+24,yPos).equals("G")) {
+			direction.add(Direction.EAST);
+		}
+		System.out.println(direction.toString());
 		return direction;
 	}
+	
+	public static String getMapStateFromXYPosition(double xPos,double yPos){
+		//System.out.println((xPos-12)/24 + " " + (yPos-12)/24);
+//		int xPosToArrayIdx = (int) Math.max(0, (xPos-12)/24);
+//		int yPosToArrayIdx = (int) Math.max(0, (yPos-12)/24);
+		double xPosToArrayIdx = Math.max(0, (xPos-12)/24);
+		double yPosToArrayIdx = Math.max(0, (yPos-12)/24);
+		System.out.println(xPosToArrayIdx+","+yPosToArrayIdx);
+		int xPosInInt = (int) Math.ceil(xPosToArrayIdx);
+		int yPosInInt = (int) Math.ceil(yPosToArrayIdx);
+		return String.valueOf(Map.getMap().charAt(yPosInInt*38+xPosInInt));
+//		System.out.println(xPosToArrayIdx+", "+yPosToArrayIdx);
+//		return String.valueOf(Map.getMap().charAt(yPosToArrayIdx*38+xPosToArrayIdx));
+		
+//		double xPosToArrayIdx = Math.max(0, (xPos-12)/24);
+//		double yPosToArrayIdx = Math.max(0, (yPos-12)/24);
+//		System.out.println(xPosToArrayIdx+","+yPosToArrayIdx);
+//		if((xPosToArrayIdx % 1 == 0) && (yPosToArrayIdx % 1 == 0)){
+//			int xPosInInt = (int) xPosToArrayIdx;
+//			int yPosInInt = (int) yPosToArrayIdx;
+//			return String.valueOf(Map.getMap().charAt(yPosInInt*38+xPosInInt));
+//		}
+//		return "W";
+		 
+	}
 
+	public static String getMapState(int xPos,int yPos){
+		return String.valueOf(Map.getMap().charAt(yPos*38+xPos));
+	}
+	
 	public static int directionToInt(Direction direction) {
 		switch (direction) {
 		case NORTH:
