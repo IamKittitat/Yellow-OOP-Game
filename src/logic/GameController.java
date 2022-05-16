@@ -6,6 +6,7 @@ import java.util.List;
 import constant.CharacterColor;
 import entity.base.Entity;
 import entity.base.Map;
+import entity.base.PelletHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
@@ -19,6 +20,7 @@ public class GameController {
 	private Ghost ghost;
 	private GhostBot ghostBot1;
 	private GhostBot ghostBot2;
+	private PelletHolder pelletHolder;
 
 	public GameController() {
 		super();
@@ -31,9 +33,14 @@ public class GameController {
 		ghost = new Ghost(CharacterColor.YELLOW);
 		ghostBot1 = new GhostBot();
 		ghostBot2 = new GhostBot();
+		pelletHolder = new PelletHolder();
 		
-//		addNewObject(pacMan);
+		addNewObject(pacMan);
 		addNewObject(ghost);
+		
+//		RenderableHolder.getInstance().add(pelletHolder);
+		
+		addNewObject(pelletHolder);
 //		addNewObject(ghostBot1);
 //		addNewObject(ghostBot2);
 		
@@ -46,7 +53,7 @@ public class GameController {
 	}
 	
 	public void logicUpdate(){
-//		pacMan.update();
+		pacMan.update();
 		ghost.update();
 //		ghostBot1.update();
 //		ghostBot2.update();

@@ -96,35 +96,28 @@ public class PacMan extends ControlCharacter {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		int state = ((int)GameCanvas.counter/5) %4;
+		
 //		int angle = GameLogic.directionToInt(getDirection());
+//
 //		gc.translate(xPos, yPos);
 //		gc.rotate(angle);
-//		gc.translate(0, 0);
-//		System.out.println(GameLogic.directionToInt(getDirection()));
+		
 		switch (state) {
 		case 0: {
 			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
-//			gc.rotate(-angle);
-			return;
 		}
 		case 1: {
 			gc.drawImage(RenderableHolder.pacManPNG2, xPos-10, yPos-10,20,20);
-//			gc.rotate(-angle);
-			return;
 		}
 		case 2: {
 			gc.drawImage(RenderableHolder.pacManPNG3, xPos-10, yPos-10,20,20);
-//			gc.rotate(-angle);
-			return;
 		}
 		case 3: {
 			gc.drawImage(RenderableHolder.pacManPNG4, xPos-10, yPos-10,20,20);
-//			gc.rotate(-angle);
-			return;
 		}
 		default:
-			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
 //			gc.rotate(-angle);
+//			gc.translate(-xPos, -yPos);
 		}
 	}
 

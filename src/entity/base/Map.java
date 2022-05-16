@@ -35,7 +35,7 @@ public class Map implements IRenderable {
 					gc.fillRect(x*24, y*24, 24, 24);
 					break;
 				case "G":
-					gc.setFill(Color.YELLOW);
+					gc.setFill(Color.BLACK);
 					gc.fillRect(x*24, y*24, 24, 24);
 					break;
 				case "X":
