@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import logic.GameLogic;
 import sharedObject.IRenderable;
 
-public class PelletHolder extends Entity implements IRenderable {
+public class PelletHolder extends Entity{
 	private ArrayList<Pellet> allPellets;
 
 	public PelletHolder() {
@@ -25,12 +25,6 @@ public class PelletHolder extends Entity implements IRenderable {
 	}
 
 	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		for (Pellet p : this.getAllPellets()) {
@@ -38,18 +32,6 @@ public class PelletHolder extends Entity implements IRenderable {
 				p.draw(gc);
 			}
 		}
-	}
-
-	@Override
-	public boolean isRemoved() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 	public ArrayList<Pellet> getAllPellets() {

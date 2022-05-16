@@ -15,7 +15,7 @@ import sharedObject.RenderableHolder;
 
 public class GameCanvas extends Canvas {
 	private static GraphicsContext gc;
-	private AnimationTimer gameLoop;
+	public static AnimationTimer gameLoop;
 	private GameController controller;
 	public static int counter;
 
