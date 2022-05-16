@@ -7,6 +7,7 @@ import entity.base.Character;
 import entity.base.SpecialPower;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class StarvePower extends SpecialPower{
 	
@@ -24,6 +25,8 @@ public class StarvePower extends SpecialPower{
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
+		gc.setFill(Color.PURPLE);
+		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
 	}
 
 	@Override

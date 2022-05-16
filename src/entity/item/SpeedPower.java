@@ -8,6 +8,7 @@ import entity.base.SpecialPower;
 import entity.character.Ghost;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class SpeedPower extends SpecialPower{
 	
@@ -26,6 +27,8 @@ public class SpeedPower extends SpecialPower{
 	@Override
 	public void draw(GraphicsContext gc) {
 		// gc.drawImage(RenderableHolder.speedPower, this.xPos, this.yPos);
+		gc.setFill(Color.CYAN);
+		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
 	}
 
 	@Override

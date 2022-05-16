@@ -8,6 +8,7 @@ import entity.base.SpecialPower;
 import entity.character.Ghost;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class RevengePower extends SpecialPower {
 
@@ -25,6 +26,8 @@ public class RevengePower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
+		gc.setFill(Color.RED);
+		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
 	}
 
 	@Override

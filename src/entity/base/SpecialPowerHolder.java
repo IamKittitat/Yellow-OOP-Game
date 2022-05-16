@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import entity.item.RevengePower;
 import javafx.scene.canvas.GraphicsContext;
+import logic.GameLogic;
 import sharedObject.IRenderable;
 
 public class SpecialPowerHolder extends Entity implements IRenderable {
 	private ArrayList<SpecialPower> allSpecialPowers;
-	
+
 	public SpecialPowerHolder() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -17,11 +18,15 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		for(SpecialPower i : this.getAllSpecialPowers()) {
-			if (i.isVisible() && !i.isRemoved()) {
-				i.draw(gc);
+		for (SpecialPower s : this.getAllSpecialPowers()) {
+			if (s.isVisible() && !s.isRemoved()) {
+				s.draw(gc);
 			}
 		}
+	}
+
+	public void update() {
+		this.getAllSpecialPowers().add(GameLogic.randomPower());
 	}
 
 	public ArrayList<SpecialPower> getAllSpecialPowers() {
