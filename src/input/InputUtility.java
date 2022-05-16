@@ -6,12 +6,12 @@ public class InputUtility {
 	private static KeyCode firstPlayerKey;
 	private static KeyCode secondPlayerKey;
 
-	public static boolean getFirstPlayerKeyPressed(KeyCode keycode) {
-		return firstPlayerKey == keycode;
+	public static KeyCode getFirstPlayerKeyPressed() {
+		return firstPlayerKey;
 	}
 
-	public static boolean getSecondPlayerKeyPressed(KeyCode keycode) {
-		return secondPlayerKey == keycode;
+	public static KeyCode getSecondPlayerKeyPressed() {
+		return secondPlayerKey;
 	}
 
 	public static void setKeyPressed(KeyCode keyCode, boolean pressed) {

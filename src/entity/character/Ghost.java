@@ -1,5 +1,7 @@
 package entity.character;
 
+import java.util.ArrayList;
+
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
@@ -64,47 +66,56 @@ public class Ghost extends ControlCharacter {
 
 	public void update() {
 		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
-			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.I))
-					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.L))
-					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.K))
-					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.J))) {
-				turn(way);
+
+		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
+			this.setSpeed(GameConstant.GHOST_SPEED);
+			this.setStarted(true);
+		}
+
+		if (this.isStarted()) {
+			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
+			System.out.println(validWays);
+			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getSecondPlayerKeyPressed());
+			if (validWays.contains(turnDirection)) {
+				turn(turnDirection);
 				alreadyTurned = true;
 			}
-			if (way == this.direction) {
-				forward();
-			}
-			if (alreadyTurned) {
-				break;
+			for (Direction way : validWays) {
+				System.out.println(way);
+				System.out.println("direction " + this.direction);
+				if (way == this.direction) {
+					forward();
+					System.out.println("forward");
+				}
 			}
 		}
+
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 //		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
-		int state = ((int)GameCanvas.counter/5) %4;
+		int state = ((int) GameCanvas.counter / 5) % 4;
 		switch (state) {
 		case 0: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
 			return;
 		}
 		case 1: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.ghostPNG2, xPos - 10, yPos - 10, 20, 20);
 			return;
 		}
 		case 2: {
-			gc.drawImage(RenderableHolder.ghostPNG3, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.ghostPNG3, xPos - 10, yPos - 10, 20, 20);
 			return;
 		}
 		case 3: {
-			gc.drawImage(RenderableHolder.ghostPNG4, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.ghostPNG4, xPos - 10, yPos - 10, 20, 20);
 			return;
 		}
 		default:
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
 		}
 	}
 
