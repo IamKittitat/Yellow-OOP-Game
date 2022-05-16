@@ -2,18 +2,16 @@ package entity.base;
 
 import constant.Direction;
 import logic.GameLogic;
-import constant.Color;
+import constant.CharacterColor;
 
 public abstract class Character extends Entity {
-	private Color color;
 	protected int speed;
 	protected Direction direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
 
-	public Character(Color color) {
+	public Character() {
 		super();
-		setColor(color);
 	}
 	
 	protected abstract void forward();
@@ -25,14 +23,6 @@ public abstract class Character extends Entity {
 	protected abstract void reborn();
 
 	public abstract void collideWith(Entity entity);
-	
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
-	}
 
 	public int getSpeed() {
 		return speed;

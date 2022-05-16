@@ -1,6 +1,6 @@
 package entity.character;
 
-import constant.Color;
+import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
@@ -9,10 +9,14 @@ import entity.base.Entity;
 import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
+import gui.GameCanvas;
 import input.InputUtility;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.ArcType;
+import javafx.scene.paint.Color;
 
 public class PacMan extends ControlCharacter {
 	private int life;
@@ -20,17 +24,17 @@ public class PacMan extends ControlCharacter {
 	private boolean canEatPellet;
 	private boolean canEatGhost;
 
-	public PacMan(Color color) {
+	public PacMan(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.PACMAN_NAME;
 		this.detail = GameConstant.PACMAN_DETAIL;
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
-		setSpeed(GameConstant.PACMAN_SPEED);
+		setSpeed(0);
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
 		setPower(null);
-		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setDirection(Direction.EAST);
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
@@ -54,7 +58,7 @@ public class PacMan extends ControlCharacter {
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(GameConstant.PACMAN_SPEED);
 		setPower(null);
-		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
@@ -83,6 +87,7 @@ public class PacMan extends ControlCharacter {
 			}
 		} else if (entity instanceof SpecialPower) {
 			this.setPower((SpecialPower) entity);
+			System.out.println(this.getPower());
 			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}
@@ -90,12 +95,39 @@ public class PacMan extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-
+		int state = ((int)GameCanvas.counter/5) %4;
+		
+//		int angle = GameLogic.directionToInt(getDirection());
+//
+//		gc.translate(xPos, yPos);
+//		gc.rotate(angle);
+		
+		switch (state) {
+		case 0: {
+			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
+		}
+		case 1: {
+			gc.drawImage(RenderableHolder.pacManPNG2, xPos-10, yPos-10,20,20);
+		}
+		case 2: {
+			gc.drawImage(RenderableHolder.pacManPNG3, xPos-10, yPos-10,20,20);
+		}
+		case 3: {
+			gc.drawImage(RenderableHolder.pacManPNG4, xPos-10, yPos-10,20,20);
+		}
+		default:
+//			gc.rotate(-angle);
+//			gc.translate(-xPos, -yPos);
+		}
 	}
 
 	public void update() {
+		if(!this.isStarted() && !InputUtility.getFirstPlayerKeyPressed(null)) {
+			this.setSpeed(GameConstant.PACMAN_SPEED);
+			this.setStarted(true);
+		}
 		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay()) {
+		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
 			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))
 					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
 					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))

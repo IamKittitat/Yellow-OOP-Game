@@ -6,22 +6,22 @@ public class GameConstant {
 	public static final String PACMAN_DETAIL = "The PacMan";
 	public static final int PACMAN_SPEED = 1;
 	public static final int PACMAN_LIFE = 3;
-	public static final int PACMAN_SPAWN_X = 10;
-	public static final int PACMAN_SPAWN_Y = 10;
+	public static final int PACMAN_SPAWN_X = 36;
+	public static final int PACMAN_SPAWN_Y = 36;
 	public static final Direction FIRST_PACMAN_DIRECTION = Direction.WEST;
 
 	public static final String GHOST_NAME = "Ghost";
 	public static final String GHOST_DETAIL = "The BoogeyMan";
 	public static final int GHOST_SPEED = 1;
-	public static final int GHOST_SPAWN_X = 50;
-	public static final int GHOST_SPAWN_Y = 50;
+	public static final int GHOST_SPAWN_X = 60;
+	public static final int GHOST_SPAWN_Y = 36;
 	public static final Direction FIRST_GHOST_DIRECTION = Direction.NORTH;
 
 	public static final String GHOST_BOT_NAME = "Ghost";
 	public static final String GHOST_BOT_DETAIL = "The BoogeyMan";
 	public static final int GHOST_BOT_SPEED = 1;
-	public static final int GHOST_BOT_SPAWN_X = 50;
-	public static final int GHOST_BOT_SPAWN_Y = 50;
+	public static final int GHOST_BOT_SPAWN_X = 60;
+	public static final int GHOST_BOT_SPAWN_Y = 36;
 	public static final Direction FIRST_GHOST_BOT_DIRECTION = Direction.NORTH;
 
 	public static final String PELLET_NAME = "Pellet";

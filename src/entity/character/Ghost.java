@@ -1,28 +1,36 @@
 package entity.character;
 
-import constant.Color;
+import java.util.ArrayList;
+
+import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.ControlCharacter;
 import entity.base.Entity;
 import entity.base.Item;
+import entity.base.Pellet;
+import entity.base.SpecialPower;
+import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 
 public class Ghost extends ControlCharacter {
 	private boolean canEatPacMan;
 
-	public Ghost(Color color) {
+	public Ghost(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
 		this.detail = GameConstant.GHOST_DETAIL;
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
@@ -35,42 +43,80 @@ public class Ghost extends ControlCharacter {
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
 
 	public void collideWith(Entity entity) {
-		/*
-		 * Check ว่าชนกับอะไร ชนกับ pacman: check ว่ากินpacmanได้ไหม? กินได้: เรียก
-		 * reborn ของpacman, ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้:
-		 * เรียก die ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ item: setPower, เรียกคสม item
-		 */
+		if (entity instanceof PacMan) {
+			if (canEatPacMan) {
+				((Character) entity).die();
+			} else {
+				if (canBeEaten()) {
+					this.die();
+				}
+			}
+		} else if (entity instanceof SpecialPower) {
+			this.setPower((SpecialPower) entity);
+			System.out.println(this.getPower());
+			// ((SpecialPower) entity).gainPower(null, null);
+		}
 	}
 
 	public void update() {
 		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay()) {
-			if ((way == Direction.NORTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.UP))
-					|| (way == Direction.EAST && InputUtility.getSecondPlayerKeyPressed(KeyCode.RIGHT))
-					|| (way == Direction.SOUTH && InputUtility.getSecondPlayerKeyPressed(KeyCode.DOWN))
-					|| (way == Direction.WEST && InputUtility.getSecondPlayerKeyPressed(KeyCode.LEFT))) {
-				turn(way);
+
+		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
+			this.setSpeed(GameConstant.GHOST_SPEED);
+			this.setStarted(true);
+		}
+
+		if (this.isStarted()) {
+			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
+			System.out.println(validWays);
+			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getSecondPlayerKeyPressed());
+			if (validWays.contains(turnDirection)) {
+				turn(turnDirection);
 				alreadyTurned = true;
 			}
-			if (way == this.direction) {
-				forward();
-			}
-			if (alreadyTurned) {
-				break;
+			for (Direction way : validWays) {
+				System.out.println(way);
+				System.out.println("direction " + this.direction);
+				if (way == this.direction) {
+					forward();
+					System.out.println("forward");
+				}
 			}
 		}
+
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-
+//		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
+		int state = ((int) GameCanvas.counter / 5) % 4;
+		switch (state) {
+		case 0: {
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
+			return;
+		}
+		case 1: {
+			gc.drawImage(RenderableHolder.ghostPNG2, xPos - 10, yPos - 10, 20, 20);
+			return;
+		}
+		case 2: {
+			gc.drawImage(RenderableHolder.ghostPNG3, xPos - 10, yPos - 10, 20, 20);
+			return;
+		}
+		case 3: {
+			gc.drawImage(RenderableHolder.ghostPNG4, xPos - 10, yPos - 10, 20, 20);
+			return;
+		}
+		default:
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
+		}
 	}
 
 	public boolean canEatPacMan() {
