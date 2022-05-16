@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import scene.PacManGameScene;
 
@@ -23,7 +24,7 @@ public class MenuButton extends Button {
 		this.setPrefWidth(300);
 		this.setPrefHeight(50);
 		this.bindScene = nextScene;
-		this.setStyle("-fx-background-color: transparent; " + "-fx-border-color: white; " + "-fx-border-radius: 30;");
+		this.setStyle("-fx-background-color: transparent; " + "-fx-border-color: yellow; " + "-fx-border-radius: 30;"+"-fx-text-fill: yellow");
 		setAction();
 	}
 
@@ -33,7 +34,9 @@ public class MenuButton extends Button {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				setEffect(new DropShadow());
+				DropShadow shadow = new DropShadow();
+				shadow.setColor(Color.YELLOW);
+				setEffect(shadow);
 			}
 		});
 

@@ -1,9 +1,12 @@
 package sharedObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
@@ -13,6 +16,8 @@ public class RenderableHolder {
 
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
+	public static Image pacManIcon;
+	public static Image ghostPNG;
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -35,6 +40,9 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
+//		pacManIcon = new Image(new File("pacman-1.gif").toURI().toString());
+		ghostPNG = new Image(ClassLoader.getSystemResource("ghost.png").toString());
+		
 	}
 
 	public void add(IRenderable entity) {

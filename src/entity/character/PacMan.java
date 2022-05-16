@@ -11,6 +11,7 @@ import entity.base.Pellet;
 import entity.base.SpecialPower;
 import input.InputUtility;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.ArcType;
@@ -95,6 +96,7 @@ public class PacMan extends ControlCharacter {
 		// TODO Auto-generated method stub
 		gc.setFill(Color.YELLOW);
 		gc.fillArc(xPos, yPos, 10, 10, 45, 300, ArcType.ROUND);
+		gc.drawImage(RenderableHolder.pacManIcon, xPos, yPos,50,50);
 	}
 
 	public void update() {

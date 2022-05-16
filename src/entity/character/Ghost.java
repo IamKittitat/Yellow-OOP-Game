@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 
 public class Ghost extends ControlCharacter {
 	private boolean canEatPacMan;
@@ -83,7 +84,8 @@ public class Ghost extends ControlCharacter {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.setFill(Color.PINK);
-		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
+//		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
+		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
 	}
 
 	public boolean canEatPacMan() {

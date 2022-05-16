@@ -68,7 +68,7 @@ public class GhostBot extends Character {
 	public void update() {
 		ArrayList<Direction> validWays = GameLogic.validWay(this.xPos,this.yPos);
 		if (validWays.contains(this.direction)) {
-			System.out.println("update");
+//			System.out.println("update");
 			forward();
 		} else {
 			int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size() - 1);
