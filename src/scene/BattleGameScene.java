@@ -19,8 +19,8 @@ public class BattleGameScene extends VBox {
 		this.setPrefSize(900, 500);
 		this.setPadding(new Insets(10));
 
-		this.gameControlPane = new GameControlPane();
 		this.gameCanvas = new GameCanvas();
+		this.gameControlPane = new GameControlPane();
 
 		this.addListerner();
 

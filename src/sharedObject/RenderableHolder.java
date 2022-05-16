@@ -25,6 +25,7 @@ public class RenderableHolder {
 	public static Image pacManPNG2;
 	public static Image pacManPNG3;
 	public static Image pacManPNG4;
+	public static Image heartPNG;
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -55,7 +56,7 @@ public class RenderableHolder {
 		pacManPNG2 = new Image(ClassLoader.getSystemResource("pacman-2.png").toString());
 		pacManPNG3 = new Image(ClassLoader.getSystemResource("pacman-3.png").toString());
 		pacManPNG4 = new Image(ClassLoader.getSystemResource("pacman-4.png").toString());
-		
+		heartPNG = new Image(ClassLoader.getSystemResource("heart.png").toString(),30, 30, false, false);
 	}
 
 	public void add(IRenderable entity) {
