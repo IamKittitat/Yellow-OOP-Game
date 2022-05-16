@@ -1,5 +1,7 @@
 package entity.character;
 
+import java.util.ArrayList;
+
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
@@ -38,6 +40,7 @@ public class PacMan extends ControlCharacter {
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
+		setRadius(GameConstant.PACMAN_RADIUS);
 	}
 
 	public boolean isDead() {
@@ -56,7 +59,8 @@ public class PacMan extends ControlCharacter {
 	protected void reborn() {
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
-		setSpeed(GameConstant.PACMAN_SPEED);
+		setSpeed(0);
+		setStarted(false);
 		setPower(null);
 		setDirection(null);
 		setCanBeEaten(false);
@@ -65,14 +69,6 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void collideWith(Entity entity) {
-		/*
-		 * Check ว่าชนกับอะไร ชนกับผี: check ว่ากินผีได้ไหม? กินได้: เรียก reborn ของผี,
-		 * ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้: เรียก die
-		 * ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ Pellet: เช็กว่าเก็บได้ไหม เก็บได้: เพิ่ม
-		 * score, เอา pellet ออก เก็บไม่ได้: เดินผ่าน ชนกับ item: setPower, เรียกคสม
-		 * item
-		 * 
-		 */
 		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
 			if (canEatGhost) {
 				((Character) entity).die();
@@ -95,25 +91,29 @@ public class PacMan extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		int state = ((int)GameCanvas.counter/5) %4;
-		
+		int state = ((int) GameCanvas.counter / 5) % 4;
+
 //		int angle = GameLogic.directionToInt(getDirection());
 //
 //		gc.translate(xPos, yPos);
 //		gc.rotate(angle);
-		
+
 		switch (state) {
 		case 0: {
-			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 		}
 		case 1: {
-			gc.drawImage(RenderableHolder.pacManPNG2, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 		}
 		case 2: {
-			gc.drawImage(RenderableHolder.pacManPNG3, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 		}
 		case 3: {
-			gc.drawImage(RenderableHolder.pacManPNG4, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 		}
 		default:
 //			gc.rotate(-angle);
@@ -122,24 +122,28 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void update() {
-		if(!this.isStarted() && !InputUtility.getFirstPlayerKeyPressed(null)) {
+		boolean alreadyTurned = false;
+
+		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
 			this.setSpeed(GameConstant.PACMAN_SPEED);
 			this.setStarted(true);
 		}
-		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
-			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))
-					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
-					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))
-					|| (way == Direction.WEST && InputUtility.getFirstPlayerKeyPressed(KeyCode.A))) {
-				this.turn(way);
+
+		if (this.isStarted()) {
+			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
+//			System.out.println(validWays);
+			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
+			if (validWays.contains(turnDirection)) {
+				turn(turnDirection);
 				alreadyTurned = true;
 			}
-			if (way == this.direction) {
-				this.forward();
-			}
-			if (alreadyTurned) {
-				break;
+			for (Direction way : validWays) {
+//				System.out.println(way);
+//				System.out.println("direction " + this.direction);
+				if (way == this.direction) {
+					forward();
+//					System.out.println("forward");
+				}
 			}
 		}
 	}

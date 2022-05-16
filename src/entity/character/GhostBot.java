@@ -26,6 +26,7 @@ public class GhostBot extends Character {
 		setDirection(GameConstant.FIRST_GHOST_BOT_DIRECTION);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
+		setRadius(GameConstant.GHOST_BOT_RADIUS);
 	}
 
 	protected void forward() {
@@ -66,7 +67,7 @@ public class GhostBot extends Character {
 	}
 
 	public void update() {
-		ArrayList<Direction> validWays = GameLogic.validWay(this.xPos,this.yPos);
+		ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos);
 		if (validWays.contains(this.direction)) {
 //			System.out.println("update");
 			forward();

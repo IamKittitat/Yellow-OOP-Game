@@ -28,8 +28,8 @@ public class GameCanvas extends Canvas {
 		this.setWidth(900);
 		this.setHeight(450);
 		this.setVisible(true);
-		
-		this.counter = 0;
+
+		GameCanvas.counter = 0;
 
 		controller = new GameController();
 		this.loop();
@@ -39,6 +39,9 @@ public class GameCanvas extends Canvas {
 		gc.setFill(Color.BLUE);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		counter++;
+		if (counter > 20) {
+			counter -= 20;
+		}
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
 			entity.draw(gc);
 		}
@@ -52,6 +55,5 @@ public class GameCanvas extends Canvas {
 			}
 		}).start();
 	}
-
 
 }

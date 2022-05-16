@@ -27,7 +27,7 @@ public class GameLogic {
 	public static ArrayList<Direction> validWay(double xPos, double yPos, Direction direction) {
 		// check with map + x pos,y pos : what way its not the wall
 		ArrayList<Direction> validDirection = new ArrayList<Direction>();
-		System.out.println(xPos + "," + yPos);
+//		System.out.println(xPos + "," + yPos);
 //		if (direction == Direction.SOUTH) {
 //			validDirection.add(Direction.NORTH);
 //		} else if (direction == Direction.NORTH) {
@@ -49,7 +49,7 @@ public class GameLogic {
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
 			validDirection.add(Direction.EAST);
 		}
-		System.out.println(validDirection.toString());
+//		System.out.println(validDirection.toString());
 		return validDirection;
 	}
 
@@ -68,7 +68,7 @@ public class GameLogic {
 
 		double xPosToArrayIdx = Math.max(0, (xPos - 12) / 24);
 		double yPosToArrayIdx = Math.max(0, (yPos - 12) / 24);
-		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
+//		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
 		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
