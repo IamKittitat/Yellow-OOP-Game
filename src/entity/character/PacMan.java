@@ -97,32 +97,40 @@ public class PacMan extends ControlCharacter {
 		// TODO Auto-generated method stub
 		int state = ((int) GameCanvas.counter / 5) % 4;
 
-//		int angle = GameLogic.directionToInt(getDirection());
+		int angle = GameLogic.directionToInt(getDirection());
 //
-//		gc.translate(xPos, yPos);
+//		gc.translate(xPos+this.radius*2, yPos+this.radius*2);
 //		gc.rotate(angle);
 
 		switch (state) {
 		case 0: {
 			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 					this.radius * 2);
+			break;
 		}
 		case 1: {
 			gc.drawImage(RenderableHolder.pacManPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 					this.radius * 2);
+			break;
 		}
 		case 2: {
 			gc.drawImage(RenderableHolder.pacManPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
 					this.radius * 2);
+			break;
 		}
 		case 3: {
 			gc.drawImage(RenderableHolder.pacManPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
 					this.radius * 2);
+			break;
 		}
-		default:
-//			gc.rotate(-angle);
-//			gc.translate(-xPos, -yPos);
 		}
+//		gc.translate(xPos, yPos);
+//		gc.rotate(angle);
+//		gc.setFill(Color.YELLOW);
+//		int gunSize = (int) (this.radius / 5);
+//		gc.fillRect(0, -gunSize, radius * 3 / 2, gunSize * 2);
+//		gc.rotate(-angle);
+//		gc.translate(-xPos, -yPos);
 	}
 
 	public void update() {
