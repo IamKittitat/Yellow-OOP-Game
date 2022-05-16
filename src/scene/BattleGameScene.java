@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import logic.GameController;
 
 public class BattleGameScene extends VBox {
 	private GameControlPane gameControlPane;
@@ -17,10 +18,9 @@ public class BattleGameScene extends VBox {
 		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: white;");
 		this.setPrefSize(900, 500);
-		this.setPadding(new Insets(10));
 
 		this.gameCanvas = new GameCanvas();
-		this.gameControlPane = new GameControlPane();
+		this.gameControlPane = GameController.gameControlPane;
 
 		this.addListerner();
 

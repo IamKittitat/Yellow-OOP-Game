@@ -11,6 +11,7 @@ import entity.base.PelletHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
+import gui.GameControlPane;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
@@ -22,6 +23,7 @@ public class GameController {
 	public static GhostBot ghostBot1;
 	public static GhostBot ghostBot2;
 	public static PelletHolder pelletHolder;
+	public static GameControlPane gameControlPane;
 
 	public GameController() {
 		super();
@@ -35,6 +37,7 @@ public class GameController {
 		ghostBot1 = new GhostBot();
 		ghostBot2 = new GhostBot();
 		pelletHolder = new PelletHolder();
+		gameControlPane = new GameControlPane();
 
 		addNewObject(pacMan);
 		addNewObject(ghost);
@@ -54,6 +57,8 @@ public class GameController {
 	public void logicUpdate() {
 		pacMan.update();
 		ghost.update();
+		gameControlPane.updateLives();
+		gameControlPane.updateScore();
 //		ghostBot1.update();
 //		ghostBot2.update();
 		if (pacMan.isCollide(ghost)) {
@@ -67,6 +72,7 @@ public class GameController {
 				pacMan.collideWith(pellet);				
 			}
 		}
+
 //		System.out.println(pacMan.getXPos()+", "+pacMan.getYPos());
 //		ArrayList<Integer> LocationNearPacMan = GameLogic.getLocationNearPacMan(pacMan);
 //		System.out.println(LocationNearPacMan.toString());
