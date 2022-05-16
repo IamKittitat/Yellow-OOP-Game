@@ -57,7 +57,7 @@ public class GameController {
 //		ghostBot1.update();
 //		ghostBot2.update();
 		if (pacMan.isCollide(ghost)) {
-			System.out.println("Check collide");
+//			System.out.println("collide");
 			pacMan.collideWith(ghost);
 		}
 		for(Pellet pellet : pelletHolder.getAllPellets()) {

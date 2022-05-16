@@ -48,9 +48,10 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void die() {
+		System.out.println("life " + this.getLife());
 		this.setLife(this.getLife() - 1);
 		if (this.getLife() <= 0) {
-			// call endgame for pacman lose
+			// call endgame
 			return;
 		}
 		this.reborn();
@@ -63,7 +64,7 @@ public class PacMan extends ControlCharacter {
 		setStarted(false);
 		setPower(null);
 		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
-		setCanBeEaten(false);
+		setCanBeEaten(true);
 		InputUtility.setFirstPlayerKeyNull();
 		setCanEatGhost(false);
 		setCanEatPellet(true);
