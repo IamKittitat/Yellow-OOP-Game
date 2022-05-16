@@ -35,7 +35,7 @@ public class GameController {
 		ghostBot2 = new GhostBot();
 		pelletHolder = new PelletHolder();
 		
-		addNewObject(pacMan);
+//		addNewObject(pacMan);
 		addNewObject(ghost);
 		
 //		RenderableHolder.getInstance().add(pelletHolder);
@@ -53,7 +53,7 @@ public class GameController {
 	}
 	
 	public void logicUpdate(){
-		pacMan.update();
+//		pacMan.update();
 		ghost.update();
 //		ghostBot1.update();
 //		ghostBot2.update();

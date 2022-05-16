@@ -37,16 +37,16 @@ public class GameLogic {
 //		} else if (direction == Direction.WEST) {
 //			validDirection.add(Direction.EAST);
 //		}
-		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos - 24).equals("G")) {
+		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos - 12.05).equals("G")) {
 			validDirection.add(Direction.NORTH);
 		}
-		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos + 24).equals("G")) {
+		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos + 12.05).equals("G")) {
 			validDirection.add(Direction.SOUTH);
 		}
-		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 24, yPos).equals("G")) {
+		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 12.05, yPos).equals("G")) {
 			validDirection.add(Direction.WEST);
 		}
-		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 24, yPos).equals("G")) {
+		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
 			validDirection.add(Direction.EAST);
 		}
 		System.out.println(validDirection.toString());
@@ -69,8 +69,8 @@ public class GameLogic {
 		double xPosToArrayIdx = Math.max(0, (xPos - 12) / 24);
 		double yPosToArrayIdx = Math.max(0, (yPos - 12) / 24);
 		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
-		int xPosInInt = (int) Math.ceil(xPosToArrayIdx);
-		int yPosInInt = (int) Math.ceil(yPosToArrayIdx);
+		int xPosInInt = (int) Math.round(xPosToArrayIdx);
+		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 //		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
