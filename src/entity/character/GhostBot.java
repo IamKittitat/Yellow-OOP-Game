@@ -7,11 +7,13 @@ import constant.Direction;
 import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
+import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 
 public class GhostBot extends Character {
 	private boolean canEatPacMan;
@@ -45,10 +47,10 @@ public class GhostBot extends Character {
 	@Override
 	protected void reborn() {
 		// TODO Auto-generated method stub
-		this.xPos = GameConstant.GHOST_SPAWN_X;
-		this.yPos = GameConstant.GHOST_SPAWN_Y;
-		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
+		this.yPos = GameConstant.GHOST_BOT_SPAWN_Y;
+		setSpeed(GameConstant.GHOST_BOT_SPEED);
+		setStarted(false);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
@@ -67,16 +69,31 @@ public class GhostBot extends Character {
 	}
 
 	public void update() {
-		ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos);
-		if (validWays.contains(this.direction)) {
-//			System.out.println("update");
-			forward();
-		} else {
-			int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size() - 1);
-			System.out.println("turn");
-			turn(validWays.get(randomNum));
+		boolean alreadyTurned = false;
+
+		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
+			this.setSpeed(GameConstant.GHOST_BOT_SPEED);
+			this.setStarted(true);
 		}
 
+		if (this.isStarted()) {
+			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
+//			System.out.println(validWays);
+			Direction turnDirection = randomDirection(validWays);
+			System.out.println(turnDirection);
+			if ((validWays.contains(turnDirection) && canTurn(validWays)) || (validWays.size() == 1)) {
+				turn(turnDirection);
+				alreadyTurned = true;
+			}
+			for (Direction way : validWays) {
+//				System.out.println(way);
+//				System.out.println("direction " + this.direction);
+				if (way == this.direction) {
+					forward();
+//					System.out.println("forward");
+				}
+			}
+		}
 //		if ((this.canBeEaten() != LastCanBeEaten) && (this.canBeEaten() == true)) {
 //			changeDirection();
 //		}
@@ -84,11 +101,56 @@ public class GhostBot extends Character {
 		// update 1 time when can be eaten == true
 	}
 
+	public boolean canTurn(ArrayList<Direction> validWays) {
+		if ((validWays.contains(Direction.NORTH) && validWays.contains(Direction.SOUTH))
+				|| (validWays.contains(Direction.WEST) && validWays.contains(Direction.EAST))) {
+			if (validWays.size() > 2) {
+				return true;
+			}
+		} else {
+			if (validWays.size() > 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Direction randomDirection(ArrayList<Direction> validWays) {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size());
+		return validWays.get(randomNum);
+	}
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.GREEN);
-		gc.fillRoundRect(xPos, yPos, 10, 10, 10, 10);
+//		gc.setFill(Color.GREEN);
+//		gc.fillRoundRect(xPos-5, yPos-5, 10, 10, 10, 10);
+		int state = ((int) GameCanvas.counter / 5) % 4;
+		switch (state) {
+		case 0: {
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			return;
+		}
+		case 1: {
+			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			return;
+		}
+		case 2: {
+			gc.drawImage(RenderableHolder.ghostPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			return;
+		}
+		case 3: {
+			gc.drawImage(RenderableHolder.ghostPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			return;
+		}
+		default:
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+		}
 	}
 
 	private void changeDirection() {

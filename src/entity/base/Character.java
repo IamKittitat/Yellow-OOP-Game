@@ -9,10 +9,12 @@ public abstract class Character extends Entity {
 	protected Direction direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
+	private boolean isStarted;
 
 	public Character() {
 		super();
 		this.setZ(10);
+		setStarted(false);
 	}
 	
 	protected abstract void forward();
@@ -55,6 +57,14 @@ public abstract class Character extends Entity {
 
 	public void setCanBeEaten(boolean canBeEaten) {
 		this.canBeEaten = canBeEaten;
+	}
+	
+	public boolean isStarted() {
+		return isStarted;
+	}
+
+	public void setStarted(boolean isStarted) {
+		this.isStarted = isStarted;
 	}
 
 }

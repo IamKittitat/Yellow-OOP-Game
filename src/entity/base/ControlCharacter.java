@@ -7,12 +7,10 @@ import logic.GameLogic;
 
 public abstract class ControlCharacter extends Character {
 	private CharacterColor color;
-	private boolean isStarted;
 
 	public ControlCharacter(CharacterColor color) {
 		super();
 		setColor(color);
-		setStarted(false);
 	}
 
 	protected void forward() {
@@ -33,13 +31,5 @@ public abstract class ControlCharacter extends Character {
 
 	public void setColor(CharacterColor color) {
 		this.color = color;
-	}
-
-	public boolean isStarted() {
-		return isStarted;
-	}
-
-	public void setStarted(boolean isStarted) {
-		this.isStarted = isStarted;
 	}
 }

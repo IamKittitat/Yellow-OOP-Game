@@ -24,9 +24,9 @@ public class GameConstant {
 	public static final String GHOST_BOT_NAME = "Ghost";
 	public static final String GHOST_BOT_DETAIL = "The BoogeyMan";
 	public static final int GHOST_BOT_SPEED = 2;
-	public static final int GHOST_BOT_SPAWN_X = 60;
+	public static final int GHOST_BOT_SPAWN_X = 84;
 	public static final int GHOST_BOT_SPAWN_Y = 36;
-	public static final Direction FIRST_GHOST_BOT_DIRECTION = Direction.NORTH;
+	public static final Direction FIRST_GHOST_BOT_DIRECTION = Direction.EAST;
 	public static final double GHOST_BOT_RADIUS = 10;
 
 	public static final String PELLET_NAME = "Pellet";

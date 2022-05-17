@@ -216,8 +216,11 @@ public class GameLogic {
 	}
 
 	public static boolean IsGameEnd() {
-		System.out.println(remainPellets());
+//		System.out.println(remainPellets());
 		if(GameController.pacMan.getLife() <= 0) {
+			return true;
+		}
+		if(remainPellets() <= 0) {
 			return true;
 		}
 		return false;

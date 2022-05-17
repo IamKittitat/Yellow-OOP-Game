@@ -54,7 +54,7 @@ public class GameController {
 
 		addNewObject(pelletHolder);
 		addNewObject(specialPowerHolder);
-//		addNewObject(ghostBot1);
+		addNewObject(ghostBot1);
 //		addNewObject(ghostBot2);
 
 		// TODO Auto-generated constructor stub
@@ -68,7 +68,7 @@ public class GameController {
 	public void logicUpdate(long currentSecondtime) {
 		pacMan.update();
 		ghost.update();
-//		ghostBot1.update();
+		ghostBot1.update();
 //		ghostBot2.update();
 		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
 			GameLogic.spawnNewPower();
@@ -77,6 +77,10 @@ public class GameController {
 		if (pacMan.isCollide(ghost)) {
 //			System.out.println("collide");
 			pacMan.collideWith(ghost);
+		}
+		if (pacMan.isCollide(ghostBot1)) {
+//			System.out.println("collide");
+			pacMan.collideWith(ghostBot1);
 		}
 		gameControlPane.updateLives();
 		gameControlPane.updateScore();
