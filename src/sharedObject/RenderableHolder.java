@@ -28,6 +28,7 @@ public class RenderableHolder {
 	public static Image heartPNG;
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
+	public static Image menuButtonPNG;
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -61,6 +62,7 @@ public class RenderableHolder {
 		heartPNG = new Image(ClassLoader.getSystemResource("heart.png").toString(),30, 30, false, false);
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource("pause-button.png").toString(),50, 50, false, false);
 		playButtonPNG = new Image(ClassLoader.getSystemResource("play-button.png").toString(),50, 50, false, false);
+		menuButtonPNG = new Image(ClassLoader.getSystemResource("menu-button.png").toString(),50, 50, false, false);
 	}
 
 	public void add(IRenderable entity) {

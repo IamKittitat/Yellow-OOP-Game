@@ -61,7 +61,7 @@ public class GameControlPane extends BorderPane {
 				}
 			}
 		});
-		this.menuButton = new MenuButton("Menu");
+		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
 
 		this.statPane = new VBox();
 		this.statPane.getChildren().addAll(scoreText, livesPane);
