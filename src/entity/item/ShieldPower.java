@@ -36,7 +36,7 @@ public class ShieldPower extends SpecialPower {
 		System.out.println("Gain Shield Power");
 		setCollector(collector);
 		setStartPowerSecondTime(System.nanoTime()/1000000000);
-		System.out.println(this.getStartPowerSecondTime());
+//		System.out.println(this.getStartPowerSecondTime());
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);
@@ -53,8 +53,8 @@ public class ShieldPower extends SpecialPower {
 	}
 
 	@Override
-	public void clearPower(Character collector, ArrayList<Character> other) {
-		System.out.println("clear shield");
+	public void clearPower(ArrayList<Character> other) {
+//		System.out.println("clear shield");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);

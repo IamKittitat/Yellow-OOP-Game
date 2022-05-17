@@ -47,6 +47,6 @@ public abstract class SpecialPower extends Item {
 
 	public abstract void gainPower(Character collector, ArrayList<Character> other);
 
-	public abstract void clearPower(Character collector, ArrayList<Character> other);
+	public abstract void clearPower(ArrayList<Character> other);
 	
 }

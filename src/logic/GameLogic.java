@@ -182,8 +182,8 @@ public class GameLogic {
 			ShieldPower shieldPower = new ShieldPower(x,y,startRandomTime);
 			return shieldPower;
 		case 2:
-			SpeedPower speedPower = new SpeedPower(x,y,startRandomTime);
-			return speedPower;
+//			SpeedPower speedPower = new SpeedPower(x,y,startRandomTime);
+//			return speedPower;
 		case 3:
 			StarvePower starvePower = new StarvePower(x,y,startRandomTime);
 			return starvePower;

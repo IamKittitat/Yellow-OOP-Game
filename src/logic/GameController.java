@@ -129,11 +129,11 @@ public class GameController {
 					});
 				}
 			}
-//			llSystem.out.println(specialPower.getStartPowerSecondTime());
+//			System.out.println(specialPower.getStartPowerSecondTime());
 		//	System.out.println((currentSecondtime - specialPower.getStartPowerSecondTime()) + ", " + specialPower.getDuration() + ", "+ specialPower.getCollector());
 			if (specialPower.getStartPowerSecondTime() != 0 && (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
 					&& specialPower.getCollector() != null) {
-				System.out.println(specialPower.getStartPowerSecondTime());
+//				System.out.println(specialPower.getStartPowerSecondTime());
 				System.out.println("clearPower " + specialPower.getName());
 				ArrayList<Character> otherCharacter = new ArrayList<Character>();
 				if (specialPower.getCollector() instanceof PacMan) {
@@ -141,7 +141,7 @@ public class GameController {
 				} else if (specialPower.getCollector() instanceof Ghost) {
 					otherCharacter.add(GameController.pacMan); // fixed here
 				}
-				specialPower.clearPower(specialPower.getCollector(), otherCharacter);
+				specialPower.clearPower(otherCharacter);
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
