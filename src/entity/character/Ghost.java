@@ -17,6 +17,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 
@@ -61,8 +62,12 @@ public class Ghost extends ControlCharacter {
 				}
 			}
 		} else if (entity instanceof SpecialPower) {
+			ArrayList<Character> otherCharacter = new ArrayList<Character>();
+			otherCharacter.add(GameController.pacMan); // fixed here
+			((SpecialPower) entity).gainPower(GameController.ghost,otherCharacter);
+			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
-			System.out.println(this.getPower());
+			System.out.println("ghost, " + this.getPower().getName());
 			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}

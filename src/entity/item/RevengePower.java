@@ -12,8 +12,8 @@ import javafx.scene.paint.Color;
 
 public class RevengePower extends SpecialPower {
 
-	public RevengePower(int x, int y) {
-		super();
+	public RevengePower(int x, int y,long startRandomSecondTime) {
+		super(startRandomSecondTime);
 		this.name = GameConstant.REVENGE_BUFF_NAME;
 		this.detail = GameConstant.REVENGE_BUFF_DETAIL;
 		this.xPos = x;
@@ -33,6 +33,9 @@ public class RevengePower extends SpecialPower {
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
 		System.out.println("Gain Revenge Power");
+		setCollector(collector);
+		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		System.out.println(this.getStartPowerSecondTime());
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(false);
 		collectedPacMan.setCanEatGhost(true);

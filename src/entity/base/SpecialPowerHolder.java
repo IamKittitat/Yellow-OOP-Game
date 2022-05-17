@@ -18,7 +18,7 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		for (SpecialPower s : this.getAllSpecialPowers()) {
+		for (SpecialPower s : SpecialPowerHolder.getAllSpecialPowers()) {
 			if (s.isVisible() && !s.isRemoved()) {
 				s.draw(gc);
 			}

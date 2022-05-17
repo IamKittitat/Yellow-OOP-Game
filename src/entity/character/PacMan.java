@@ -72,8 +72,6 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void collideWith(Entity entity) {
-		ArrayList<Character> otherCharacter = new ArrayList<Character>();
-		otherCharacter.add(GameController.ghost); // fixed here
 		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
 			if (canEatGhost) {
 				((Character) entity).die();
@@ -89,6 +87,8 @@ public class PacMan extends ControlCharacter {
 				System.out.println(this.getScore());				
 			}
 		} else if (entity instanceof SpecialPower) {
+			ArrayList<Character> otherCharacter = new ArrayList<Character>();
+			otherCharacter.add(GameController.ghost); // fixed here
 			((SpecialPower) entity).gainPower(GameController.pacMan,otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);

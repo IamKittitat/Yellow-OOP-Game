@@ -12,8 +12,8 @@ import javafx.scene.paint.Color;
 
 public class SpeedPower extends SpecialPower{
 	
-	public SpeedPower(int x,int y) {
-		super();
+	public SpeedPower(int x,int y,long startRandomSecondTime) {
+		super(startRandomSecondTime);
 		this.name = GameConstant.SPEED_BUFF_NAME;
 		this.detail = GameConstant.SPEED_BUFF_DETAIL;
 		this.xPos = x;
@@ -34,6 +34,9 @@ public class SpeedPower extends SpecialPower{
 	@Override
 	public void gainPower(Character collector,ArrayList<Character> other) {
 		System.out.println("Gain Speed Power");
+		setCollector(collector);
+		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		System.out.println(this.getStartPowerSecondTime());
 		collector.setSpeed(GameConstant.BUFF_SPEED);
 	}
 

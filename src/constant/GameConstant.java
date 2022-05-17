@@ -43,10 +43,10 @@ public class GameConstant {
 	public static final int BUFF_SPEED = 1;
 	public static final int DEBUFF_SPEED = -1;
 	public static final int BUFF_SPAWN_TIME = 5;
-	public static final int REVENGE_BUFF_DURATION = 8;
-	public static final int SPEED_BUFF_DURATION = 7;
-	public static final int SHIELD_BUFF_DURATION = 7;
-	public static final int STARVE_BUFF_DURATION = 7;
+	public static final int REVENGE_BUFF_DURATION = 3;
+	public static final int SPEED_BUFF_DURATION = 3;
+	public static final int SHIELD_BUFF_DURATION = 3;
+	public static final int STARVE_BUFF_DURATION = 3;
 
 	public static final int GAME_TIMER = 600;
 

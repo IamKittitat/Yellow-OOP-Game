@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 
 public class StarvePower extends SpecialPower{
 	
-	public StarvePower(int x,int y) {
-		super();
+	public StarvePower(int x,int y,long startRandomSecondTime) {
+		super(startRandomSecondTime);
 		this.name = GameConstant.STARVE_BUFF_NAME;
 		this.detail = GameConstant.STARVE_BUFF_DETAIL;
 		this.xPos = x;
@@ -32,6 +32,9 @@ public class StarvePower extends SpecialPower{
 	@Override
 	public void gainPower(Character collector,ArrayList<Character> other) {
 		System.out.println("Gain Starve Power");
+		setCollector(collector);
+		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		System.out.println(this.getStartPowerSecondTime());
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
 	}

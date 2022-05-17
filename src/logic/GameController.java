@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constant.CharacterColor;
+import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Map;
 import entity.base.Pellet;
@@ -15,6 +16,7 @@ import entity.character.GhostBot;
 import entity.character.PacMan;
 import gui.GameCanvas;
 import gui.GameControlPane;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
@@ -70,7 +72,7 @@ public class GameController {
 		gameControlPane.updateScore();
 //		ghostBot1.update();
 //		ghostBot2.update();
-		if (GameLogic.timeToRandomNewPower(currentSecondtime,startSecondTime)) {
+		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
 			GameLogic.spawnNewPower();
 		}
 
@@ -78,23 +80,79 @@ public class GameController {
 //			System.out.println("collide");
 			pacMan.collideWith(ghost);
 		}
-		for(Pellet pellet : pelletHolder.getAllPellets()) {
+
+		// ######## move to pelletHolder.update ########
+		for (Pellet pellet : pelletHolder.getAllPellets()) {
 //			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			if(!pellet.isRemoved() && pacMan.isCollide(pellet)) {
+			if (!pellet.isRemoved() && pacMan.isCollide(pellet)) {
 //				System.out.println("pellets");
-				pacMan.collideWith(pellet);				
+				pacMan.collideWith(pellet);
 			}
 		}
-		for(SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
+		// ###################################################
+
+		// ######## move to SpecialPowerHolder.update ########
+		for (SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
 //			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			if(!specialPower.isRemoved() && pacMan.isCollide(specialPower) && specialPower.getEatenBy().contains(pacMan.getName())) {
+			boolean taken = false;
+			if (!specialPower.isRemoved() && pacMan.isCollide(specialPower)
+					&& specialPower.getEatenBy().contains(pacMan.getName())) {
 //				System.out.println("pellets");
-				pacMan.collideWith(specialPower);				
-			} else if(!specialPower.isRemoved() && ghost.isCollide(specialPower) && specialPower.getEatenBy().contains(ghost.getName()))  {
+				pacMan.collideWith(specialPower);
+				taken = true;
+			} else if (!specialPower.isRemoved() && ghost.isCollide(specialPower)
+					&& specialPower.getEatenBy().contains(ghost.getName())) {
 //				System.out.println("pellets");
-				ghost.collideWith(specialPower);				
+				ghost.collideWith(specialPower);
+				taken = true;
+			}
+
+//			if (taken) {
+//				Platform.runLater(new Runnable() {
+//					@Override
+//					public void run() {
+//						SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
+//						specialPower.setRemoved(true);
+//					}
+//				});
+//			}
+
+			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > 3) {
+				if(specialPower.getCollector() == null) {
+					System.out.println("remove " + specialPower.getName());
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
+							specialPower.setRemoved(true);
+						}
+					});
+				}
+			}
+//			llSystem.out.println(specialPower.getStartPowerSecondTime());
+		//	System.out.println((currentSecondtime - specialPower.getStartPowerSecondTime()) + ", " + specialPower.getDuration() + ", "+ specialPower.getCollector());
+			if (specialPower.getStartPowerSecondTime() != 0 && (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
+					&& specialPower.getCollector() != null) {
+				System.out.println(specialPower.getStartPowerSecondTime());
+				System.out.println("clearPower " + specialPower.getName());
+				ArrayList<Character> otherCharacter = new ArrayList<Character>();
+				if (specialPower.getCollector() instanceof PacMan) {
+					otherCharacter.add(GameController.ghost); // fixed here
+				} else if (specialPower.getCollector() instanceof Ghost) {
+					otherCharacter.add(GameController.pacMan); // fixed here
+				}
+				specialPower.clearPower(specialPower.getCollector(), otherCharacter);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
+						specialPower.setRemoved(true);
+					}
+				});
 			}
 		}
+
+		// ###################################################
 
 //		System.out.println(pacMan.getXPos()+", "+pacMan.getYPos());
 //		ArrayList<Integer> LocationNearPacMan = GameLogic.getLocationNearPacMan(pacMan);

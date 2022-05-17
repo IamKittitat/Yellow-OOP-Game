@@ -12,8 +12,8 @@ import javafx.scene.paint.Color;
 
 public class ShieldPower extends SpecialPower {
 
-	public ShieldPower(int x, int y) {
-		super();
+	public ShieldPower(int x, int y,long startRandomSecondTime) {
+		super(startRandomSecondTime);
 		this.name = GameConstant.SHIELD_BUFF_NAME;
 		this.detail = GameConstant.SHIELD_BUFF_DETAIL;
 		this.xPos = x;
@@ -34,6 +34,9 @@ public class ShieldPower extends SpecialPower {
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
 		System.out.println("Gain Shield Power");
+		setCollector(collector);
+		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		System.out.println(this.getStartPowerSecondTime());
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);
@@ -51,6 +54,7 @@ public class ShieldPower extends SpecialPower {
 
 	@Override
 	public void clearPower(Character collector, ArrayList<Character> other) {
+		System.out.println("clear shield");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);
