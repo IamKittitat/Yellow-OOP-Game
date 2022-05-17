@@ -14,8 +14,8 @@ public class GameConstant {
 	public static final String GHOST_NAME = "Ghost";
 	public static final String GHOST_DETAIL = "The BoogeyMan";
 	public static final int GHOST_SPEED = 1;
-	public static final int GHOST_SPAWN_X = 60;
-	public static final int GHOST_SPAWN_Y = 36;
+	public static final int GHOST_SPAWN_X = 468;
+	public static final int GHOST_SPAWN_Y = 156;
 	public static final Direction FIRST_GHOST_DIRECTION = Direction.NORTH;
 	public static final double GHOST_RADIUS = 10;
 
