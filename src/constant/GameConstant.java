@@ -42,7 +42,7 @@ public class GameConstant {
 	public static final String SHIELD_BUFF_DETAIL = "THE SHIELD_BUFF";
 	public static final String STARVE_BUFF_NAME = "STARVE_BUFF";
 	public static final String STARVE_BUFF_DETAIL = "THE STARVE_BUFF";
-	public static final int BUFF_SPEED = 3;
+	public static final int BUFF_SPEED = 4;
 	public static final int DEBUFF_SPEED = 1;
 	public static final int BUFF_SPAWN_TIME = 5;
 	public static final int REVENGE_BUFF_DURATION = 3;
@@ -51,6 +51,7 @@ public class GameConstant {
 	public static final int STARVE_BUFF_DURATION = 3;
 
 	public static final int GAME_TIMER = 600;
+	public static final int BUFF_SPAWN_DURATION = 5;
 
 	public static final int SCREEN_SIZE_WIDTH = 900;
 	public static final int SCREEN_SIZE_HEIGHT = 500;

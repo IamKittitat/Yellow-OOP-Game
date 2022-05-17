@@ -91,7 +91,7 @@ public class GameControlPane extends BorderPane {
 
 	public void updateLives() {
 		this.lives = GameController.pacMan.getLife();
-		while (this.livesPane.getChildren().size() > this.lives)
+		while (this.livesPane.getChildren().size() > this.lives && this.lives >= 0)
 			this.livesPane.getChildren().remove(0);
 	}
 }

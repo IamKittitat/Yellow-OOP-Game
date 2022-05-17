@@ -102,10 +102,18 @@ public class PacMan extends ControlCharacter {
 		// TODO Auto-generated method stub
 		int state = ((int) GameCanvas.counter / 5) % 4;
 
-		int angle = GameLogic.directionToInt(getDirection());
-//
-//		gc.translate(xPos+this.radius*2, yPos+this.radius*2);
+//		int angle = GameLogic.directionToInt(getDirection())+270; // plus for make east =0;
+//		System.out.println(angle);
 //		gc.rotate(angle);
+//		if(angle == 360) { // right
+//			
+//		} else if(angle == 450) { // down
+//			
+//		} else if(angle == 540) { // left
+//			
+//		} else  if(angle == 270) { // up
+//			
+//		}
 
 		switch (state) {
 		case 0: {

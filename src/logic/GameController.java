@@ -68,8 +68,6 @@ public class GameController {
 	public void logicUpdate(long currentSecondtime) {
 		pacMan.update();
 		ghost.update();
-		gameControlPane.updateLives();
-		gameControlPane.updateScore();
 //		ghostBot1.update();
 //		ghostBot2.update();
 		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
@@ -80,6 +78,8 @@ public class GameController {
 //			System.out.println("collide");
 			pacMan.collideWith(ghost);
 		}
+		gameControlPane.updateLives();
+		gameControlPane.updateScore();
 
 		// ######## move to pelletHolder.update ########
 		for (Pellet pellet : pelletHolder.getAllPellets()) {
@@ -87,6 +87,13 @@ public class GameController {
 			if (!pellet.isRemoved() && pacMan.isCollide(pellet)) {
 //				System.out.println("pellets");
 				pacMan.collideWith(pellet);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						pelletHolder.getAllPellets().remove(pellet);
+						pellet.setRemoved(true);
+					}
+				});
 			}
 		}
 		// ###################################################
@@ -150,6 +157,10 @@ public class GameController {
 					}
 				});
 			}
+		}
+		
+		if(GameLogic.IsGameEnd()) {
+			GameCanvas.gameLoop.stop();
 		}
 
 		// ###################################################

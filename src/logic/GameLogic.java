@@ -21,8 +21,8 @@ import javafx.scene.input.KeyCode;
 
 public class GameLogic {
 
-	public static boolean pelletsRemain(PacMan pacMan) { // check if any pellets left in a map
-		return pacMan.getScore() < GameConstant.TOTAL_PELLET;
+	public static int remainPellets() { // check if any pellets left in a map
+		return GameController.pelletHolder.getAllPellets().size();
 	}
 
 	public static ArrayList<Direction> validWay(double xPos, double yPos, Direction direction) {
@@ -130,8 +130,8 @@ public class GameLogic {
 	public static ArrayList<Integer> getLocationNearPacMan(PacMan pacMan) {
 		int startedX = Math.max((int) (Math.round((pacMan.getXPos() - 12) / 24) - 2), 0);
 		int endedX = Math.min((int) (Math.round((pacMan.getXPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_WIDTH);
-		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2),0);
-		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2),GameConstant.SCREEN_PLAY_HEIGHT);
+		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2), 0);
+		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_HEIGHT);
 		ArrayList<Integer> location = new ArrayList<>();
 		location.add(startedX);
 		location.add(endedX);
@@ -147,53 +147,60 @@ public class GameLogic {
 		}
 		return null;
 	}
-	
-	public static boolean timeToRandomNewPower(long currentSecondtime,long startSecondTime) {
+
+	public static boolean timeToRandomNewPower(long currentSecondtime, long startSecondTime) {
 		long diffTime = currentSecondtime - startSecondTime;
-		if((diffTime)%5 == 0 && diffTime !=0 && !GameController.alreadyRandomPower) {
+		if ((diffTime) % GameConstant.BUFF_SPAWN_DURATION == 0 && diffTime != 0 && !GameController.alreadyRandomPower) {
 			GameController.alreadyRandomPower = true;
 			return true;
 		}
-		if((diffTime)%5 != 0) {
+		if ((diffTime) % GameConstant.BUFF_SPAWN_DURATION != 0) {
 			GameController.alreadyRandomPower = false;
 			return false;
 		}
 		return false;
-		
+
 	}
 
 	public static void spawnNewPower() {
-		int xRandomPos = 132;
+		ArrayList<Integer> randomPosition = randomPosition();
+//		int xRandomPos = randomPosition.get(0);
+//		int yRandomPos = randomPosition.get(1);
+		int xRandomPos = 60;
 		int yRandomPos = 36;
-		long startRandomSecondTime = System.nanoTime()/1000000000;
-		SpecialPower randomPower = randomPower(xRandomPos,yRandomPos,startRandomSecondTime);
-		System.out.println(randomPower.getName() +" , "+randomPower.getStartRandomSecondTime());
+//		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
+		long startRandomSecondTime = System.nanoTime() / 1000000000;
+		SpecialPower randomPower = randomPower(xRandomPos, yRandomPos, startRandomSecondTime);
+		System.out.println(randomPower.getName() + " , " + randomPower.getStartRandomSecondTime());
 		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
 	}
-	
 
-	public static SpecialPower randomPower(int x, int y,long startRandomTime) {
+	public static ArrayList<Integer> randomPosition() {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 276 + 1);
+		ArrayList<Integer> randomPosition = new ArrayList<>();
+		randomPosition.add(Map.groundState[randomNum][0]*24 + 12);
+		randomPosition.add(Map.groundState[randomNum][1]*24 + 12);
+		System.out.println("hi " + randomPosition.toString());
+		return randomPosition;
+	}
+
+	public static SpecialPower randomPower(int x, int y, long startRandomTime) {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 		switch (randomNum) {
 		case 0:
-			RevengePower revengePower = new RevengePower(x,y,startRandomTime);
+			RevengePower revengePower = new RevengePower(x, y, startRandomTime);
 			return revengePower;
 		case 1:
-			ShieldPower shieldPower = new ShieldPower(x,y,startRandomTime);
+			ShieldPower shieldPower = new ShieldPower(x, y, startRandomTime);
 			return shieldPower;
 		case 2:
 //			SpeedPower speedPower = new SpeedPower(x,y,startRandomTime);
 //			return speedPower;
 		case 3:
-			StarvePower starvePower = new StarvePower(x,y,startRandomTime);
+			StarvePower starvePower = new StarvePower(x, y, startRandomTime);
 			return starvePower;
 
 		}
-		return null;
-	}
-
-	public static ArrayList<Integer> randomPosition() {
-		// random from arraylist of map that is ground state
 		return null;
 	}
 
@@ -208,9 +215,11 @@ public class GameLogic {
 		return false;
 	}
 
-	public static boolean gameEnd() {
-		// check pacman or ghost win
-		// ???????
+	public static boolean IsGameEnd() {
+		System.out.println(remainPellets());
+		if(GameController.pacMan.getLife() <= 0) {
+			return true;
+		}
 		return false;
 	}
 
