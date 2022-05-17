@@ -17,6 +17,7 @@ public class GameButton extends Button {
 	public GameButton(String arg0) {
 		super(arg0);
 		setAction();
+		this.setStyle("-fx-background-color: transparent; ");
 		// TODO Auto-generated constructor stub
 	}
 	
