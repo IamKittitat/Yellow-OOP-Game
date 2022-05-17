@@ -19,12 +19,11 @@ import application.Main;
 public class MenuControlPane extends VBox {
 
 	private Text gameText;
-	private Button battleGameButton;
-	private Button pacManGameButton;
-	private Button customizeButton;
-	private Button howToPlayButton;
-	private Button quitButton;
-	private HowToPlayPane howToPlayPane;
+	public Button battleGameButton;
+	public Button pacManGameButton;
+	public Button customizeButton;
+	public Button howToPlayButton;
+	public Button quitButton;
 	private static Stage primaryStage;
 
 	public MenuControlPane() {
@@ -49,15 +48,7 @@ public class MenuControlPane extends VBox {
 	private void initializeHowToPlayButton() {
 		// TODO Auto-generated method stub
 		this.howToPlayButton = new MenuButton("How to play");
-		this.howToPlayPane = new HowToPlayPane();
-		this.howToPlayButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				howToPlayPane.enter();
-			}
-		});
+	
 	}
 
 	private void initializeCustomizeButton() {
@@ -81,7 +72,7 @@ public class MenuControlPane extends VBox {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Main.sceneHolder.switchScene(new Scene(new BattleGameScene()));
+				Main.sceneHolder.switchScene(new BattleGameScene());
 			}
 		});
 	}
