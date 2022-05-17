@@ -1,6 +1,7 @@
 package gui;
 
 import entity.character.PacMan;
+import gui.base.IconButton;
 import gui.base.MenuButton;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -43,7 +44,7 @@ public class GameControlPane extends BorderPane {
 
 		this.isPaused = false;
 
-		this.pauseButton = new MenuButton("Pause");
+		this.pauseButton = new IconButton(RenderableHolder.pauseButtonPNG);
 		this.pauseButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -51,9 +52,11 @@ public class GameControlPane extends BorderPane {
 				// TODO Auto-generated method stub
 				if (!isPaused) {
 					GameCanvas.gameLoop.stop();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
 					isPaused = true;
 				} else {
 					GameCanvas.gameLoop.start();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
 					isPaused = false;
 				}
 			}
