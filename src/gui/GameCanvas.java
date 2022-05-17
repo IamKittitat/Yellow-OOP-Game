@@ -51,7 +51,7 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void loop() {
-		(this.gameLoop = new AnimationTimer() {
+		(GameCanvas.gameLoop = new AnimationTimer() {
 			public void handle(final long currentNanotime) {
 				long currentSecondTime = currentNanotime/1000000000;
 				controller.logicUpdate(currentSecondTime);

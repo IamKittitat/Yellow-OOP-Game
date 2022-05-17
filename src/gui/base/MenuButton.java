@@ -1,18 +1,8 @@
 package gui.base;
 
-import application.Main;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import scene.PacManGameScene;
+import sharedObject.RenderableHolder;
 
 public class MenuButton extends GameButton {
-
-	private GameText buttonText;
 
 	public MenuButton(String arg0) {
 		super(arg0);

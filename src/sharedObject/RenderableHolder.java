@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Font;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -25,10 +26,14 @@ public class RenderableHolder {
 	public static Image pacManPNG2;
 	public static Image pacManPNG3;
 	public static Image pacManPNG4;
+	public static Image MainMenuGIF;
 	public static Image heartPNG;
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
 	public static Image menuButtonPNG;
+	public static Font gameHeaderFont;
+	public static Font gameSubHeaderFont;
+	
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -59,10 +64,14 @@ public class RenderableHolder {
 		pacManPNG2 = new Image(ClassLoader.getSystemResource("pacman-2.png").toString());
 		pacManPNG3 = new Image(ClassLoader.getSystemResource("pacman-3.png").toString());
 		pacManPNG4 = new Image(ClassLoader.getSystemResource("pacman-4.png").toString());
+		MainMenuGIF = new Image(ClassLoader.getSystemResource("MainMenu.gif").toString(),400, 400, false, false);
 		heartPNG = new Image(ClassLoader.getSystemResource("heart.png").toString(),30, 30, false, false);
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource("pause-button.png").toString(),50, 50, false, false);
 		playButtonPNG = new Image(ClassLoader.getSystemResource("play-button.png").toString(),50, 50, false, false);
 		menuButtonPNG = new Image(ClassLoader.getSystemResource("menu-button.png").toString(),50, 50, false, false);
+		
+		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscrb.ttf").toString(), 45);
+		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscr.ttf").toString(), 45);
 	}
 
 	public void add(IRenderable entity) {

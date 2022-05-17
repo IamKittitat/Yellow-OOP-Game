@@ -1,18 +1,26 @@
 package gui;
 
+import javafx.geometry.Insets;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import sharedObject.RenderableHolder;
 
-public class MainMenuPane extends BorderPane {
+public class MainMenuPane extends HBox {
 	public MenuControlPane menuControlPane;
 
 	public MainMenuPane() {
 		super();
 
 		this.setPrefSize(900, 500);
-		this.setStyle("-fx-background-color: midnightblue; ");
+		this.setPadding(new Insets(30));
+		this.setStyle("-fx-background-color: black; ");
 
 		this.menuControlPane = new MenuControlPane();
-		this.setLeft(menuControlPane);
+		BorderPane imagePane = new BorderPane(new ImageView(RenderableHolder.MainMenuGIF));
+		
+		this.getChildren().addAll(menuControlPane,imagePane);
 		// TODO Auto-generated constructor stub
 
 	}

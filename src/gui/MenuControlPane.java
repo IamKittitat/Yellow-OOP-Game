@@ -8,12 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scene.BattleGameScene;
 import scene.CustomiseScene;
 import scene.MainMenuScene;
 import scene.PacManGameScene;
+import sharedObject.RenderableHolder;
 import application.Main;
 
 public class MenuControlPane extends VBox {
@@ -58,7 +60,7 @@ public class MenuControlPane extends VBox {
 
 	private void initializePacManGameButton() {
 		// TODO Auto-generated method stub
-		this.pacManGameButton = new MenuButton("Pac-man vs Pac-man");
+		this.pacManGameButton = new MenuButton("Classic Pac-man");
 
 	}
 
@@ -80,6 +82,8 @@ public class MenuControlPane extends VBox {
 	private void initializeGameText() {
 		// TODO Auto-generated method stub
 		this.gameText = new Text("PAC-MAN");
+		this.gameText.setFont(RenderableHolder.gameHeaderFont);
+		this.gameText.setFill(Color.YELLOW);
 	}
 
 	private void initializeQuitButton() {

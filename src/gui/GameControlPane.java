@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
 import scene.MainMenuScene;
@@ -41,6 +42,9 @@ public class GameControlPane extends BorderPane {
 		initilizeLivesPane();
 
 		this.scoreText = new Text("Score : 0");
+		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
+		this.scoreText.setFill(Color.YELLOW);
+		this.scoreText.setStyle("-fx-font-size:20;");
 
 		this.isPaused = false;
 
