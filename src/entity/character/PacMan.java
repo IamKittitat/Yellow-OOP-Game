@@ -1,5 +1,7 @@
 package entity.character;
 
+import java.util.ArrayList;
+
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
@@ -11,6 +13,7 @@ import entity.base.Pellet;
 import entity.base.SpecialPower;
 import gui.GameCanvas;
 import input.InputUtility;
+import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
@@ -38,6 +41,7 @@ public class PacMan extends ControlCharacter {
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
+		setRadius(GameConstant.PACMAN_RADIUS);
 	}
 
 	public boolean isDead() {
@@ -45,9 +49,10 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void die() {
+		System.out.println("life " + this.getLife());
 		this.setLife(this.getLife() - 1);
 		if (this.getLife() <= 0) {
-			// call endgame for pacman lose
+			// call endgame
 			return;
 		}
 		this.reborn();
@@ -56,23 +61,19 @@ public class PacMan extends ControlCharacter {
 	protected void reborn() {
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
-		setSpeed(GameConstant.PACMAN_SPEED);
+		setSpeed(0);
+		setStarted(false);
 		setPower(null);
-		setDirection(null);
-		setCanBeEaten(false);
+		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
+		setCanBeEaten(true);
+		InputUtility.setFirstPlayerKeyNull();
 		setCanEatGhost(false);
 		setCanEatPellet(true);
 	}
 
 	public void collideWith(Entity entity) {
-		/*
-		 * Check ว่าชนกับอะไร ชนกับผี: check ว่ากินผีได้ไหม? กินได้: เรียก reborn ของผี,
-		 * ล้างบัพitem, กินไม่ได้: check ว่าถูกกินได้ไหม? ถูกกินได้: เรียก die
-		 * ถูกกินไม่ได้: เดินผ่านไปเลย ชนกับ Pellet: เช็กว่าเก็บได้ไหม เก็บได้: เพิ่ม
-		 * score, เอา pellet ออก เก็บไม่ได้: เดินผ่าน ชนกับ item: setPower, เรียกคสม
-		 * item
-		 * 
-		 */
+		ArrayList<Character> otherCharacter = new ArrayList<Character>();
+		otherCharacter.add(GameController.ghost); // fixed here
 		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
 			if (canEatGhost) {
 				((Character) entity).die();
@@ -83,11 +84,15 @@ public class PacMan extends ControlCharacter {
 			}
 		} else if (entity instanceof Pellet) {
 			if (canEatPellet) {
+				((Pellet) entity).setRemoved(true);
 				this.setScore(this.getScore() + 1);
+				System.out.println(this.getScore());				
 			}
 		} else if (entity instanceof SpecialPower) {
+			((SpecialPower) entity).gainPower(GameController.pacMan,otherCharacter);
+			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
-			System.out.println(this.getPower());
+			System.out.println(this.getPower().getName());
 			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}
@@ -95,51 +100,68 @@ public class PacMan extends ControlCharacter {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		int state = ((int)GameCanvas.counter/5) %4;
-		
-//		int angle = GameLogic.directionToInt(getDirection());
+		int state = ((int) GameCanvas.counter / 5) % 4;
+
+		int angle = GameLogic.directionToInt(getDirection());
 //
-//		gc.translate(xPos, yPos);
+//		gc.translate(xPos+this.radius*2, yPos+this.radius*2);
 //		gc.rotate(angle);
-		
+
 		switch (state) {
 		case 0: {
-			gc.drawImage(RenderableHolder.pacManPNG1, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			break;
 		}
 		case 1: {
-			gc.drawImage(RenderableHolder.pacManPNG2, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			break;
 		}
 		case 2: {
-			gc.drawImage(RenderableHolder.pacManPNG3, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			break;
 		}
 		case 3: {
-			gc.drawImage(RenderableHolder.pacManPNG4, xPos-10, yPos-10,20,20);
+			gc.drawImage(RenderableHolder.pacManPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
+			break;
 		}
-		default:
-//			gc.rotate(-angle);
-//			gc.translate(-xPos, -yPos);
 		}
+//		gc.translate(xPos, yPos);
+//		gc.rotate(angle);
+//		gc.setFill(Color.YELLOW);
+//		int gunSize = (int) (this.radius / 5);
+//		gc.fillRect(0, -gunSize, radius * 3 / 2, gunSize * 2);
+//		gc.rotate(-angle);
+//		gc.translate(-xPos, -yPos);
 	}
 
 	public void update() {
-		if(!this.isStarted() && !InputUtility.getFirstPlayerKeyPressed(null)) {
+		boolean alreadyTurned = false;
+
+		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
+			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
 			this.setStarted(true);
 		}
-		boolean alreadyTurned = false;
-		for (Direction way : GameLogic.validWay(this.xPos,this.yPos)) {
-			if ((way == Direction.NORTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.W))
-					|| (way == Direction.EAST && InputUtility.getFirstPlayerKeyPressed(KeyCode.D))
-					|| (way == Direction.SOUTH && InputUtility.getFirstPlayerKeyPressed(KeyCode.S))
-					|| (way == Direction.WEST && InputUtility.getFirstPlayerKeyPressed(KeyCode.A))) {
-				this.turn(way);
+
+		if (this.isStarted()) {
+			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
+//			System.out.println(validWays);
+			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
+			if (validWays.contains(turnDirection)) {
+				turn(turnDirection);
 				alreadyTurned = true;
 			}
-			if (way == this.direction) {
-				this.forward();
-			}
-			if (alreadyTurned) {
-				break;
+			for (Direction way : validWays) {
+//				System.out.println(way);
+//				System.out.println("direction " + this.direction);
+				if (way == this.direction) {
+					forward();
+//					System.out.println("forward");
+				}
 			}
 		}
 	}

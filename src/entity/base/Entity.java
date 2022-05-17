@@ -4,6 +4,11 @@ import sharedObject.IRenderable;
 
 public abstract class Entity implements IRenderable {
 	protected String name;
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	protected String detail;
 	protected double xPos, yPos;
 	protected double radius;
@@ -14,9 +19,9 @@ public abstract class Entity implements IRenderable {
 		visible = true;
 		removed = false;
 	}
-	
-	protected boolean isCollide(Entity other){
-		return Math.hypot(this.xPos-other.xPos, this.yPos-other.yPos) <= this.radius+other.radius;
+
+	public boolean isCollide(Entity other) {
+		return Math.hypot(this.xPos - other.xPos, this.yPos - other.yPos) <= this.radius + other.radius;
 	}
 
 	@Override
@@ -33,11 +38,11 @@ public abstract class Entity implements IRenderable {
 	public int getZ() {
 		return z;
 	}
-	
+
 	public void setZ(int z) {
 		this.z = z;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -69,4 +74,13 @@ public abstract class Entity implements IRenderable {
 	public void setRemoved(boolean removed) {
 		this.removed = removed;
 	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double pacmanRadius) {
+		this.radius = pacmanRadius;
+	}
+
 }

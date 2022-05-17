@@ -10,6 +10,7 @@ import constant.GameConstant;
 import entity.base.ControlCharacter;
 import entity.base.Map;
 import entity.base.SpecialPower;
+import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.PacMan;
 import entity.item.RevengePower;
@@ -27,7 +28,7 @@ public class GameLogic {
 	public static ArrayList<Direction> validWay(double xPos, double yPos, Direction direction) {
 		// check with map + x pos,y pos : what way its not the wall
 		ArrayList<Direction> validDirection = new ArrayList<Direction>();
-		System.out.println(xPos + "," + yPos);
+//		System.out.println(xPos + "," + yPos);
 //		if (direction == Direction.SOUTH) {
 //			validDirection.add(Direction.NORTH);
 //		} else if (direction == Direction.NORTH) {
@@ -49,7 +50,7 @@ public class GameLogic {
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
 			validDirection.add(Direction.EAST);
 		}
-		System.out.println(validDirection.toString());
+//		System.out.println(validDirection.toString());
 		return validDirection;
 	}
 
@@ -68,7 +69,7 @@ public class GameLogic {
 
 		double xPosToArrayIdx = Math.max(0, (xPos - 12) / 24);
 		double yPosToArrayIdx = Math.max(0, (yPos - 12) / 24);
-		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
+//		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
 		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
@@ -126,6 +127,19 @@ public class GameLogic {
 		return null;
 	}
 
+	public static ArrayList<Integer> getLocationNearPacMan(PacMan pacMan) {
+		int startedX = Math.max((int) (Math.round((pacMan.getXPos() - 12) / 24) - 2), 0);
+		int endedX = Math.min((int) (Math.round((pacMan.getXPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_WIDTH);
+		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2),0);
+		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2),GameConstant.SCREEN_PLAY_HEIGHT);
+		ArrayList<Integer> location = new ArrayList<>();
+		location.add(startedX);
+		location.add(endedX);
+		location.add(startedY);
+		location.add(endedY);
+		return location;
+	}
+
 	public static Color CharacterColorToColor(CharacterColor color) {
 		switch (color) {
 		case YELLOW:
@@ -133,27 +147,44 @@ public class GameLogic {
 		}
 		return null;
 	}
-
-	public static void spawnNewPower() {
-		// Get random place (x,y)
-		// Get random buff(x,y)
-		// New + add to renderable Holder
+	
+	public static boolean timeToRandomNewPower(long currentSecondtime,long startSecondTime) {
+		long diffTime = currentSecondtime - startSecondTime;
+		if((diffTime)%5 == 0 && diffTime !=0 && !GameController.alreadyRandomPower) {
+			GameController.alreadyRandomPower = true;
+			return true;
+		}
+		if((diffTime)%5 != 0) {
+			GameController.alreadyRandomPower = false;
+			return false;
+		}
+		return false;
+		
 	}
 
-	public static SpecialPower randomPower() {
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 7 + 1);
+	public static void spawnNewPower() {
+		int xRandomPos = 132;
+		int yRandomPos = 36;
+		SpecialPower randomPower = randomPower(xRandomPos,yRandomPos);
+		System.out.println(randomPower.getName());
+		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
+	}
+	
+
+	public static SpecialPower randomPower(int x, int y) {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 		switch (randomNum) {
 		case 0:
-			RevengePower revengePower = null;
+			RevengePower revengePower = new RevengePower(x,y);
 			return revengePower;
 		case 1:
-			ShieldPower shieldPower = null;
+			ShieldPower shieldPower = new ShieldPower(x,y);
 			return shieldPower;
 		case 2:
-			SpeedPower speedPower = null;
+			SpeedPower speedPower = new SpeedPower(x,y);
 			return speedPower;
 		case 3:
-			StarvePower starvePower = null;
+			StarvePower starvePower = new StarvePower(x,y);
 			return starvePower;
 
 		}
@@ -181,4 +212,5 @@ public class GameLogic {
 		// ???????
 		return false;
 	}
+
 }

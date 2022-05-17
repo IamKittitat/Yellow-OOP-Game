@@ -33,6 +33,7 @@ public class Ghost extends ControlCharacter {
 		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
+		setRadius(GameConstant.GHOST_RADIUS);
 	}
 
 	public void die() {
@@ -43,7 +44,9 @@ public class Ghost extends ControlCharacter {
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);
-		setDirection(null);
+		setStarted(false);
+		setDirection(GameConstant.FIRST_GHOST_DIRECTION);
+		InputUtility.setSecondPlayerKeyNull();
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
 	}
@@ -74,22 +77,21 @@ public class Ghost extends ControlCharacter {
 
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
-			System.out.println(validWays);
+//			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getSecondPlayerKeyPressed());
 			if (validWays.contains(turnDirection)) {
 				turn(turnDirection);
 				alreadyTurned = true;
 			}
 			for (Direction way : validWays) {
-				System.out.println(way);
-				System.out.println("direction " + this.direction);
+//				System.out.println(way);
+//				System.out.println("direction " + this.direction);
 				if (way == this.direction) {
 					forward();
-					System.out.println("forward");
+//					System.out.println("forward");
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -99,23 +101,28 @@ public class Ghost extends ControlCharacter {
 		int state = ((int) GameCanvas.counter / 5) % 4;
 		switch (state) {
 		case 0: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 			return;
 		}
 		case 1: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos - 10, yPos - 10, 20, 20);
+			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 			return;
 		}
 		case 2: {
-			gc.drawImage(RenderableHolder.ghostPNG3, xPos - 10, yPos - 10, 20, 20);
+			gc.drawImage(RenderableHolder.ghostPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 			return;
 		}
 		case 3: {
-			gc.drawImage(RenderableHolder.ghostPNG4, xPos - 10, yPos - 10, 20, 20);
+			gc.drawImage(RenderableHolder.ghostPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 			return;
 		}
 		default:
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - 10, yPos - 10, 20, 20);
+			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+					this.radius * 2);
 		}
 	}
 

@@ -1,25 +1,32 @@
 package gui;
 
+import entity.character.PacMan;
 import gui.base.MenuButton;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import logic.GameController;
 import scene.MainMenuScene;
+import sharedObject.RenderableHolder;
 
-public class GameControlPane extends BorderPane{
-	private int point;
-	private Text textPoint;
+public class GameControlPane extends BorderPane {
+	private int score;
+	private Text scoreText;
 	private int lives;
 	private Pane livesPane;
 	private Button pauseButton;
 	private Button menuButton;
 	private Pane statPane;
 	private Pane controlPane;
-	
+	private Boolean isPaused;
+
 	public GameControlPane() {
 		super();
 		initilize();
@@ -27,30 +34,61 @@ public class GameControlPane extends BorderPane{
 		this.setPrefHeight(50);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	private void initilize() {
-		this.setPoint(0);
-		this.setLives(3);
-		this.livesPane = new Pane();
-		this.textPoint = new Text("Points : 0");
+
+		initilizeLivesPane();
+
+		this.scoreText = new Text("Score : 0");
+
+		this.isPaused = false;
+
 		this.pauseButton = new MenuButton("Pause");
+		this.pauseButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if (!isPaused) {
+					GameCanvas.gameLoop.stop();
+					isPaused = true;
+				} else {
+					GameCanvas.gameLoop.start();
+					isPaused = false;
+				}
+			}
+		});
 		this.menuButton = new MenuButton("Menu");
-		
+
 		this.statPane = new VBox();
-		this.statPane.getChildren().addAll(textPoint,livesPane);
-		
+		this.statPane.getChildren().addAll(scoreText, livesPane);
+
 		this.controlPane = new HBox();
-		this.controlPane.getChildren().addAll(pauseButton,menuButton);
-		
+		this.controlPane.getChildren().addAll(pauseButton, menuButton);
+
 		this.setLeft(statPane);
 		this.setRight(controlPane);
+
+		this.updateScore();
+		this.updateLives();
 	}
 
-	public void setPoint(int point) {
-		this.point = point;
+	public void initilizeLivesPane() {
+		this.livesPane = new HBox();
+		this.lives = GameController.pacMan.getLife();
+		for (int i = 0; i < this.lives; i++) {
+			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));
+		}
 	}
 
-	public void setLives(int lives) {
-		this.lives = lives;
+	public void updateScore() {
+		this.score = GameController.pacMan.getScore();
+		this.scoreText.setText("Score : " + this.score);
+	}
+
+	public void updateLives() {
+		this.lives = GameController.pacMan.getLife();
+		while (this.livesPane.getChildren().size() > this.lives)
+			this.livesPane.getChildren().remove(0);
 	}
 }

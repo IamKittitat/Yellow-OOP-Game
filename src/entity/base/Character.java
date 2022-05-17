@@ -12,6 +12,7 @@ public abstract class Character extends Entity {
 
 	public Character() {
 		super();
+		this.setZ(10);
 	}
 	
 	protected abstract void forward();

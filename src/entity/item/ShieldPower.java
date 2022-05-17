@@ -8,6 +8,7 @@ import entity.base.SpecialPower;
 import entity.character.Ghost;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class ShieldPower extends SpecialPower {
 
@@ -26,10 +27,13 @@ public class ShieldPower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
+		gc.setFill(Color.GREENYELLOW);
+		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
+		System.out.println("Gain Shield Power");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);

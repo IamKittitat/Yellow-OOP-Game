@@ -15,13 +15,14 @@ public class Pellet extends Item {
 		this.yPos = y;
 		setEaten(false);
 		super.getEatenBy().add("PacMan");
+		setRadius(GameConstant.PELLET_RADIUS);
 	}
 	
 	@Override
 	public void draw(GraphicsContext gc) {
 		// gc.drawImage( RenderableHolder.pellets, this.xPos, this.yPos);
 		gc.setFill(Color.WHITE);
-		gc.fillRect(xPos*24+12-2.5, yPos*24+12-2.5, 5, 5);
+		gc.fillRect(xPos-this.radius, yPos-this.radius, this.radius*2, this.radius*2);
 	}
 
 }

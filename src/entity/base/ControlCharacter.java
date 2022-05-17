@@ -16,8 +16,8 @@ public abstract class ControlCharacter extends Character {
 	}
 
 	protected void forward() {
-		System.out.println("+x " + Math.sin(Math.toRadians(GameLogic.directionToInt(direction))));
-		System.out.println("+y " + Math.cos(Math.toRadians(GameLogic.directionToInt(direction))));
+//		System.out.println("+x " + Math.sin(Math.toRadians(GameLogic.directionToInt(direction))));
+//		System.out.println("+y " + Math.cos(Math.toRadians(GameLogic.directionToInt(direction))));
 		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 	}

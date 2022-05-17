@@ -15,7 +15,7 @@ import sharedObject.RenderableHolder;
 
 public class GameCanvas extends Canvas {
 	private static GraphicsContext gc;
-	private AnimationTimer gameLoop;
+	public static AnimationTimer gameLoop;
 	private GameController controller;
 	public static int counter;
 
@@ -28,8 +28,8 @@ public class GameCanvas extends Canvas {
 		this.setWidth(900);
 		this.setHeight(450);
 		this.setVisible(true);
-		
-		this.counter = 0;
+
+		GameCanvas.counter = 0;
 
 		controller = new GameController();
 		this.loop();
@@ -39,19 +39,25 @@ public class GameCanvas extends Canvas {
 		gc.setFill(Color.BLUE);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		counter++;
+		if (counter > 20) {
+			counter -= 20;
+		}
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			entity.draw(gc);
+			if (entity.isVisible() && !entity.isRemoved()) {
+				entity.draw(gc);
+			}
+//			entity.draw(gc);
 		}
 	}
 
 	public void loop() {
 		(this.gameLoop = new AnimationTimer() {
-			public void handle(final long now) {
-				controller.logicUpdate();
+			public void handle(final long currentNanotime) {
+				long currentSecondTime = currentNanotime/1000000000;
+				controller.logicUpdate(currentSecondTime);
 				paintComponent();
 			}
 		}).start();
 	}
-
 
 }
