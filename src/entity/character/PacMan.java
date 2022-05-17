@@ -37,7 +37,7 @@ public class PacMan extends ControlCharacter {
 		setLife(GameConstant.PACMAN_LIFE);
 		setScore(0);
 		setPower(null);
-		setDirection(Direction.EAST);
+		setDirection(GameConstant.FIRST_PACMAN_DIRECTION);
 		setCanBeEaten(true);
 		setCanEatGhost(false);
 		setCanEatPellet(true);
