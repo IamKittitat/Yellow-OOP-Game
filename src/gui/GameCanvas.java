@@ -20,13 +20,13 @@ public class GameCanvas extends Canvas {
 	public static int counter;
 
 	public GameCanvas() {
-		super(500, 400);
+		super();
 		// TODO Auto-generated constructor stub
 		GameCanvas.gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		this.setWidth(900);
-		this.setHeight(450);
+		this.setHeight(430);
 		this.setVisible(true);
 
 		GameCanvas.counter = 0;
@@ -36,7 +36,6 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void paintComponent() {
-		gc.setFill(Color.BLUE);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		counter++;
 		if (counter > 20) {

@@ -14,6 +14,7 @@ public class BattleGamePane extends VBox {
 		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;");
 		this.setPrefSize(900, 500);
+		this.setMaxSize(900, 500);
 
 		this.gameCanvas = new GameCanvas();
 		this.gameControlPane = GameController.gameControlPane;

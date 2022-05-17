@@ -14,6 +14,7 @@ public class MainMenuPane extends HBox {
 		super();
 
 		this.setPrefSize(900, 500);
+		this.setMaxSize(900, 500);
 		this.setPadding(new Insets(30));
 		this.setStyle("-fx-background-color: black; ");
 
