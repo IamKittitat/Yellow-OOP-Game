@@ -15,6 +15,8 @@ import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
+import gui.BattleGamePane;
+import gui.EndGamePane;
 import gui.GameCanvas;
 import gui.GameControlPane;
 import javafx.application.Platform;
@@ -22,7 +24,7 @@ import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
 public class GameController {
-	private List<Entity> gameObjectContainer;
+	public static List<Entity> gameObjectContainer;
 
 	public static PacMan pacMan;
 	public static Ghost ghost;
@@ -86,6 +88,8 @@ public class GameController {
 
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
+			BattleGamePane.endGamePane.setResult();
+			BattleGamePane.endGamePane.enter();
 		}
 	}
 }

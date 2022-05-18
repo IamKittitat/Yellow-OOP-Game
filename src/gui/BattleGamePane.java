@@ -2,12 +2,15 @@ package gui;
 
 import input.InputUtility;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.GameController;
 
-public class BattleGamePane extends VBox {
+public class BattleGamePane extends StackPane {
 	private GameControlPane gameControlPane;
 	private GameCanvas gameCanvas;
+	public static EndGamePane endGamePane;
 
 	public BattleGamePane() {
 		super();
@@ -18,11 +21,17 @@ public class BattleGamePane extends VBox {
 
 		this.gameCanvas = new GameCanvas();
 		this.gameControlPane = GameController.gameControlPane;
+		
+		this.endGamePane = new EndGamePane();
 
 		this.addListerner();
-
-		this.getChildren().addAll(gameControlPane, gameCanvas);
+		
+		Pane gamePane = new VBox();
+		
+		gamePane.getChildren().addAll(gameControlPane, gameCanvas);
 		gameCanvas.requestFocus();
+		
+		this.getChildren().addAll(gamePane,endGamePane);
 	}
 	
 	public void addListerner() {
