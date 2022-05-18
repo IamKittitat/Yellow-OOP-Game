@@ -2,6 +2,8 @@ package entity.base;
 
 import java.util.ArrayList;
 
+import constant.GameConstant;
+
 public abstract class SpecialPower extends Item {
 	protected int duration;
 	protected long startRandomSecondTime;
@@ -10,6 +12,7 @@ public abstract class SpecialPower extends Item {
 	
 	public SpecialPower(long startRandomSecondTime) {
 		setStartRandomSecondTime(startRandomSecondTime);
+		setRadius(GameConstant.SPECIAL_POWER_RADIUS);
 	}
 
 	public Character getCollector() {

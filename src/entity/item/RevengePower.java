@@ -15,14 +15,15 @@ import sharedObject.RenderableHolder;
 
 public class RevengePower extends SpecialPower {
 	public static AnimationTimer startChasingSong;
-	
-	public RevengePower(int x, int y,long startRandomSecondTime) {
+
+	public RevengePower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.REVENGE_BUFF_NAME;
 		this.detail = GameConstant.REVENGE_BUFF_DETAIL;
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);
+		setRadius(GameConstant.REVENGE_POWER_RADIUS);
 		super.getEatenBy().add("PacMan");
 		this.duration = GameConstant.REVENGE_BUFF_DURATION;
 	}
@@ -31,14 +32,15 @@ public class RevengePower extends SpecialPower {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.setFill(Color.RED);
-		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
+		System.out.println(xPos + ", " + yPos);
+		gc.fillOval(xPos - this.radius, yPos - this.radius, this.radius * 2, this.radius * 2);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
 //		System.out.println("Gain Revenge Power");
 		setCollector(collector);
-		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
 		playMusic();
 		PacMan collectedPacMan = (PacMan) collector;
@@ -73,12 +75,12 @@ public class RevengePower extends SpecialPower {
 		stopMusic();
 
 		for (Character otherCharacter : other) {
-			if(otherCharacter instanceof Ghost) {
+			if (otherCharacter instanceof Ghost) {
 				Ghost otherGhost = (Ghost) otherCharacter;
 				otherGhost.setCanBeEaten(false);
 				otherGhost.setCanEatPacMan(true);
 				otherGhost.setSpeed(GameConstant.GHOST_SPEED);
-			} else if(otherCharacter instanceof GhostBot) {
+			} else if (otherCharacter instanceof GhostBot) {
 				GhostBot otherGhostBot = (GhostBot) otherCharacter;
 				otherGhostBot.setCanBeEaten(false);
 				otherGhostBot.setCanEatPacMan(true);

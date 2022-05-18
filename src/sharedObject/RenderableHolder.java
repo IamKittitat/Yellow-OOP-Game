@@ -34,6 +34,9 @@ public class RenderableHolder {
 
 	public static Image wallPNG;
 	public static Image spawnPNG;
+	
+	public static Image shieldPNG;
+	public static Image starvePNG;
 
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
@@ -91,6 +94,9 @@ public class RenderableHolder {
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
 
+		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
+		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
+		
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
 

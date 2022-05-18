@@ -9,10 +9,11 @@ import entity.character.Ghost;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class ShieldPower extends SpecialPower {
 
-	public ShieldPower(int x, int y,long startRandomSecondTime) {
+	public ShieldPower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.SHIELD_BUFF_NAME;
 		this.detail = GameConstant.SHIELD_BUFF_DETAIL;
@@ -27,15 +28,15 @@ public class ShieldPower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.GREENYELLOW);
-		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
+		gc.drawImage(RenderableHolder.shieldPNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				this.radius * 2);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
 		System.out.println("Gain Shield Power");
 		setCollector(collector);
-		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
@@ -58,10 +59,10 @@ public class ShieldPower extends SpecialPower {
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			Ghost otherGhost = (Ghost) other.get(0);
-			
+
 			collectedPacMan.setCanBeEaten(true);
 			otherGhost.setCanEatPacMan(true);
-		} else if (collector instanceof Ghost) { //Not sure here
+		} else if (collector instanceof Ghost) { // Not sure here
 			Ghost collectedGhost = (Ghost) collector;
 			PacMan otherPacMan = (PacMan) other.get(0);
 

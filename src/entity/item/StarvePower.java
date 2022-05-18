@@ -8,10 +8,11 @@ import entity.base.SpecialPower;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
-public class StarvePower extends SpecialPower{
-	
-	public StarvePower(int x,int y,long startRandomSecondTime) {
+public class StarvePower extends SpecialPower {
+
+	public StarvePower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.STARVE_BUFF_NAME;
 		this.detail = GameConstant.STARVE_BUFF_DETAIL;
@@ -21,19 +22,19 @@ public class StarvePower extends SpecialPower{
 		super.getEatenBy().add("Ghost");
 		this.duration = GameConstant.STARVE_BUFF_DURATION;
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.PURPLE);
-		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
+		gc.drawImage(RenderableHolder.starvePNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				this.radius * 2);
 	}
 
 	@Override
-	public void gainPower(Character collector,ArrayList<Character> other) {
+	public void gainPower(Character collector, ArrayList<Character> other) {
 //		System.out.println("Gain Starve Power");
 		setCollector(collector);
-		setStartPowerSecondTime(System.nanoTime()/1000000000);
+		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
