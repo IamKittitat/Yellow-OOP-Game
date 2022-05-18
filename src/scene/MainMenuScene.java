@@ -31,8 +31,8 @@ public class MainMenuScene extends Scene{
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
 		startThemeSong = new AnimationTimer() {
 			public void handle(long now) {
-				if (!RenderableHolder.StartScreen_Music.isPlaying())
-					RenderableHolder.StartScreen_Music.play();
+				if (!RenderableHolder.ThemeSong_music.isPlaying())
+					RenderableHolder.ThemeSong_music.play();
 			}
 		};
 		startThemeSong.start();

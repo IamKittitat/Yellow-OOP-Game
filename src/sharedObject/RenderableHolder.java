@@ -38,10 +38,15 @@ public class RenderableHolder {
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
 
-//	public static Image mapSprite;
-//	public static Image mineSprite;
-//	public static AudioClip  explosionSound;
-	public static AudioClip StartScreen_Music;
+	public static AudioClip ThemeSong_music;
+	public static AudioClip ChasingGhost_music;
+	public static AudioClip ClickedSound_music;
+	public static AudioClip CollectPower_music;
+	public static AudioClip EatPellet_music;
+	public static AudioClip GameEnd_music;
+	public static AudioClip PacManDie_music;
+	public static AudioClip PacManEatGhost_music;
+	
 	static {
 		loadResource();
 	}
@@ -88,7 +93,14 @@ public class RenderableHolder {
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
 
-		StartScreen_Music = new AudioClip(ClassLoader.getSystemResource(audio + "ThemeSong.mp3").toString());
+		ThemeSong_music = new AudioClip(ClassLoader.getSystemResource(audio + "ThemeSong.mp3").toString());
+		ChasingGhost_music = new AudioClip(ClassLoader.getSystemResource(audio + "ChasingGhost.mp3").toString());
+		ClickedSound_music = new AudioClip(ClassLoader.getSystemResource(audio + "ClickedSound.mp3").toString());
+		CollectPower_music = new AudioClip(ClassLoader.getSystemResource(audio + "CollectPower.mp3").toString());
+		EatPellet_music = new AudioClip(ClassLoader.getSystemResource(audio + "EatPellet.mp3").toString());
+		GameEnd_music = new AudioClip(ClassLoader.getSystemResource(audio + "GameEnd.mp3").toString());
+		PacManDie_music = new AudioClip(ClassLoader.getSystemResource(audio + "PacManDie.mp3").toString());
+		PacManEatGhost_music = new AudioClip(ClassLoader.getSystemResource(audio + "PacManEatGhost.mp3").toString());
 	}
 
 	public void add(IRenderable entity) {
