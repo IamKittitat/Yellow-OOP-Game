@@ -167,10 +167,10 @@ public class GameLogic {
 
 	public static void spawnNewPower() {
 		ArrayList<Integer> randomPosition = randomPosition();
-//		int xRandomPos = randomPosition.get(0);
-//		int yRandomPos = randomPosition.get(1);
-		int xRandomPos = 60;
-		int yRandomPos = 36;
+		int xRandomPos = randomPosition.get(0);
+		int yRandomPos = randomPosition.get(1);
+//		int xRandomPos = 60;
+//		int yRandomPos = 36;
 //		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
 		long startRandomSecondTime = System.nanoTime() / 1000000000;
 		SpecialPower randomPower = randomPower(xRandomPos, yRandomPos, startRandomSecondTime);
