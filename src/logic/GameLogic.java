@@ -21,8 +21,8 @@ import javafx.scene.input.KeyCode;
 
 public class GameLogic {
 	public static int counter = 0;
-	public static CharacterColor pacManColor;
-	public static CharacterColor ghostColor;
+	public static CharacterColor pacManColor = CharacterColor.YELLOW;
+	public static CharacterColor ghostColor = CharacterColor.PINK;
 
 	public static int remainPellets() { // check if any pellets left in a map
 		return GameController.pelletHolder.getAllPellets().size();
