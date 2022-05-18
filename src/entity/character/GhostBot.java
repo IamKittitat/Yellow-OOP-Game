@@ -50,7 +50,7 @@ public class GhostBot extends Character {
 		// TODO Auto-generated method stub
 		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
 		this.yPos = GameConstant.GHOST_BOT_SPAWN_Y;
-		moveOutFromSpawn();
+		setDirection(GameConstant.FIRST_GHOST_BOT_DIRECTION);
 		setSpeed(GameConstant.GHOST_BOT_SPEED);
 		setStarted(false);
 		setCanBeEaten(false);
