@@ -45,9 +45,11 @@ public class GameLogic {
 			validDirection.add(Direction.SOUTH);
 		}
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 12.05, yPos).equals("G")) {
+//			System.out.println("west");
 			validDirection.add(Direction.WEST);
 		}
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
+//			System.out.println("east");
 			validDirection.add(Direction.EAST);
 		}
 //		System.out.println(validDirection.toString());
@@ -74,8 +76,14 @@ public class GameLogic {
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 //		int yPosInInt = (int) Math.round(yPosToArrayIdx);
-		if(yPosInInt >= 18) { // for warp spot
-			return "G";
+		if(yPosInInt > 17) { // for warp spot
+			if(xPosInInt == 19) {
+				System.out.println(xPosInInt  + ",, " + yPosInInt);
+				return "G";
+			} else {
+				return "W";
+			}
+			
 		}
 		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
 	}

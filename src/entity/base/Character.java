@@ -29,6 +29,7 @@ public abstract class Character extends Entity {
 		if (this.xPos == 468 && this.yPos <= -12) {
 			this.setYPos(444);
 		} else if(this.xPos == 468 && this.yPos >= 444) {
+//			System.out.println("warp?");
 			this.setYPos(-12);
 		}
 	}

@@ -32,7 +32,7 @@ public class RevengePower extends SpecialPower {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.setFill(Color.RED);
-		System.out.println(xPos + ", " + yPos);
+//		System.out.println(xPos + ", " + yPos);
 		gc.fillOval(xPos - this.radius, yPos - this.radius, this.radius * 2, this.radius * 2);
 	}
 

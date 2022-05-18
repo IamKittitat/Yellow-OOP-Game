@@ -141,7 +141,7 @@ public class PacMan extends ControlCharacter {
 
 	public void update() {
 		boolean alreadyTurned = false;
-//		System.out.println(xPos + ", "+yPos);
+		System.out.println(xPos + ", "+yPos);
 		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
 			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
@@ -151,10 +151,12 @@ public class PacMan extends ControlCharacter {
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
+			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
-
+			
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
+				System.out.println(turnDirection);
 				turn(turnDirection);
 				alreadyTurned = true;
 			}
