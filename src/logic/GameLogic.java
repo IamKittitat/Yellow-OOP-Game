@@ -74,6 +74,9 @@ public class GameLogic {
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 //		int yPosInInt = (int) Math.round(yPosToArrayIdx);
+		if(yPosInInt >= 18) { // for warp spot
+			return "G";
+		}
 		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
 	}
 
@@ -223,6 +226,10 @@ public class GameLogic {
 		if(remainPellets() <= 0) {
 			return true;
 		}
+		return false;
+	}
+
+	public static boolean canWarp() {
 		return false;
 	}
 

@@ -84,6 +84,7 @@ public class Ghost extends ControlCharacter {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getSecondPlayerKeyPressed());
+			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
 				turn(turnDirection);
 				alreadyTurned = true;

@@ -16,15 +16,23 @@ public abstract class Character extends Entity {
 		this.setZ(10);
 		setStarted(false);
 	}
-	
+
 	protected abstract void forward();
 
 	protected abstract void turn(Direction direction);
-	
+
 	public abstract void die();
-	
+
 	protected abstract void reborn();
 
+	public void checkWarp() {
+		if (this.xPos == 468 && this.yPos <= -12) {
+			this.setYPos(444);
+		} else if(this.xPos == 468 && this.yPos >= 444) {
+			this.setYPos(-12);
+		}
+	}
+	
 	public abstract void collideWith(Entity entity);
 
 	public double getSpeed() {
@@ -58,7 +66,7 @@ public abstract class Character extends Entity {
 	public void setCanBeEaten(boolean canBeEaten) {
 		this.canBeEaten = canBeEaten;
 	}
-	
+
 	public boolean isStarted() {
 		return isStarted;
 	}
@@ -66,5 +74,4 @@ public abstract class Character extends Entity {
 	public void setStarted(boolean isStarted) {
 		this.isStarted = isStarted;
 	}
-
 }
