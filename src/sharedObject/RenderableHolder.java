@@ -50,6 +50,7 @@ public class RenderableHolder {
 	public static Image spawnPNG;
 
 	public static Image pacManShieldPNG;
+	public static Image pacManStarve;
 	public static Image shieldPNG;
 	public static Image starvePNG;
 	public static Image revengePNG;
@@ -126,7 +127,8 @@ public class RenderableHolder {
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
 
-		pacManShieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
+		pacManShieldPNG = new Image(ClassLoader.getSystemResource(img + "pacManShield.png").toString(), 24, 24, false, false);
+		pacManStarve = new Image(ClassLoader.getSystemResource(img + "pacManStarve.png").toString(), 24, 24, false, false);
 		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
 		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);

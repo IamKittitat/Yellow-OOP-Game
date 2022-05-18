@@ -133,6 +133,12 @@ public class PacMan extends ControlCharacter {
 			break;
 		}
 		}
+		if(this.canBeEaten() == false && this.canEatGhost == false) {
+			gc.drawImage(RenderableHolder.pacManShieldPNG, -this.radius*1.5, -this.radius*1.5, this.radius * 3, this.radius * 3);
+		}
+		if(this.CanEatPellet() == false) {
+			gc.drawImage(RenderableHolder.pacManStarve, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+		}
 //		gc.translate(xPos, yPos);
 //		gc.rotate(angle);
 //		gc.setFill(Color.YELLOW);
