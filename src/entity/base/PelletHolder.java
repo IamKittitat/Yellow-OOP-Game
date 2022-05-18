@@ -3,8 +3,10 @@ package entity.base;
 import java.util.ArrayList;
 
 import constant.GameConstant;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.GameController;
 import logic.GameLogic;
 import sharedObject.IRenderable;
 
@@ -31,6 +33,22 @@ public class PelletHolder extends Entity {
 		for (Pellet p : this.getAllPellets()) {
 			if (p.isVisible() && !p.isRemoved()) {
 				p.draw(gc);
+			}
+		}
+	}
+	
+	public void update() {
+		for (Pellet pellet : GameController.pelletHolder.getAllPellets()) {
+			if (!pellet.isRemoved() && GameController.pacMan.isCollide(pellet)) {
+				GameController.pacMan.collideWith(pellet);
+				if (pellet.isRemoved()) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							GameController.pelletHolder.getAllPellets().remove(pellet);
+						}
+					});
+				}
 			}
 		}
 	}

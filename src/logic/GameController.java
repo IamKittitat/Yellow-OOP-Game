@@ -68,119 +68,24 @@ public class GameController {
 		ghost.update();
 		ghostBot1.update();
 		System.out.println("check");
-//		ghostBot2.update();
 		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
 			GameLogic.spawnNewPower();
 		}
 
 		if (pacMan.isCollide(ghost)) {
-//			System.out.println("collide");
 			pacMan.collideWith(ghost);
 		}
 		if (pacMan.isCollide(ghostBot1)) {
-//			System.out.println("collide");
 			pacMan.collideWith(ghostBot1);
 		}
 		gameControlPane.updateLives();
 		gameControlPane.updateScore();
 
-		// ######## move to pelletHolder.update ########
-		for (Pellet pellet : pelletHolder.getAllPellets()) {
-//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			if (!pellet.isRemoved() && pacMan.isCollide(pellet)) {
-//				System.out.println("pellets");
-				pacMan.collideWith(pellet);
-				if (pellet.isRemoved()) {
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							pelletHolder.getAllPellets().remove(pellet);
-						}
-					});
-				}
-			}
-		}
-		// ###################################################
-
-		// ######## move to SpecialPowerHolder.update ########
-		for (SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
-//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			boolean taken = false;
-			if (!specialPower.isRemoved() && pacMan.isCollide(specialPower)
-					&& specialPower.getEatenBy().contains(pacMan.getName())) {
-//				System.out.println("pellets");
-				pacMan.collideWith(specialPower);
-				taken = true;
-			} else if (!specialPower.isRemoved() && ghost.isCollide(specialPower)
-					&& specialPower.getEatenBy().contains(ghost.getName())) {
-//				System.out.println("pellets");
-				ghost.collideWith(specialPower);
-				taken = true;
-			}
-
-//			if (taken) {
-//				Platform.runLater(new Runnable() {
-//					@Override
-//					public void run() {
-//						SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
-//						specialPower.setRemoved(true);
-//					}
-//				});
-//			}
-
-			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
-				if (specialPower.getCollector() == null) {
-					System.out.println("remove " + specialPower.getName());
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
-							specialPower.setRemoved(true);
-						}
-					});
-				}
-			}
-//			System.out.println(specialPower.getStartPowerSecondTime());
-			// System.out.println((currentSecondtime -
-			// specialPower.getStartPowerSecondTime()) + ", " + specialPower.getDuration() +
-			// ", "+ specialPower.getCollector());
-			if (specialPower.getStartPowerSecondTime() != 0
-					&& (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
-					&& specialPower.getCollector() != null) {
-//				System.out.println(specialPower.getStartPowerSecondTime());
-				System.out.println("clearPower " + specialPower.getName());
-				ArrayList<Character> otherCharacter = new ArrayList<Character>();
-				if (specialPower.getCollector() instanceof PacMan) {
-					otherCharacter.add(GameController.ghost); // fixed here
-					otherCharacter.add(GameController.ghostBot1);
-				} else if (specialPower.getCollector() instanceof Ghost) {
-					otherCharacter.add(GameController.pacMan); // fixed here
-				}
-				specialPower.clearPower(otherCharacter);
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
-						specialPower.setRemoved(true);
-					}
-				});
-			}
-		}
+		pelletHolder.update();
+		specialPowerHolder.update();
 
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
 		}
-
-		// ###################################################
-
-//		System.out.println(pacMan.getXPos()+", "+pacMan.getYPos());
-//		ArrayList<Integer> LocationNearPacMan = GameLogic.getLocationNearPacMan(pacMan);
-//		System.out.println(LocationNearPacMan.toString());
-//		for(int x=LocationNearPacMan.get(0);x<=LocationNearPacMan.get(1);x++) {
-//			for(int y=LocationNearPacMan.get(2);y<=LocationNearPacMan.get(3);y++) {
-//				pelletHolder.getAllPellets()
-//			}
-//		}
-
 	}
 }
