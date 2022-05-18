@@ -44,6 +44,7 @@ public class RevengePower extends SpecialPower {
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(false);
 		collectedPacMan.setCanEatGhost(true);
+		collectedPacMan.setPower(this);
 
 		for (Character otherCharacter : other) {
 //			System.out.println("check");
@@ -79,6 +80,7 @@ public class RevengePower extends SpecialPower {
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(true);
 		collectedPacMan.setCanEatGhost(false);
+		collectedPacMan.setPower(null);
 		stopMusic();
 
 		for (Character otherCharacter : other) {

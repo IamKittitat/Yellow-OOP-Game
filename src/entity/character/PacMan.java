@@ -11,6 +11,7 @@ import entity.base.Entity;
 import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
+import entity.item.ShieldPower;
 import gui.GameCanvas;
 import input.InputUtility;
 import logic.GameController;
@@ -133,7 +134,7 @@ public class PacMan extends ControlCharacter {
 			break;
 		}
 		}
-		if(this.canBeEaten() == false && this.canEatGhost == false) {
+		if(this.getPower() instanceof ShieldPower) {
 			gc.drawImage(RenderableHolder.pacManShieldPNG, -this.radius*1.5, -this.radius*1.5, this.radius * 3, this.radius * 3);
 		}
 		if(this.CanEatPellet() == false) {

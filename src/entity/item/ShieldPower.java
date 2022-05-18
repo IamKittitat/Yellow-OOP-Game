@@ -42,6 +42,7 @@ public class ShieldPower extends SpecialPower {
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
 			collectedPacMan.setCanBeEaten(false);
+			collectedPacMan.setPower(this);
 			for(Character otherCharacter : other) {
 				if(otherCharacter instanceof Ghost) {
 					Ghost otherGhost = (Ghost) otherCharacter;					
@@ -53,6 +54,9 @@ public class ShieldPower extends SpecialPower {
 			}
 		} else if (collector instanceof Ghost) {
 			Ghost collectedGhost = (Ghost) collector;
+			collectedGhost.setPower(this);
+//			System.out.println("++ " + collectedGhost.getPower().getName());
+//			System.out.println(collectedGhost.getPower() instanceof ShieldPower);
 			PacMan otherPacMan = (PacMan) other.get(0);
 
 			collectedGhost.setCanBeEaten(false);
@@ -65,12 +69,14 @@ public class ShieldPower extends SpecialPower {
 //		System.out.println("clear shield");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
+			collectedPacMan.setPower(null);
 			Ghost otherGhost = (Ghost) other.get(0);
 
 			collectedPacMan.setCanBeEaten(true);
 			otherGhost.setCanEatPacMan(true);
 		} else if (collector instanceof Ghost) { // Not sure here
 			Ghost collectedGhost = (Ghost) collector;
+			collectedGhost.setPower(null);
 			PacMan otherPacMan = (PacMan) other.get(0);
 
 			collectedGhost.setCanBeEaten(false);

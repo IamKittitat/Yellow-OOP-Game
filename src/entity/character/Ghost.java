@@ -11,6 +11,7 @@ import entity.base.Entity;
 import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
+import entity.item.ShieldPower;
 import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -105,27 +106,27 @@ public class Ghost extends ControlCharacter {
 		// TODO Auto-generated method stub
 //		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
 		int state = ((int) GameCanvas.counter / 5) % 4;
-		if (this.canBeEaten()) {
+		if (this.canBeEaten() && !this.canEatPacMan()) {
 			switch (state) {
 			case 0: {
 				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 1: {
 				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 2: {
 				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 3: {
 				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			default:
 				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
@@ -136,27 +137,31 @@ public class Ghost extends ControlCharacter {
 			case 0: {
 				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 1: {
 				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 2: {
 				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			case 3: {
 				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
-				return;
+				break;
 			}
 			default:
 				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 			}
+		}
+		if(this.getPower() instanceof ShieldPower) {
+			System.out.println("has shield");
+			gc.drawImage(RenderableHolder.pacManShieldPNG, xPos -this.radius*1.5, yPos -this.radius*1.5, this.radius * 3, this.radius * 3);
 		}
 	}
 

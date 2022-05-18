@@ -34,6 +34,7 @@ public class StarvePower extends SpecialPower {
 	public void gainPower(Character collector, ArrayList<Character> other) {
 		System.out.println("Gain Starve Power");
 		setCollector(collector);
+		collector.setPower(this);
 		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
 		PacMan otherPacMan = (PacMan) other.get(0);
@@ -44,6 +45,7 @@ public class StarvePower extends SpecialPower {
 	@Override
 	public void clearPower(ArrayList<Character> other) {
 		PacMan otherPacMan = (PacMan) other.get(0);
+		collector.setPower(null);
 		otherPacMan.setCanEatPellet(true);
 	}
 }
