@@ -59,8 +59,9 @@ public class PacMan extends ControlCharacter {
 	}
 
 	protected void reborn() {
-		this.xPos = GameConstant.PACMAN_SPAWN_X;
-		this.yPos = GameConstant.PACMAN_SPAWN_Y;
+		ArrayList<Integer> randomPosition = GameLogic.randomPosition();
+		this.xPos = randomPosition.get(0);
+		this.yPos = randomPosition.get(1);
 		setSpeed(0);
 		setStarted(false);
 		setPower(null);
@@ -91,6 +92,7 @@ public class PacMan extends ControlCharacter {
 			}
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
+			RenderableHolder.CollectPower_music.play();
 			otherCharacter.add(GameController.ghost); // fixed here
 			otherCharacter.add(GameController.ghostBot1);
 			((SpecialPower) entity).gainPower(GameController.pacMan, otherCharacter);
@@ -154,7 +156,7 @@ public class PacMan extends ControlCharacter {
 //			System.out.println(validWays);
 //			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
-			
+
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
 //				System.out.println(turnDirection);
