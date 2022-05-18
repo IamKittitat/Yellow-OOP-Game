@@ -12,6 +12,7 @@ import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 
@@ -65,7 +66,7 @@ public class GhostBot extends Character {
 					this.die();
 				}
 			}
-		}
+		} 
 	}
 
 	public void update() {
@@ -79,8 +80,8 @@ public class GhostBot extends Character {
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
-			Direction turnDirection = randomDirection(validWays);
-			System.out.println(turnDirection);
+			Direction turnDirection = calculateDirection(validWays);
+//			System.out.println(turnDirection);
 			if ((validWays.contains(turnDirection) && canTurn(validWays)) || (validWays.size() == 1)) {
 				turn(turnDirection);
 				alreadyTurned = true;
@@ -98,9 +99,9 @@ public class GhostBot extends Character {
 //			changeDirection();
 //		}
 
-		// update 1 time when can be eaten == true
 	}
 
+	// so bot wont move back and forth.
 	public boolean canTurn(ArrayList<Direction> validWays) {
 		if ((validWays.contains(Direction.NORTH) && validWays.contains(Direction.SOUTH))
 				|| (validWays.contains(Direction.WEST) && validWays.contains(Direction.EAST))) {
@@ -115,9 +116,56 @@ public class GhostBot extends Character {
 		return false;
 	}
 
-	public Direction randomDirection(ArrayList<Direction> validWays) {
+	public Direction calculateDirection(ArrayList<Direction> validWays) {
+		double pacManXPos = GameController.pacMan.getXPos();
+		double pacManYPos = GameController.pacMan.getYPos();
+		double ghostBotXPos = this.getXPos();
+		double ghostBotYPos = this.getYPos();
+		double diffX = ghostBotXPos - pacManXPos;
+		double diffY = ghostBotYPos - pacManYPos;
+		ArrayList<Direction> validTurnDirection = new ArrayList<Direction>();
+		
+//		System.out.println(diffX + ", " + diffY);
+		if((diffX >= 0) && (diffY >= 0)) { //pacman up left
+			if(validWays.contains(Direction.NORTH)) {
+				validTurnDirection.add(Direction.NORTH);
+			} 
+			if(validWays.contains(Direction.WEST)) {
+				validTurnDirection.add(Direction.WEST);
+			}
+		} else if((diffX <= 0) && (diffY >= 0)) { //pacman up right
+			if(validWays.contains(Direction.NORTH)) {
+				validTurnDirection.add(Direction.NORTH);
+			} 
+			if(validWays.contains(Direction.EAST)) {
+				validTurnDirection.add(Direction.EAST);
+			}
+		} else if((diffX >= 0) && (diffY <= 0)) { //pacman down left
+			if(validWays.contains(Direction.SOUTH)) {
+				validTurnDirection.add(Direction.SOUTH);
+			}
+			if(validWays.contains(Direction.WEST)) {
+				validTurnDirection.add(Direction.WEST);
+			}
+		} else if((diffX <= 0) && (diffY <= 0)) { //pacman down right
+			if(validWays.contains(Direction.SOUTH)) {
+				validTurnDirection.add(Direction.SOUTH);
+			}
+			if(validWays.contains(Direction.EAST)) {
+				validTurnDirection.add(Direction.EAST);
+			}
+		}
+		if(validTurnDirection.size() > 0) {
+			return randomFromValidTurnDirection(validTurnDirection);
+		}
 		int randomNum = ThreadLocalRandom.current().nextInt(0, validWays.size());
-		return validWays.get(randomNum);
+		return validWays.get(randomNum);	
+	}
+	
+	public Direction randomFromValidTurnDirection(ArrayList<Direction> validTurnDirection) {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, validTurnDirection.size());
+		return validTurnDirection.get(randomNum);
+
 	}
 
 	@Override
@@ -154,6 +202,7 @@ public class GhostBot extends Character {
 	}
 
 	private void changeDirection() {
+		System.out.println("change");
 		if (this.direction == Direction.NORTH) {
 			this.direction = Direction.SOUTH;
 		} else if (this.direction == Direction.EAST) {
