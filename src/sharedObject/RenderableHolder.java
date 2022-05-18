@@ -84,8 +84,6 @@ public class RenderableHolder {
 
 		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
 		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost-2.png").toString());
-		ghostPNG3 = new Image(ClassLoader.getSystemResource(img + "ghost-3.png").toString());
-		ghostPNG4 = new Image(ClassLoader.getSystemResource(img + "ghost-4.png").toString());
 		pacManPNG1 = new Image(ClassLoader.getSystemResource(img + "pacman-1.png").toString());
 		pacManPNG2 = new Image(ClassLoader.getSystemResource(img + "pacman-2.png").toString());
 		pacManPNG3 = new Image(ClassLoader.getSystemResource(img + "pacman-3.png").toString());
