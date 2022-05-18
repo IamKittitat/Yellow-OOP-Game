@@ -53,6 +53,9 @@ public class RenderableHolder {
 	public static Image starvePNG;
 	public static Image revengePNG;
 
+	public static Image howToPlay1PNG;
+	public static Image howToPlay2PNG;
+	
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
 
@@ -126,6 +129,9 @@ public class RenderableHolder {
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
 		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);
 
+		howToPlay1PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay1.png").toString(), 24, 24, false, false);
+		howToPlay2PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay2.png").toString(), 24, 24, false, false);
+		
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
 
