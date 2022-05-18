@@ -67,6 +67,7 @@ public class GameController {
 		pacMan.update();
 		ghost.update();
 		ghostBot1.update();
+		System.out.println("check");
 //		ghostBot2.update();
 		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
 			GameLogic.spawnNewPower();

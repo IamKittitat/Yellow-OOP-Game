@@ -26,7 +26,6 @@ public class MenuControlPane extends VBox {
 	public Button customizeButton;
 	public Button howToPlayButton;
 	public Button quitButton;
-	private static Stage primaryStage;
 
 	public MenuControlPane() {
 		super();

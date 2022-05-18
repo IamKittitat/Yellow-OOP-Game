@@ -61,6 +61,7 @@ public class CustomizePane extends BorderPane {
 		this.ghostSwitchColorPane = new SwitchColorPane(ghostColorImageList,ghostColorlList);
 
 		Pane switchColorPane = new VBox(10);
+		switchColorPane.setPadding(new Insets(50,0,0,0));
 		switchColorPane.getChildren().addAll(pacManSwitchColorPane, ghostSwitchColorPane);
 
 		Button playButton = new MenuButton("Play");

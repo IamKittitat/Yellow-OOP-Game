@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 
 import constant.CharacterColor;
+import gui.base.IconButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -18,35 +19,26 @@ public class SwitchColorPane extends BorderPane {
 	private ArrayList<Image> ColorImageList;
 	private ArrayList<CharacterColor> ColorList;
 	private int idx;
-	private VBox nextButton;
-	private VBox prevButton;
+	private Button nextButton;
+	private Button prevButton;
 
 	public SwitchColorPane(ArrayList<Image> arrayImages,ArrayList<CharacterColor> arrayColors) {
 
 		this.setColorImageList(arrayImages);
 		this.setColorList(arrayColors);
 		this.setPrefSize(600, 100);
+		this.setPadding(new Insets(30, 100, 0, 100));
 
-		this.nextButton = new VBox();
-		this.prevButton = new VBox();
-		final Button nextBtn = new Button(">");
-		final Button prevBtn = new Button("<");
-		nextButton.getChildren().add(nextBtn);
-		prevButton.getChildren().add(prevBtn);
-		this.nextButton.setAlignment(Pos.CENTER);
-		this.nextButton.setPadding(new Insets(50.0));
-		this.prevButton.setAlignment(Pos.CENTER);
-		this.prevButton.setPadding(new Insets(50.0));
-		nextBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 30));
-		prevBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 30));
+		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
+		this.prevButton = new IconButton(RenderableHolder.previousButtonPNG);
 		this.setLeft(prevButton);
 		this.setRight(nextButton);
 		this.change();
-		nextBtn.setOnMouseClicked(e -> {
+		nextButton.setOnMouseClicked(e -> {
 			idx = (idx + 1) % ColorList.size();
 			change();
 		});
-		prevBtn.setOnMouseClicked(e -> {
+		prevButton.setOnMouseClicked(e -> {
 			idx = (idx + 2) % ColorList.size();
 			change();
 		});

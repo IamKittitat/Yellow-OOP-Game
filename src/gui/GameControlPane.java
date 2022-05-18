@@ -1,5 +1,6 @@
 package gui;
 
+import application.Main;
 import entity.character.PacMan;
 import gui.base.IconButton;
 import gui.base.MenuButton;
@@ -69,14 +70,13 @@ public class GameControlPane extends BorderPane {
 				}
 			}
 		});
-		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
 
 		this.statPane = new VBox();
 		this.statPane.setPadding(new Insets(6));
 		this.statPane.getChildren().addAll(scoreText, livesPane);
 
 		this.controlPane = new HBox();
-		this.controlPane.getChildren().addAll(pauseButton, menuButton);
+		this.controlPane.getChildren().addAll(pauseButton);
 
 		this.setLeft(statPane);
 		this.setRight(controlPane);
