@@ -233,4 +233,13 @@ public class GameLogic {
 		return false;
 	}
 
+	public static boolean closeToSpawn(int x, int y) {
+		for(int[] close : Map.closeToSpawnPosition) {
+			if(x == close[0] && y == close[1]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
