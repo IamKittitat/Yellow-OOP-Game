@@ -50,6 +50,7 @@ public class GhostBot extends Character {
 		// TODO Auto-generated method stub
 		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
 		this.yPos = GameConstant.GHOST_BOT_SPAWN_Y;
+		moveOutFromSpawn();
 		setSpeed(GameConstant.GHOST_BOT_SPEED);
 		setStarted(false);
 		setCanBeEaten(false);
@@ -71,16 +72,17 @@ public class GhostBot extends Character {
 
 	public void update() {
 		boolean alreadyTurned = false;
-
+		this.checkWarp();
 		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
 			this.setSpeed(GameConstant.GHOST_BOT_SPEED);
-			this.setStarted(true);
+			this.moveOutFromSpawn();
 		}
 
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
 			Direction turnDirection = calculateDirection(validWays);
+			System.out.println(this.direction);
 //			System.out.println(turnDirection);
 			if ((validWays.contains(turnDirection) && canTurn(validWays)) || (validWays.size() == 1)) {
 				turn(turnDirection);
@@ -99,6 +101,17 @@ public class GhostBot extends Character {
 //			changeDirection();
 //		}
 
+	}
+
+	private void moveOutFromSpawn() {
+		// TODO Auto-generated method stub
+		this.forward();
+		if(this.yPos == 156) { // to get out from spawn
+			this.direction = Direction.WEST;
+			if(this.xPos == 396) {
+				this.setStarted(true);
+			}
+		}
 	}
 
 	// so bot wont move back and forth.

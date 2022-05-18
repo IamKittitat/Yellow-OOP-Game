@@ -41,7 +41,7 @@ public class RenderableHolder {
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
-
+	public static AudioClip StartScreen_Music;
 	static {
 		loadResource();
 	}
@@ -80,6 +80,9 @@ public class RenderableHolder {
 		
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscr.ttf").toString(), 45);
+		
+		String audio = "audio/";
+		StartScreen_Music = new AudioClip(ClassLoader.getSystemResource(audio + "ThemeSong.mp3").toString());
 	}
 
 	public void add(IRenderable entity) {

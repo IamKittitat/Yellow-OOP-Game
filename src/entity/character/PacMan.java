@@ -84,12 +84,12 @@ public class PacMan extends ControlCharacter {
 			if (canEatPellet) {
 				((Pellet) entity).setRemoved(true);
 				this.setScore(this.getScore() + 1);
-				System.out.println(this.getScore());				
+				System.out.println(this.getScore());
 			}
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
 			otherCharacter.add(GameController.ghost); // fixed here
-			((SpecialPower) entity).gainPower(GameController.pacMan,otherCharacter);
+			((SpecialPower) entity).gainPower(GameController.pacMan, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
 			System.out.println(this.getPower().getName());
@@ -102,38 +102,28 @@ public class PacMan extends ControlCharacter {
 		// TODO Auto-generated method stub
 		int state = ((int) GameCanvas.counter / 5) % 4;
 
-//		int angle = GameLogic.directionToInt(getDirection())+270; // plus for make east =0;
-//		System.out.println(angle);
-//		gc.rotate(angle);
-//		if(angle == 360) { // right
-//			
-//		} else if(angle == 450) { // down
-//			
-//		} else if(angle == 540) { // left
-//			
-//		} else  if(angle == 270) { // up
-//			
-//		}
-
+		int angle = GameLogic.directionToInt(getDirection()) + 270; // plus for make east =0;
+		System.out.println(angle);
+		gc.translate(xPos, yPos);
+		gc.rotate(angle);
 		switch (state) {
 		case 0: {
-			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+//			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+//					this.radius * 2);
+			gc.drawImage(RenderableHolder.pacManPNG1, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+
 			break;
 		}
 		case 1: {
-			gc.drawImage(RenderableHolder.pacManPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+			gc.drawImage(RenderableHolder.pacManPNG2, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
 			break;
 		}
 		case 2: {
-			gc.drawImage(RenderableHolder.pacManPNG3, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+			gc.drawImage(RenderableHolder.pacManPNG3, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
 			break;
 		}
 		case 3: {
-			gc.drawImage(RenderableHolder.pacManPNG4, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+			gc.drawImage(RenderableHolder.pacManPNG4, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
 			break;
 		}
 		}
@@ -142,8 +132,8 @@ public class PacMan extends ControlCharacter {
 //		gc.setFill(Color.YELLOW);
 //		int gunSize = (int) (this.radius / 5);
 //		gc.fillRect(0, -gunSize, radius * 3 / 2, gunSize * 2);
-//		gc.rotate(-angle);
-//		gc.translate(-xPos, -yPos);
+		gc.rotate(-angle);
+		gc.translate(-xPos, -yPos);
 	}
 
 	public void update() {
@@ -159,7 +149,7 @@ public class PacMan extends ControlCharacter {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
-			
+
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
 				turn(turnDirection);

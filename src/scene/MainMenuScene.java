@@ -4,6 +4,7 @@ import gui.BattleGamePane;
 import gui.HowToPlayPane;
 import gui.MainMenuPane;
 import gui.MenuControlPane;
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ public class MainMenuScene extends Scene{
 	private MainMenuPane mainMenuPane;
 	private StackPane stackPane;
 	private HowToPlayPane howToPlayPane;
+	public static AnimationTimer startThemeSong;
 	
 	public MainMenuScene(final Parent root) {
 		super(root);
@@ -27,7 +29,14 @@ public class MainMenuScene extends Scene{
 	public MainMenuScene() {
 		this((Parent) new StackPane());
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
-
+		startThemeSong = new AnimationTimer() {
+			public void handle(long now) {
+				if (!RenderableHolder.StartScreen_Music.isPlaying())
+					RenderableHolder.StartScreen_Music.play();
+			}
+		};
+		startThemeSong.start();
+		
 		this.mainMenuPane = new MainMenuPane();
 		this.mainMenuPane.menuControlPane.howToPlayButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
