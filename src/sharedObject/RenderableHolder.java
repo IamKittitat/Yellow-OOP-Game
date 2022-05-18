@@ -46,6 +46,7 @@ public class RenderableHolder {
 	public static Image menuButtonPNG;
 	public static Image nextButtonPNG;
 	public static Image previousButtonPNG;
+	public static Image closeButtonPNG;
 	public static Image gameIconPNG;
 
 	public static Image wallPNG;
@@ -113,6 +114,8 @@ public class RenderableHolder {
 		nextButtonPNG = new Image(ClassLoader.getSystemResource(img + "next-button.png").toString(), 50, 50, false,
 				false);
 		previousButtonPNG = new Image(ClassLoader.getSystemResource(img + "previous-button.png").toString(), 50, 50, false,
+				false);
+		closeButtonPNG = new Image(ClassLoader.getSystemResource(img + "close-button.png").toString(), 30, 30, false,
 				false);
 		
 		gameIconPNG = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());

@@ -25,7 +25,7 @@ public class HowToPlayPane extends BorderPane {
 		super();
 		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;" + "-fx-border-color: yellow; " + "-fx-border-radius: 30;"
-				 + " -fx-border-width: 2px;");
+				+ " -fx-border-width: 2px;");
 		setMaxSize(600, 400);
 		this.isHidden = true;
 
@@ -33,7 +33,7 @@ public class HowToPlayPane extends BorderPane {
 
 		ImageView howToPlayDetails1 = new ImageView(RenderableHolder.howToPlay1PNG);
 		ImageView howToPlayDetails2 = new ImageView(RenderableHolder.howToPlay2PNG);
-		
+
 		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
 		this.nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -45,7 +45,7 @@ public class HowToPlayPane extends BorderPane {
 				prevButton.setDisable(false);
 			}
 		});
-		
+
 		this.prevButton = new IconButton(RenderableHolder.previousButtonPNG);
 		this.prevButton.setDisable(true);
 		this.prevButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -58,13 +58,28 @@ public class HowToPlayPane extends BorderPane {
 				prevButton.setDisable(true);
 			}
 		});
-		
+
 		Pane buttonPane = new HBox(5);
 		buttonPane.setPadding(new Insets(0, 10, 30, 500));
-		buttonPane.getChildren().addAll(prevButton,nextButton);
+		buttonPane.getChildren().addAll(prevButton, nextButton);
+
+		this.closeButton = new IconButton(RenderableHolder.closeButtonPNG);
+		this.closeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				enter();
+			}
+		});
+
+		Pane closeButtonPane = new HBox();
+		closeButtonPane.getChildren().add(closeButton);
+		closeButtonPane.setPadding(new Insets(30, 10, 0, 600));
 
 		this.setCenter(howToPlayDetails1);
 		this.setBottom(buttonPane);
+		this.setTop(closeButtonPane);
 	}
 
 	public void enter() {
