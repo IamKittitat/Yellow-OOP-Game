@@ -19,7 +19,11 @@ public class RenderableHolder {
 
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
+
+	// Game Icon Image
 	public static Image pacManIcon;
+
+	// Ghost Image
 	public static Image ghostPNG1;
 	public static Image ghostPNG2;
 	public static Image scaredGhostPNG1;
@@ -27,11 +31,13 @@ public class RenderableHolder {
 	public static Image ghostBotPNG1;
 	public static Image ghostBotPNG2;
 
+	// PacMan Image
 	public static Image pacManPNG1;
 	public static Image pacManPNG2;
 	public static Image pacManPNG3;
 	public static Image pacManPNG4;
 
+	// Character GIF
 	public static Image mainMenuGIF;
 	public static Image yellowPacManGIF;
 	public static Image bluePacManGIF;
@@ -40,6 +46,7 @@ public class RenderableHolder {
 	public static Image greenGhostGIF;
 	public static Image purpleGhostGIF;
 
+	// GUI Image
 	public static Image heartPNG;
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
@@ -48,22 +55,25 @@ public class RenderableHolder {
 	public static Image previousButtonPNG;
 	public static Image closeButtonPNG;
 	public static Image gameIconPNG;
+	public static Image howToPlay1PNG;
+	public static Image howToPlay2PNG;
 
+	// Map Image
 	public static Image wallPNG;
 	public static Image spawnPNG;
 
+	// Special Power Image
 	public static Image pacManShieldPNG;
 	public static Image pacManStarve;
 	public static Image shieldPNG;
 	public static Image starvePNG;
 	public static Image revengePNG;
 
-	public static Image howToPlay1PNG;
-	public static Image howToPlay2PNG;
-
+	// Font
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
 
+	// Audio
 	public static AudioClip ThemeSong_music;
 	public static AudioClip ChasingGhost_music;
 	public static AudioClip ClickedSound_music;
@@ -97,29 +107,35 @@ public class RenderableHolder {
 		String audio = "audio/";
 		String font = "font/";
 
+		// Game Icon Image
+		gameIconPNG = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
+
+		// Ghost Image
 		scaredGhostPNG1 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-1.png").toString());
 		scaredGhostPNG2 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-2.png").toString());
 		ghostBotPNG1 = new Image(ClassLoader.getSystemResource(img + "GhostBot1.png").toString());
 		ghostBotPNG2 = new Image(ClassLoader.getSystemResource(img + "GhostBot2.png").toString());
 
+		// GUI Image
 		heartPNG = new Image(ClassLoader.getSystemResource(img + "heart.png").toString(), 30, 30, false, false);
-
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource(img + "pause-button.png").toString(), 50, 50, false,
 				false);
 		playButtonPNG = new Image(ClassLoader.getSystemResource(img + "play-button.png").toString(), 50, 50, false,
 				false);
 		menuButtonPNG = new Image(ClassLoader.getSystemResource(img + "menu-button.png").toString(), 50, 50, false,
 				false);
-		
 		nextButtonPNG = new Image(ClassLoader.getSystemResource(img + "next-button.png").toString(), 50, 50, false,
 				false);
-		previousButtonPNG = new Image(ClassLoader.getSystemResource(img + "previous-button.png").toString(), 50, 50, false,
-				false);
+		previousButtonPNG = new Image(ClassLoader.getSystemResource(img + "previous-button.png").toString(), 50, 50,
+				false, false);
 		closeButtonPNG = new Image(ClassLoader.getSystemResource(img + "close-button.png").toString(), 30, 30, false,
 				false);
-		
-		gameIconPNG = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
+		howToPlay1PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay1.png").toString(), 600, 300, true,
+				false);
+		howToPlay2PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay2.png").toString(), 600, 300, true,
+				false);
 
+		// GIF
 		mainMenuGIF = new Image(ClassLoader.getSystemResource(gif + "main-menu.gif").toString(), 400, 400, false,
 				false);
 		yellowPacManGIF = new Image(ClassLoader.getSystemResource(gif + "yellow-pacman.gif").toString(), 100, 100,
@@ -135,9 +151,11 @@ public class RenderableHolder {
 		purpleGhostGIF = new Image(ClassLoader.getSystemResource(gif + "purple-ghost.gif").toString(), 100, 100, false,
 				false);
 
+		// Map Image
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
 
+		// Special Power Image
 		pacManShieldPNG = new Image(ClassLoader.getSystemResource(img + "pacManShield.png").toString(), 24, 24, false,
 				false);
 		pacManStarve = new Image(ClassLoader.getSystemResource(img + "pacManStarve.png").toString(), 24, 24, false,
@@ -146,14 +164,11 @@ public class RenderableHolder {
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
 		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);
 
-		howToPlay1PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay1.png").toString(), 600, 300, true,
-				false);
-		howToPlay2PNG = new Image(ClassLoader.getSystemResource(img + "howToPlay2.png").toString(), 600, 300, true,
-				false);
-
+		// Font
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
 
+		// Audio
 		ThemeSong_music = new AudioClip(ClassLoader.getSystemResource(audio + "ThemeSong.mp3").toString());
 		ChasingGhost_music = new AudioClip(ClassLoader.getSystemResource(audio + "ChasingGhost.mp3").toString());
 		ClickedSound_music = new AudioClip(ClassLoader.getSystemResource(audio + "ClickedSound.mp3").toString());
@@ -165,7 +180,7 @@ public class RenderableHolder {
 		Playing_music = new AudioClip(ClassLoader.getSystemResource(audio + "Playing.mp3").toString());
 	}
 
-	public static void loadCharacter() {
+	public static void loadCharacter() { // Load Specific color of character
 		String img = "image/";
 		String ghost = "ghost/";
 		String pacman = "pacman/";
