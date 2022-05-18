@@ -31,13 +31,13 @@ public class RenderableHolder {
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
 	public static Image menuButtonPNG;
-	
+
 	public static Image wallPNG;
 	public static Image spawnPNG;
-	
+
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
-	
+
 //	public static Image mapSprite;
 //	public static Image mineSprite;
 //	public static AudioClip  explosionSound;
@@ -60,28 +60,34 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		ghostPNG1 = new Image(ClassLoader.getSystemResource("ghost-1.png").toString());
-		ghostPNG2 = new Image(ClassLoader.getSystemResource("ghost-2.png").toString());
-		ghostPNG3 = new Image(ClassLoader.getSystemResource("ghost-3.png").toString());
-		ghostPNG4 = new Image(ClassLoader.getSystemResource("ghost-4.png").toString());
-		pacManPNG1 = new Image(ClassLoader.getSystemResource("pacman-1.png").toString());
-		pacManPNG2 = new Image(ClassLoader.getSystemResource("pacman-2.png").toString());
-		pacManPNG3 = new Image(ClassLoader.getSystemResource("pacman-3.png").toString());
-		pacManPNG4 = new Image(ClassLoader.getSystemResource("pacman-4.png").toString());
-		MainMenuGIF = new Image(ClassLoader.getSystemResource("MainMenu.gif").toString(),400, 400, false, false);
-		heartPNG = new Image(ClassLoader.getSystemResource("heart.png").toString(),30, 30, false, false);
-		
-		pauseButtonPNG = new Image(ClassLoader.getSystemResource("pause-button.png").toString(),50, 50, false, false);
-		playButtonPNG = new Image(ClassLoader.getSystemResource("play-button.png").toString(),50, 50, false, false);
-		menuButtonPNG = new Image(ClassLoader.getSystemResource("menu-button.png").toString(),50, 50, false, false);
-		
-		wallPNG  = new Image(ClassLoader.getSystemResource("wall.png").toString(),24, 24, false, false);
-		spawnPNG = new Image(ClassLoader.getSystemResource("spawn.png").toString(),24, 24, false, false);
-		
-		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscrb.ttf").toString(), 45);
-		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscr.ttf").toString(), 45);
-		
+		String img = "image/";
 		String audio = "audio/";
+		String font = "font/";
+
+		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
+		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost-2.png").toString());
+		ghostPNG3 = new Image(ClassLoader.getSystemResource(img + "ghost-3.png").toString());
+		ghostPNG4 = new Image(ClassLoader.getSystemResource(img + "ghost-4.png").toString());
+		pacManPNG1 = new Image(ClassLoader.getSystemResource(img + "pacman-1.png").toString());
+		pacManPNG2 = new Image(ClassLoader.getSystemResource(img + "pacman-2.png").toString());
+		pacManPNG3 = new Image(ClassLoader.getSystemResource(img + "pacman-3.png").toString());
+		pacManPNG4 = new Image(ClassLoader.getSystemResource(img + "pacman-4.png").toString());
+		MainMenuGIF = new Image(ClassLoader.getSystemResource(img + "MainMenu.gif").toString(), 400, 400, false, false);
+		heartPNG = new Image(ClassLoader.getSystemResource(img + "heart.png").toString(), 30, 30, false, false);
+
+		pauseButtonPNG = new Image(ClassLoader.getSystemResource(img + "pause-button.png").toString(), 50, 50, false,
+				false);
+		playButtonPNG = new Image(ClassLoader.getSystemResource(img + "play-button.png").toString(), 50, 50, false,
+				false);
+		menuButtonPNG = new Image(ClassLoader.getSystemResource(img + "menu-button.png").toString(), 50, 50, false,
+				false);
+
+		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
+		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
+
+		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
+		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
+
 		StartScreen_Music = new AudioClip(ClassLoader.getSystemResource(audio + "ThemeSong.mp3").toString());
 	}
 
