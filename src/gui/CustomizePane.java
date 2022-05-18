@@ -28,6 +28,7 @@ public class CustomizePane extends BorderPane {
 		
 		this.setPrefSize(912, 500);
 		this.setMaxSize(912, 500);
+		this.setStyle("-fx-background-color: black; ");
 
 		ArrayList<Image> pacManColorList = new ArrayList<Image>();
 		pacManColorList.add(RenderableHolder.yellowPacManGIF);
