@@ -61,6 +61,7 @@ public class MenuControlPane extends VBox {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				Main.sceneHolder.switchScene(new CustomizeScene());
 			}
 		});
@@ -84,8 +85,6 @@ public class MenuControlPane extends VBox {
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				RenderableHolder.ClickedSound_music.play();
-				RenderableHolder.ThemeSong_music.stop();
-				MainMenuScene.startThemeSong.stop();
 				Main.sceneHolder.switchScene(new BattleGameScene());
 			}
 		});

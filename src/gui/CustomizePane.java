@@ -70,6 +70,7 @@ public class CustomizePane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				saveColor();
 				RenderableHolder.loadCharacter();
 				Main.sceneHolder.switchScene(new BattleGameScene());
@@ -82,6 +83,7 @@ public class CustomizePane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				saveColor();
 				RenderableHolder.loadCharacter();
 				Main.sceneHolder.switchScene(new MainMenuScene());

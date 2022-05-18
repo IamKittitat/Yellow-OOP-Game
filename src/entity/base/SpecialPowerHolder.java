@@ -49,12 +49,13 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 
 			// If Special Power not collected in time > remove it from the map and specialPowerHolder
 			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
-				if (specialPower.getCollector() == null) {
+				if (specialPower.getCollector() == null) { // no one collected
 					System.out.println("remove " + specialPower.getName());
+					// Prevent concurrent exception
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							SpecialPowerHolder.getAllSpecialPowers().remove(specialPower);
+							SpecialPowerHolder.getAllSpecialPowers().remove(specialPower); 
 							specialPower.setRemoved(true);
 						}
 					});
@@ -68,10 +69,10 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 				System.out.println("clearPower " + specialPower.getName());
 				ArrayList<Character> otherCharacter = new ArrayList<Character>();
 				if (specialPower.getCollector() instanceof PacMan) {
-					otherCharacter.add(GameController.ghost); // fixed here
+					otherCharacter.add(GameController.ghost); 
 					otherCharacter.add(GameController.ghostBot1);
 				} else if (specialPower.getCollector() instanceof Ghost) {
-					otherCharacter.add(GameController.pacMan); // fixed here
+					otherCharacter.add(GameController.pacMan);
 				}
 				specialPower.clearPower(otherCharacter);
 				Platform.runLater(new Runnable() {

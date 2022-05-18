@@ -40,6 +40,7 @@ public class HowToPlayPane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				setCenter(howToPlayDetails2);
 				nextButton.setDisable(true);
 				prevButton.setDisable(false);
@@ -53,6 +54,7 @@ public class HowToPlayPane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				setCenter(howToPlayDetails1);
 				nextButton.setDisable(false);
 				prevButton.setDisable(true);
@@ -69,6 +71,7 @@ public class HowToPlayPane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				enter();
 			}
 		});

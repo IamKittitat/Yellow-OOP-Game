@@ -35,10 +35,12 @@ public class SwitchColorPane extends BorderPane {
 		this.setRight(nextButton);
 		this.change();
 		nextButton.setOnMouseClicked(e -> {
+			RenderableHolder.ClickedSound_music.play();
 			idx = (idx + 1) % ColorList.size();
 			change();
 		});
 		prevButton.setOnMouseClicked(e -> {
+			RenderableHolder.ClickedSound_music.play();
 			idx = (idx + 2) % ColorList.size();
 			change();
 		});
