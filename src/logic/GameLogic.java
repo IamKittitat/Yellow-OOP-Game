@@ -20,6 +20,7 @@ import entity.item.StarvePower;
 import javafx.scene.input.KeyCode;
 
 public class GameLogic {
+	public static int counter = 0;
 
 	public static int remainPellets() { // check if any pellets left in a map
 		return GameController.pelletHolder.getAllPellets().size();
@@ -76,14 +77,14 @@ public class GameLogic {
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 //		int yPosInInt = (int) Math.round(yPosToArrayIdx);
-		if(yPosInInt > 17) { // for warp spot
-			if(xPosInInt == 19) {
-				System.out.println(xPosInInt  + ",, " + yPosInInt);
+		if (yPosInInt > 17) { // for warp spot
+			if (xPosInInt == 19) {
+//				System.out.println(xPosInInt  + ",, " + yPosInInt);
 				return "G";
 			} else {
 				return "W";
 			}
-			
+
 		}
 		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
 	}
@@ -175,13 +176,13 @@ public class GameLogic {
 
 	public static void spawnNewPower() {
 		ArrayList<Integer> randomPosition = randomPosition();
-//		int xRandomPos = randomPosition.get(0);
-//		int yRandomPos = randomPosition.get(1);
-		int xRandomPos = 60;
-		int yRandomPos = 36;
+		int xRandomPos = randomPosition.get(0);
+		int yRandomPos = randomPosition.get(1);
+//		int xRandomPos = 60;
+//		int yRandomPos = 36;
 //		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
 		long startRandomSecondTime = System.nanoTime() / 1000000000;
-		SpecialPower randomPower = randomPower(xRandomPos, yRandomPos, startRandomSecondTime);
+		SpecialPower randomPower = getPower(xRandomPos, yRandomPos, startRandomSecondTime);
 		System.out.println(randomPower.getName() + " , " + randomPower.getStartRandomSecondTime());
 		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
 	}
@@ -189,24 +190,25 @@ public class GameLogic {
 	public static ArrayList<Integer> randomPosition() {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 276 + 1);
 		ArrayList<Integer> randomPosition = new ArrayList<>();
-		randomPosition.add(Map.groundState[randomNum][0]*24 + 12);
-		randomPosition.add(Map.groundState[randomNum][1]*24 + 12);
+		randomPosition.add(Map.groundState[randomNum][0] * 24 + 12);
+		randomPosition.add(Map.groundState[randomNum][1] * 24 + 12);
 		System.out.println("hi " + randomPosition.toString());
 		return randomPosition;
 	}
 
-	public static SpecialPower randomPower(int x, int y, long startRandomTime) {
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-		System.out.println(randomNum);
-		switch (randomNum) {
+	public static SpecialPower getPower(int x, int y, long startRandomTime) {
+		switch (counter%3) {
 		case 0:
 			RevengePower revengePower = new RevengePower(x, y, startRandomTime);
+			counter++;
 			return revengePower;
 		case 1:
 			ShieldPower shieldPower = new ShieldPower(x, y, startRandomTime);
+			counter++;
 			return shieldPower;
 		case 2:
 			StarvePower starvePower = new StarvePower(x, y, startRandomTime);
+			counter++;
 			return starvePower;
 		}
 		return null;
@@ -225,10 +227,10 @@ public class GameLogic {
 
 	public static boolean IsGameEnd() {
 //		System.out.println(remainPellets());
-		if(GameController.pacMan.getLife() <= 0) {
+		if (GameController.pacMan.getLife() <= 0) {
 			return true;
 		}
-		if(remainPellets() <= 0) {
+		if (remainPellets() <= 0) {
 			return true;
 		}
 		return false;
@@ -239,8 +241,8 @@ public class GameLogic {
 	}
 
 	public static boolean closeToSpawn(int x, int y) {
-		for(int[] close : Map.closeToSpawnPosition) {
-			if(x == close[0] && y == close[1]) {
+		for (int[] close : Map.closeToSpawnPosition) {
+			if (x == close[0] && y == close[1]) {
 				return true;
 			}
 		}

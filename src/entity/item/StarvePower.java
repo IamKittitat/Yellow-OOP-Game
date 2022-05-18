@@ -32,12 +32,13 @@ public class StarvePower extends SpecialPower {
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
-//		System.out.println("Gain Starve Power");
+		System.out.println("Gain Starve Power");
 		setCollector(collector);
 		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
+		System.out.println(otherPacMan.CanEatPellet());
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class GhostBot extends Character {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
 			Direction turnDirection = calculateDirection(validWays);
-			System.out.println(this.direction);
+//			System.out.println(this.direction);
 //			System.out.println(turnDirection);
 			if ((validWays.contains(turnDirection) && canTurn(validWays)) || (validWays.size() == 1)) {
 				turn(turnDirection);
@@ -187,30 +187,58 @@ public class GhostBot extends Character {
 //		gc.setFill(Color.GREEN);
 //		gc.fillRoundRect(xPos-5, yPos-5, 10, 10, 10, 10);
 		int state = ((int) GameCanvas.counter / 5) % 4;
-		switch (state) {
-		case 0: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 1: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 2: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 3: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		default:
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+		if (this.canBeEaten()) {
+			switch (state) {
+			case 0: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 1: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 2: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 3: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			default:
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+			}
+		} else {
+			switch (state) {
+			case 0: {
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 1: {
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 2: {
+				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 3: {
+				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			default:
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+			}
 		}
 	}
 

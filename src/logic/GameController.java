@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constant.CharacterColor;
+import constant.GameConstant;
 import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Map;
@@ -91,13 +92,14 @@ public class GameController {
 			if (!pellet.isRemoved() && pacMan.isCollide(pellet)) {
 //				System.out.println("pellets");
 				pacMan.collideWith(pellet);
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						pelletHolder.getAllPellets().remove(pellet);
-						pellet.setRemoved(true);
-					}
-				});
+				if (pellet.isRemoved()) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							pelletHolder.getAllPellets().remove(pellet);
+						}
+					});
+				}
 			}
 		}
 		// ###################################################
@@ -128,8 +130,8 @@ public class GameController {
 //				});
 //			}
 
-			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > 3) {
-				if(specialPower.getCollector() == null) {
+			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
+				if (specialPower.getCollector() == null) {
 					System.out.println("remove " + specialPower.getName());
 					Platform.runLater(new Runnable() {
 						@Override
@@ -141,14 +143,18 @@ public class GameController {
 				}
 			}
 //			System.out.println(specialPower.getStartPowerSecondTime());
-		//	System.out.println((currentSecondtime - specialPower.getStartPowerSecondTime()) + ", " + specialPower.getDuration() + ", "+ specialPower.getCollector());
-			if (specialPower.getStartPowerSecondTime() != 0 && (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
+			// System.out.println((currentSecondtime -
+			// specialPower.getStartPowerSecondTime()) + ", " + specialPower.getDuration() +
+			// ", "+ specialPower.getCollector());
+			if (specialPower.getStartPowerSecondTime() != 0
+					&& (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
 					&& specialPower.getCollector() != null) {
 //				System.out.println(specialPower.getStartPowerSecondTime());
 				System.out.println("clearPower " + specialPower.getName());
 				ArrayList<Character> otherCharacter = new ArrayList<Character>();
 				if (specialPower.getCollector() instanceof PacMan) {
 					otherCharacter.add(GameController.ghost); // fixed here
+					otherCharacter.add(GameController.ghostBot1);
 				} else if (specialPower.getCollector() instanceof Ghost) {
 					otherCharacter.add(GameController.pacMan); // fixed here
 				}
@@ -162,8 +168,8 @@ public class GameController {
 				});
 			}
 		}
-		
-		if(GameLogic.IsGameEnd()) {
+
+		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
 		}
 

@@ -46,6 +46,7 @@ public class RenderableHolder {
 	
 	public static Image shieldPNG;
 	public static Image starvePNG;
+	public static Image revengePNG;
 
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
@@ -115,6 +116,7 @@ public class RenderableHolder {
 
 		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
+		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);
 		
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);

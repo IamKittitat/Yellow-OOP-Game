@@ -92,6 +92,7 @@ public class PacMan extends ControlCharacter {
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
 			otherCharacter.add(GameController.ghost); // fixed here
+			otherCharacter.add(GameController.ghostBot1);
 			((SpecialPower) entity).gainPower(GameController.pacMan, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
@@ -141,7 +142,7 @@ public class PacMan extends ControlCharacter {
 
 	public void update() {
 		boolean alreadyTurned = false;
-		System.out.println(xPos + ", "+yPos);
+//		System.out.println(xPos + ", "+yPos);
 		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
 			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
@@ -151,12 +152,12 @@ public class PacMan extends ControlCharacter {
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
 //			System.out.println(validWays);
-			System.out.println(validWays);
+//			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
 			
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
-				System.out.println(turnDirection);
+//				System.out.println(turnDirection);
 				turn(turnDirection);
 				alreadyTurned = true;
 			}
@@ -187,7 +188,7 @@ public class PacMan extends ControlCharacter {
 		this.score = score;
 	}
 
-	public boolean isCanEatPellet() {
+	public boolean CanEatPellet() {
 		return canEatPellet;
 	}
 

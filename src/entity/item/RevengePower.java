@@ -31,9 +31,8 @@ public class RevengePower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.RED);
-//		System.out.println(xPos + ", " + yPos);
-		gc.fillOval(xPos - this.radius, yPos - this.radius, this.radius * 2, this.radius * 2);
+		gc.drawImage(RenderableHolder.shieldPNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				this.radius * 2);
 	}
 
 	@Override
@@ -48,10 +47,19 @@ public class RevengePower extends SpecialPower {
 		collectedPacMan.setCanEatGhost(true);
 
 		for (Character otherCharacter : other) {
-			Ghost otherGhost = (Ghost) otherCharacter;
-			otherGhost.setCanBeEaten(true);
-			otherGhost.setCanEatPacMan(false);
-			otherGhost.setSpeed(GameConstant.DEBUFF_SPEED);
+//			System.out.println("check");
+			if (otherCharacter instanceof Ghost) {
+				Ghost otherGhost = (Ghost) otherCharacter;
+				otherGhost.setCanBeEaten(true);
+				otherGhost.setCanEatPacMan(false);
+				otherGhost.setSpeed(GameConstant.DEBUFF_SPEED);
+			} else if (otherCharacter instanceof GhostBot) {
+				GhostBot otherGhost = (GhostBot) otherCharacter;
+				otherGhost.setCanBeEaten(true);
+				otherGhost.setCanEatPacMan(false);
+				otherGhost.setSpeed(GameConstant.DEBUFF_SPEED);
+			}
+
 		}
 
 	}

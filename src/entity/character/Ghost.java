@@ -64,7 +64,7 @@ public class Ghost extends ControlCharacter {
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
 			otherCharacter.add(GameController.pacMan); // fixed here
-			((SpecialPower) entity).gainPower(GameController.ghost,otherCharacter);
+			((SpecialPower) entity).gainPower(GameController.ghost, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
 			System.out.println("ghost, " + this.getPower().getName());
@@ -105,30 +105,58 @@ public class Ghost extends ControlCharacter {
 		// TODO Auto-generated method stub
 //		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
 		int state = ((int) GameCanvas.counter / 5) % 4;
-		switch (state) {
-		case 0: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 1: {
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 2: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		case 3: {
-			gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
-			return;
-		}
-		default:
-			gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-					this.radius * 2);
+		if (this.canBeEaten()) {
+			switch (state) {
+			case 0: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 1: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 2: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 3: {
+				gc.drawImage(RenderableHolder.scaredGhostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			default:
+				gc.drawImage(RenderableHolder.scaredGhostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+			}
+		} else {
+			switch (state) {
+			case 0: {
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 1: {
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 2: {
+				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			case 3: {
+				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+				return;
+			}
+			default:
+				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+						this.radius * 2);
+			}
 		}
 	}
 

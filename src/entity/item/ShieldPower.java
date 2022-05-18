@@ -6,6 +6,7 @@ import constant.GameConstant;
 import entity.base.Character;
 import entity.base.SpecialPower;
 import entity.character.Ghost;
+import entity.character.GhostBot;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -40,10 +41,16 @@ public class ShieldPower extends SpecialPower {
 //		System.out.println(this.getStartPowerSecondTime());
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
-			Ghost otherGhost = (Ghost) other.get(0);
-
 			collectedPacMan.setCanBeEaten(false);
-			otherGhost.setCanEatPacMan(false);
+			for(Character otherCharacter : other) {
+				if(otherCharacter instanceof Ghost) {
+					Ghost otherGhost = (Ghost) otherCharacter;					
+					otherGhost.setCanEatPacMan(false);
+				} else if(otherCharacter instanceof GhostBot) {
+					GhostBot otherGhost = (GhostBot) otherCharacter;
+					otherGhost.setCanEatPacMan(false);
+				}
+			}
 		} else if (collector instanceof Ghost) {
 			Ghost collectedGhost = (Ghost) collector;
 			PacMan otherPacMan = (PacMan) other.get(0);
