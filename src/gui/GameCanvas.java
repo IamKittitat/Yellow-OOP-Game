@@ -25,7 +25,7 @@ public class GameCanvas extends Canvas {
 		GameCanvas.gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-		this.setWidth(900);
+		this.setWidth(912);
 		this.setHeight(430);
 		this.setVisible(true);
 

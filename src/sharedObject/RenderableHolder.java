@@ -31,6 +31,10 @@ public class RenderableHolder {
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
 	public static Image menuButtonPNG;
+	
+	public static Image wallPNG;
+	public static Image spawnPNG;
+	
 	public static Font gameHeaderFont;
 	public static Font gameSubHeaderFont;
 	
@@ -66,9 +70,13 @@ public class RenderableHolder {
 		pacManPNG4 = new Image(ClassLoader.getSystemResource("pacman-4.png").toString());
 		MainMenuGIF = new Image(ClassLoader.getSystemResource("MainMenu.gif").toString(),400, 400, false, false);
 		heartPNG = new Image(ClassLoader.getSystemResource("heart.png").toString(),30, 30, false, false);
+		
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource("pause-button.png").toString(),50, 50, false, false);
 		playButtonPNG = new Image(ClassLoader.getSystemResource("play-button.png").toString(),50, 50, false, false);
 		menuButtonPNG = new Image(ClassLoader.getSystemResource("menu-button.png").toString(),50, 50, false, false);
+		
+		wallPNG  = new Image(ClassLoader.getSystemResource("wall.png").toString(),24, 24, false, false);
+		spawnPNG = new Image(ClassLoader.getSystemResource("spawn.png").toString(),24, 24, false, false);
 		
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource("slkscr.ttf").toString(), 45);
