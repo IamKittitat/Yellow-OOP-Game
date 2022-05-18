@@ -30,7 +30,7 @@ public class RevengePower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.drawImage(RenderableHolder.revengePNG, xPos - this.radius, yPos - this.radius, this.radius*1.2 ,
+		gc.drawImage(RenderableHolder.revengePNG, xPos - this.radius*0.6, yPos - this.radius, this.radius*1.2 ,
 				this.radius * 2);
 	}
 
