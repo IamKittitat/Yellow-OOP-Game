@@ -31,7 +31,7 @@ public class GameConstant {
 
 	public static final String PELLET_NAME = "Pellet";
 	public static final String PELLET_DETAIL = "THE Pellet";
-	public static final double PELLET_RADIUS = 2.5;
+	public static final double PELLET_RADIUS = 1.5;
 
 	public static final int TOTAL_PELLET = 100;
 	public static final String REVENGE_BUFF_NAME = "REVENGE_BUFF";
