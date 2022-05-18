@@ -21,6 +21,8 @@ import javafx.scene.input.KeyCode;
 
 public class GameLogic {
 	public static int counter = 0;
+	public static CharacterColor pacManColor;
+	public static CharacterColor ghostColor;
 
 	public static int remainPellets() { // check if any pellets left in a map
 		return GameController.pelletHolder.getAllPellets().size();
@@ -152,12 +154,8 @@ public class GameLogic {
 		return location;
 	}
 
-	public static Color CharacterColorToColor(CharacterColor color) {
-		switch (color) {
-		case YELLOW:
-			return Color.yellow;
-		}
-		return null;
+	public static String CharacterColorToString(CharacterColor color) {
+		return (color+"").toLowerCase();
 	}
 
 	public static boolean timeToRandomNewPower(long currentSecondtime, long startSecondTime) {
@@ -247,6 +245,22 @@ public class GameLogic {
 			}
 		}
 		return false;
+	}
+
+	public static CharacterColor getPacManColor() {
+		return pacManColor;
+	}
+
+	public static void setPacManColor(CharacterColor pacManColor) {
+		GameLogic.pacManColor = pacManColor;
+	}
+
+	public static CharacterColor getGhostColor() {
+		return ghostColor;
+	}
+
+	public static void setGhostColor(CharacterColor ghostColor) {
+		GameLogic.ghostColor = ghostColor;
 	}
 
 }

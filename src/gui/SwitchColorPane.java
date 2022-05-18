@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
+import constant.CharacterColor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,16 +15,17 @@ import javafx.scene.text.FontWeight;
 import sharedObject.RenderableHolder;
 
 public class SwitchColorPane extends BorderPane {
-	private ArrayList<Image> ColorList;
+	private ArrayList<Image> ColorImageList;
+	private ArrayList<CharacterColor> ColorList;
 	private int idx;
 	private VBox nextButton;
 	private VBox prevButton;
 
-	public SwitchColorPane(ArrayList<Image> arrayList) {
+	public SwitchColorPane(ArrayList<Image> arrayImages,ArrayList<CharacterColor> arrayColors) {
 
-		this.setColorList(arrayList);
-		this.setPrefSize(600, 200);
-
+		this.setColorImageList(arrayImages);
+		this.setColorList(arrayColors);
+		this.setPrefSize(600, 100);
 
 		this.nextButton = new VBox();
 		this.prevButton = new VBox();
@@ -32,13 +34,11 @@ public class SwitchColorPane extends BorderPane {
 		nextButton.getChildren().add(nextBtn);
 		prevButton.getChildren().add(prevBtn);
 		this.nextButton.setAlignment(Pos.CENTER);
-		this.nextButton.setSpacing(400.0);
 		this.nextButton.setPadding(new Insets(50.0));
 		this.prevButton.setAlignment(Pos.CENTER);
-		this.prevButton.setSpacing(400.0);
 		this.prevButton.setPadding(new Insets(50.0));
-		nextBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 50));
-		prevBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 50));
+		nextBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 30));
+		prevBtn.setFont(Font.font("Consolas", FontWeight.SEMI_BOLD, 30));
 		this.setLeft(prevButton);
 		this.setRight(nextButton);
 		this.change();
@@ -54,7 +54,7 @@ public class SwitchColorPane extends BorderPane {
 	}
 
 	public void change() {
-		ImageView image = new ImageView(this.ColorList.get(idx));
+		ImageView image = new ImageView(this.ColorImageList.get(idx));
 		image.setFitWidth(100);
 		image.setFitHeight(100);
 		if (idx == 0) {
@@ -64,14 +64,28 @@ public class SwitchColorPane extends BorderPane {
 		this.setCenter(image);
 	}
 
-	public ArrayList<Image> getColorList() {
+	public ArrayList<Image> getColorImageList() {
+		return ColorImageList;
+	}
+
+	public void setColorImageList(ArrayList<Image> colorImageList) {
+		ColorImageList = colorImageList;
+	}
+
+	public ArrayList<CharacterColor> getColorList() {
 		return ColorList;
 	}
 
-	public void setColorList(ArrayList<Image> colorList) {
+	public void setColorList(ArrayList<CharacterColor> colorList) {
 		ColorList = colorList;
 	}
-	
-	
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	
 }

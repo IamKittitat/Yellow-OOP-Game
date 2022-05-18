@@ -27,7 +27,7 @@ public class Main extends Application {
 
 		(sceneHolder = new SceneHolder(primaryStage)).initialize();
 		primaryStage.setTitle("Pac-Man");
-		primaryStage.getIcons().add(RenderableHolder.ghostPNG1);
+		primaryStage.getIcons().add(RenderableHolder.gameIconPNG);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 

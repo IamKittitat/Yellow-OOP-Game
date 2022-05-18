@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
+import logic.GameController;
+import logic.GameLogic;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -24,12 +26,12 @@ public class RenderableHolder {
 	public static Image scaredGhostPNG2;
 	public static Image ghostBotPNG1;
 	public static Image ghostBotPNG2;
-	
+
 	public static Image pacManPNG1;
 	public static Image pacManPNG2;
 	public static Image pacManPNG3;
 	public static Image pacManPNG4;
-	
+
 	public static Image mainMenuGIF;
 	public static Image yellowPacManGIF;
 	public static Image bluePacManGIF;
@@ -37,15 +39,16 @@ public class RenderableHolder {
 	public static Image pinkGhostGIF;
 	public static Image greenGhostGIF;
 	public static Image purpleGhostGIF;
-	
+
 	public static Image heartPNG;
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
 	public static Image menuButtonPNG;
+	public static Image gameIconPNG;
 
 	public static Image wallPNG;
 	public static Image spawnPNG;
-	
+
 	public static Image shieldPNG;
 	public static Image starvePNG;
 	public static Image revengePNG;
@@ -62,7 +65,7 @@ public class RenderableHolder {
 	public static AudioClip PacManDie_music;
 	public static AudioClip PacManEatGhost_music;
 	public static AudioClip Playing_music;
-	
+
 	static {
 		loadResource();
 	}
@@ -86,18 +89,11 @@ public class RenderableHolder {
 		String audio = "audio/";
 		String font = "font/";
 
-		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
-		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost-2.png").toString());
 		scaredGhostPNG1 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-1.png").toString());
 		scaredGhostPNG2 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-2.png").toString());
 		ghostBotPNG1 = new Image(ClassLoader.getSystemResource(img + "GhostBot1.png").toString());
 		ghostBotPNG2 = new Image(ClassLoader.getSystemResource(img + "GhostBot2.png").toString());
-		
-		pacManPNG1 = new Image(ClassLoader.getSystemResource(img + "pacman-1.png").toString());
-		pacManPNG2 = new Image(ClassLoader.getSystemResource(img + "pacman-2.png").toString());
-		pacManPNG3 = new Image(ClassLoader.getSystemResource(img + "pacman-3.png").toString());
-		pacManPNG4 = new Image(ClassLoader.getSystemResource(img + "pacman-4.png").toString());
-		
+
 		heartPNG = new Image(ClassLoader.getSystemResource(img + "heart.png").toString(), 30, 30, false, false);
 
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource(img + "pause-button.png").toString(), 50, 50, false,
@@ -106,14 +102,22 @@ public class RenderableHolder {
 				false);
 		menuButtonPNG = new Image(ClassLoader.getSystemResource(img + "menu-button.png").toString(), 50, 50, false,
 				false);
-		
-		mainMenuGIF = new Image(ClassLoader.getSystemResource(gif + "main-menu.gif").toString(), 400, 400, false, false);
-		yellowPacManGIF = new Image(ClassLoader.getSystemResource(gif + "yellow-pacman.gif").toString(), 100, 100, false, false);
-		bluePacManGIF = new Image(ClassLoader.getSystemResource(gif + "blue-pacman.gif").toString(), 100, 100, false, false);
-		pinkPacManGIF = new Image(ClassLoader.getSystemResource(gif + "pink-pacman.gif").toString(), 100, 100, false, false);
-		pinkGhostGIF = new Image(ClassLoader.getSystemResource(gif + "pink-ghost.gif").toString(), 100, 100, false, false);
-		greenGhostGIF = new Image(ClassLoader.getSystemResource(gif + "green-ghost.gif").toString(), 100, 100, false, false);
-		purpleGhostGIF = new Image(ClassLoader.getSystemResource(gif + "purple-ghost.gif").toString(), 100, 100, false, false);
+		gameIconPNG = new Image(ClassLoader.getSystemResource(img + "ghost-1.png").toString());
+
+		mainMenuGIF = new Image(ClassLoader.getSystemResource(gif + "main-menu.gif").toString(), 400, 400, false,
+				false);
+		yellowPacManGIF = new Image(ClassLoader.getSystemResource(gif + "yellow-pacman.gif").toString(), 100, 100,
+				false, false);
+		bluePacManGIF = new Image(ClassLoader.getSystemResource(gif + "blue-pacman.gif").toString(), 100, 100, false,
+				false);
+		pinkPacManGIF = new Image(ClassLoader.getSystemResource(gif + "pink-pacman.gif").toString(), 100, 100, false,
+				false);
+		pinkGhostGIF = new Image(ClassLoader.getSystemResource(gif + "pink-ghost.gif").toString(), 100, 100, false,
+				false);
+		greenGhostGIF = new Image(ClassLoader.getSystemResource(gif + "green-ghost.gif").toString(), 100, 100, false,
+				false);
+		purpleGhostGIF = new Image(ClassLoader.getSystemResource(gif + "purple-ghost.gif").toString(), 100, 100, false,
+				false);
 
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
@@ -121,7 +125,7 @@ public class RenderableHolder {
 		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
 		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);
-		
+
 		gameHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscrb.ttf").toString(), 45);
 		gameSubHeaderFont = Font.loadFont(ClassLoader.getSystemResource(font + "slkscr.ttf").toString(), 45);
 
@@ -136,16 +140,28 @@ public class RenderableHolder {
 		Playing_music = new AudioClip(ClassLoader.getSystemResource(audio + "Playing.mp3").toString());
 	}
 
+	public static void loadCharacter() {
+		String img = "image/";
+		String ghostColor = GameLogic.CharacterColorToString(GameLogic.ghostColor) + "/";
+		String pacManColor = GameLogic.CharacterColorToString(GameLogic.pacManColor) + "/";
+
+		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + "ghost/" + ghostColor + "ghost-1.png").toString());
+		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost/" + ghostColor + "ghost-2.png").toString());
+
+		pacManPNG1 = new Image(
+				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-1.png").toString());
+		pacManPNG2 = new Image(
+				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-2.png").toString());
+		pacManPNG3 = new Image(
+				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-3.png").toString());
+		pacManPNG4 = new Image(
+				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-4.png").toString());
+	}
+
 	public void add(IRenderable entity) {
 		System.out.println("add");
 		entities.add(entity);
 		Collections.sort(entities, comparator);
-//		for(IRenderable x: entities){
-//			if(x instanceof Tank) System.out.println("tank");
-//			if(x instanceof Mine) System.out.println("mine");
-//			if(x instanceof Field) System.out.println("field");
-//			
-//		}
 	}
 
 	public void update() {

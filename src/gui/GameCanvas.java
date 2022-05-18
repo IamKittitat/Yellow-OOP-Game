@@ -32,6 +32,7 @@ public class GameCanvas extends Canvas {
 		GameCanvas.counter = 0;
 
 		controller = new GameController();
+		RenderableHolder.loadCharacter();
 		this.loop();
 	}
 

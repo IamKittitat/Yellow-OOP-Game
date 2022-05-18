@@ -38,19 +38,20 @@ public class MenuControlPane extends VBox {
 
 		initializeGameText();
 		initializeBattleGameButton();
-		initializePacManGameButton();
+//		initializePacManGameButton();
 		initializeCustomizeButton();
 		initializeHowToPlayButton();
 		initializeQuitButton();
 
-		this.getChildren().addAll(gameText, battleGameButton, pacManGameButton, customizeButton, howToPlayButton,
-				quitButton);
+//		this.getChildren().addAll(gameText, battleGameButton, pacManGameButton, customizeButton, howToPlayButton,
+//				quitButton);
+		this.getChildren().addAll(gameText, battleGameButton, customizeButton, howToPlayButton, quitButton);
 	}
 
 	private void initializeHowToPlayButton() {
 		// TODO Auto-generated method stub
 		this.howToPlayButton = new MenuButton("How to play");
-	
+
 	}
 
 	private void initializeCustomizeButton() {
@@ -64,7 +65,7 @@ public class MenuControlPane extends VBox {
 				Main.sceneHolder.switchScene(new CustomizeScene());
 			}
 		});
-		
+
 	}
 
 	private void initializePacManGameButton() {

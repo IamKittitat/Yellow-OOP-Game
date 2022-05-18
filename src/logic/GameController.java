@@ -42,21 +42,18 @@ public class GameController {
 		Map map = new Map();
 		RenderableHolder.getInstance().add(map);
 
-		pacMan = new PacMan(CharacterColor.YELLOW);
-		ghost = new Ghost(CharacterColor.YELLOW);
+		pacMan = new PacMan(GameLogic.pacManColor);
+		ghost = new Ghost(GameLogic.ghostColor);
 		ghostBot1 = new GhostBot();
-		ghostBot2 = new GhostBot();
 		pelletHolder = new PelletHolder();
 		specialPowerHolder = new SpecialPowerHolder();
 		gameControlPane = new GameControlPane();
 
 		addNewObject(pacMan);
 		addNewObject(ghost);
-
 		addNewObject(pelletHolder);
 		addNewObject(specialPowerHolder);
 		addNewObject(ghostBot1);
-//		addNewObject(ghostBot2);
 
 		// TODO Auto-generated constructor stub
 	}
