@@ -1,5 +1,6 @@
 package entity.base;
 
+import constant.GameConstant;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
@@ -45,7 +46,7 @@ public class Map implements IRenderable {
 			{ 18, 8 }, { 19, 8 }, { 20, 8 }, { 18, 9 }, { 19, 9 }, { 20, 9 } };
 
 	public String getTerrain(int x, int y) {
-		if (x < 0 || x >= 38 || y < 0 || y >= 18)
+		if (x < 0 || x > GameConstant.SCREEN_PLAY_WIDTH || y < 0 || y > GameConstant.SCREEN_PLAY_HEIGHT)
 			return "W";
 		return GameLogic.getMapState(x, y);
 	}
@@ -59,36 +60,29 @@ public class Map implements IRenderable {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		for (int y = 0; y < 18; y++) {
-			for (int x = 0; x < 38; x++) {
+		for (int y = 0; y <= GameConstant.SCREEN_PLAY_HEIGHT; y++) {
+			for (int x = 0; x <= GameConstant.SCREEN_PLAY_WIDTH; x++) {
 				// System.out.println(getTerrain(x,y));
 				switch (getTerrain(x, y)) {
 				case "W":
-					gc.drawImage(RenderableHolder.wallPNG, x * 24, y * 24);
+					gc.drawImage(RenderableHolder.wallPNG, x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE);
 					break;
 				case "G":
 					gc.setFill(Color.BLACK);
-					gc.fillRect(x * 24, y * 24, 24, 24);
+					gc.fillRect(x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE, GameConstant.BLOCK_SIZE,
+							GameConstant.BLOCK_SIZE);
 					break;
 				case "X":
 					gc.setFill(Color.PINK);
-					gc.drawImage(RenderableHolder.spawnPNG, x * 24, y * 24);
+					gc.drawImage(RenderableHolder.spawnPNG, x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE);
 					break;
 				default:
 					gc.setFill(Color.BLACK);
-					gc.fillRect(x * 24, y * 24, 24, 24);
+					gc.fillRect(x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE, GameConstant.BLOCK_SIZE,
+							GameConstant.BLOCK_SIZE);
 				}
 			}
 		}
-
-//		for (int x = 0; x <= gc.getCanvas().getWidth(); x++) {
-//			for (int y = 0; y <= gc.getCanvas().getHeight(); y++) {
-//				if(x == 300 || y == 200) {
-//					gc.setFill(Color.RED);
-//					gc.fillRect(x, y, 64, 64);
-//				}
-//			}
-//		}
 	}
 
 	@Override

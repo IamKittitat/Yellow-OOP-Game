@@ -64,12 +64,11 @@ public class Ghost extends ControlCharacter {
 			}
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
-			otherCharacter.add(GameController.pacMan); // fixed here
+			otherCharacter.add(GameController.pacMan);
 			((SpecialPower) entity).gainPower(GameController.ghost, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
 			System.out.println("ghost, " + this.getPower().getName());
-			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}
 

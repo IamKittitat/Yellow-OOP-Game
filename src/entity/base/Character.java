@@ -1,8 +1,7 @@
 package entity.base;
 
 import constant.Direction;
-import logic.GameLogic;
-import constant.CharacterColor;
+import constant.GameConstant;
 
 public abstract class Character extends Entity {
 	protected double speed;
@@ -26,11 +25,10 @@ public abstract class Character extends Entity {
 	protected abstract void reborn();
 
 	public void checkWarp() {
-		if (this.xPos == 468 && this.yPos <= -12) {
-			this.setYPos(444);
-		} else if(this.xPos == 468 && this.yPos >= 444) {
-//			System.out.println("warp?");
-			this.setYPos(-12);
+		if (this.xPos == GameConstant.WARP_POINT_1_X && this.yPos <= GameConstant.WARP_POINT_1_Y) { // Up warp point
+			this.setYPos(GameConstant.WARP_POINT_2_Y);
+		} else if(this.xPos == GameConstant.WARP_POINT_1_X && this.yPos >= GameConstant.WARP_POINT_2_Y) { // Down warp point
+			this.setYPos(GameConstant.WARP_POINT_1_Y);
 		}
 	}
 	

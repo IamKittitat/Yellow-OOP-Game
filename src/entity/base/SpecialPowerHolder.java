@@ -25,10 +25,6 @@ public class SpecialPowerHolder extends Entity implements IRenderable {
 		}
 	}
 
-//	public void update() {
-//		this.getAllSpecialPowers().add(GameLogic.randomPower());
-//	}
-
 	public static ArrayList<SpecialPower> getAllSpecialPowers() {
 		return allSpecialPowers;
 	}

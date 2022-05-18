@@ -2,7 +2,6 @@ package entity.base;
 
 import constant.CharacterColor;
 import constant.Direction;
-import javafx.scene.paint.Color;
 import logic.GameLogic;
 
 public abstract class ControlCharacter extends Character {
@@ -14,9 +13,6 @@ public abstract class ControlCharacter extends Character {
 	}
 
 	protected void forward() {
-//		System.out.println("+x " + Math.sin(Math.toRadians(GameLogic.directionToInt(direction))));
-//		System.out.println("+y " + Math.cos(Math.toRadians(GameLogic.directionToInt(direction))));
-//		System.out.println("xPOs , "+ this.xPos);
 		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
 	}
