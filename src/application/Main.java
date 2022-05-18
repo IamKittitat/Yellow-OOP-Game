@@ -26,7 +26,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		(sceneHolder = new SceneHolder(primaryStage)).initialize();
-		primaryStage.setTitle("Pac-Man");
+		primaryStage.setTitle("Yellow");
 		primaryStage.getIcons().add(RenderableHolder.gameIconPNG);
 		primaryStage.setResizable(false);
 		primaryStage.show();

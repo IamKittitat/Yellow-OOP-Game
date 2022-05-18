@@ -92,7 +92,7 @@ public class MenuControlPane extends VBox {
 
 	private void initializeGameText() {
 		// TODO Auto-generated method stub
-		this.gameText = new Text("PAC-MAN");
+		this.gameText = new Text("YELLOW");
 		this.gameText.setFont(RenderableHolder.gameHeaderFont);
 		this.gameText.setFill(Color.YELLOW);
 	}

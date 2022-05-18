@@ -40,7 +40,6 @@ public class BattleGameScene extends Scene {
 		};
 		startPlayingSong.start();
 		
-		
 		this.battleGamePane = new BattleGamePane();
 		this.stackPane.getChildren().add(battleGamePane);
 	}
