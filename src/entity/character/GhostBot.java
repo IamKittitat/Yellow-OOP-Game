@@ -216,27 +216,27 @@ public class GhostBot extends Character {
 		} else {
 			switch (state) {
 			case 0: {
-				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				gc.drawImage(RenderableHolder.ghostBotPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 				return;
 			}
 			case 1: {
-				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				gc.drawImage(RenderableHolder.ghostBotPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 				return;
 			}
 			case 2: {
-				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				gc.drawImage(RenderableHolder.ghostBotPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 				return;
 			}
 			case 3: {
-				gc.drawImage(RenderableHolder.ghostPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				gc.drawImage(RenderableHolder.ghostBotPNG2, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 				return;
 			}
 			default:
-				gc.drawImage(RenderableHolder.ghostPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				gc.drawImage(RenderableHolder.ghostBotPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
 						this.radius * 2);
 			}
 		}
