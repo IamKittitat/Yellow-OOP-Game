@@ -174,10 +174,10 @@ public class GameLogic {
 
 	public static void spawnNewPower() {
 		ArrayList<Integer> randomPosition = randomPosition();
-//		int xRandomPos = randomPosition.get(0);
-//		int yRandomPos = randomPosition.get(1);
-		int xRandomPos = 60;
-		int yRandomPos = 36;
+		int xRandomPos = randomPosition.get(0);
+		int yRandomPos = randomPosition.get(1);
+//		int xRandomPos = 60;
+//		int yRandomPos = 36;
 //		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
 		long startRandomSecondTime = System.nanoTime() / 1000000000;
 		SpecialPower randomPower = getPower(xRandomPos, yRandomPos, startRandomSecondTime);
@@ -195,7 +195,7 @@ public class GameLogic {
 	}
 
 	public static SpecialPower getPower(int x, int y, long startRandomTime) {
-		switch (counter%3) {
+		switch (counter%4) {
 		case 0:
 			RevengePower revengePower = new RevengePower(x, y, startRandomTime);
 			counter++;
@@ -205,6 +205,10 @@ public class GameLogic {
 			counter++;
 			return shieldPower;
 		case 2:
+			ShieldPower shieldPower1 = new ShieldPower(x, y, startRandomTime);
+			counter++;
+			return shieldPower1;
+		case 3:
 			StarvePower starvePower = new StarvePower(x, y, startRandomTime);
 			counter++;
 			return starvePower;
