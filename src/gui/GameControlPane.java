@@ -4,6 +4,7 @@ import entity.character.PacMan;
 import gui.base.IconButton;
 import gui.base.MenuButton;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,8 @@ public class GameControlPane extends BorderPane {
 	}
 
 	private void initilize() {
+		
+		this.setPadding(new Insets(6));
 
 		initilizeLivesPane();
 
@@ -81,7 +84,7 @@ public class GameControlPane extends BorderPane {
 	}
 
 	public void initilizeLivesPane() {
-		this.livesPane = new HBox();
+		this.livesPane = new HBox(5);
 		this.lives = GameController.pacMan.getLife();
 		for (int i = 0; i < this.lives; i++) {
 			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));

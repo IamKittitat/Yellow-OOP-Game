@@ -29,6 +29,8 @@ public class GameButton extends Button {
 				// TODO Auto-generated method stub
 				DropShadow shadow = new DropShadow();
 				shadow.setColor(Color.YELLOW);
+				shadow.setSpread(0.4);
+				shadow.setRadius(10);
 				setEffect(shadow);
 			}
 		});

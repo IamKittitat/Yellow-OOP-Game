@@ -36,7 +36,6 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void paintComponent() {
-		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		counter++;
 		if (counter > 20) {
 			counter -= 20;
