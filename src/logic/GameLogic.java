@@ -216,17 +216,6 @@ public class GameLogic {
 		return null;
 	}
 
-	private static boolean ghostWin() {
-		// pacman life <= 0;
-		return false;
-
-	}
-
-	private static boolean pacManWin() {
-		// all pellet collected
-		return false;
-	}
-
 	public static boolean IsGameEnd() {
 //		System.out.println(remainPellets());
 		if (GameController.pacMan.getLife() <= 0) {
@@ -237,10 +226,15 @@ public class GameLogic {
 		}
 		return false;
 	}
-
-	public static boolean canWarp() {
-		return false;
+	
+	public static boolean pacManWin() {
+		return GameController.pelletHolder.getAllPellets().size() <= 0;
 	}
+	
+	public static boolean GhostWin() {
+		return GameController.pacMan.getLife() <= 0;
+	}
+	
 
 	public static boolean closeToSpawn(int x, int y) {
 		for (int[] close : Map.closeToSpawnPosition) {
