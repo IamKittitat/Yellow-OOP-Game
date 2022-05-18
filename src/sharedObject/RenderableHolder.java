@@ -46,6 +46,7 @@ public class RenderableHolder {
 	public static AudioClip GameEnd_music;
 	public static AudioClip PacManDie_music;
 	public static AudioClip PacManEatGhost_music;
+	public static AudioClip Playing_music;
 	
 	static {
 		loadResource();
@@ -101,6 +102,7 @@ public class RenderableHolder {
 		GameEnd_music = new AudioClip(ClassLoader.getSystemResource(audio + "GameEnd.mp3").toString());
 		PacManDie_music = new AudioClip(ClassLoader.getSystemResource(audio + "PacManDie.mp3").toString());
 		PacManEatGhost_music = new AudioClip(ClassLoader.getSystemResource(audio + "PacManEatGhost.mp3").toString());
+		Playing_music = new AudioClip(ClassLoader.getSystemResource(audio + "Playing.mp3").toString());
 	}
 
 	public void add(IRenderable entity) {

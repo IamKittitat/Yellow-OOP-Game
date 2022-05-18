@@ -43,6 +43,7 @@ public class MainMenuScene extends Scene{
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				howToPlayPane.enter();
 			}
 		});

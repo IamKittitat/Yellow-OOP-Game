@@ -57,6 +57,7 @@ public class GameControlPane extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				if (!isPaused) {
 					GameCanvas.gameLoop.stop();
 					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));

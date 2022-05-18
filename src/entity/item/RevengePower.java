@@ -8,11 +8,14 @@ import entity.base.SpecialPower;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
+import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class RevengePower extends SpecialPower {
-
+	public static AnimationTimer startChasingSong;
+	
 	public RevengePower(int x, int y,long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.REVENGE_BUFF_NAME;
@@ -37,6 +40,7 @@ public class RevengePower extends SpecialPower {
 		setCollector(collector);
 		setStartPowerSecondTime(System.nanoTime()/1000000000);
 //		System.out.println(this.getStartPowerSecondTime());
+		playMusic();
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(false);
 		collectedPacMan.setCanEatGhost(true);
@@ -50,11 +54,23 @@ public class RevengePower extends SpecialPower {
 
 	}
 
+	private void playMusic() {
+		// TODO Auto-generated method stub
+		startChasingSong = new AnimationTimer() {
+			public void handle(long now) {
+				if (!RenderableHolder.ChasingGhost_music.isPlaying())
+					RenderableHolder.ChasingGhost_music.play();
+			}
+		};
+		startChasingSong.start();
+	}
+
 	@Override
 	public void clearPower(ArrayList<Character> other) {
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(true);
 		collectedPacMan.setCanEatGhost(false);
+		stopMusic();
 
 		for (Character otherCharacter : other) {
 			if(otherCharacter instanceof Ghost) {
@@ -70,6 +86,12 @@ public class RevengePower extends SpecialPower {
 			}
 
 		}
+	}
+
+	private void stopMusic() {
+		// TODO Auto-generated method stub
+		RenderableHolder.ChasingGhost_music.stop();
+		startChasingSong.stop();
 	}
 
 }

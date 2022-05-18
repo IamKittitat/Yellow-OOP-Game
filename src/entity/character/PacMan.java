@@ -75,14 +75,17 @@ public class PacMan extends ControlCharacter {
 		if ((entity instanceof Ghost) || (entity instanceof GhostBot)) {
 			if (canEatGhost) {
 				((Character) entity).die();
+				RenderableHolder.PacManEatGhost_music.play();
 			} else {
 				if (canBeEaten()) {
 					this.die();
+					RenderableHolder.PacManDie_music.play();
 				}
 			}
 		} else if (entity instanceof Pellet) {
 			if (canEatPellet) {
 				((Pellet) entity).setRemoved(true);
+//				RenderableHolder.EatPellet_music.play();
 				this.setScore(this.getScore() + 1);
 				System.out.println(this.getScore());
 			}
