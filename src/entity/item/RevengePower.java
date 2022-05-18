@@ -23,7 +23,6 @@ public class RevengePower extends SpecialPower {
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);
-		setRadius(GameConstant.REVENGE_POWER_RADIUS);
 		super.getEatenBy().add("PacMan");
 		this.duration = GameConstant.REVENGE_BUFF_DURATION;
 	}
@@ -31,7 +30,7 @@ public class RevengePower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.drawImage(RenderableHolder.shieldPNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
+		gc.drawImage(RenderableHolder.revengePNG, xPos - this.radius, yPos - this.radius, this.radius*1.2 ,
 				this.radius * 2);
 	}
 
