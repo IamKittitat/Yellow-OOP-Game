@@ -22,6 +22,8 @@ public class RenderableHolder {
 	public static Image ghostPNG2;
 	public static Image scaredGhostPNG1;
 	public static Image scaredGhostPNG2;
+	public static Image ghostBotPNG1;
+	public static Image ghostBotPNG2;
 	
 	public static Image pacManPNG1;
 	public static Image pacManPNG2;
@@ -88,6 +90,8 @@ public class RenderableHolder {
 		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost-2.png").toString());
 		scaredGhostPNG1 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-1.png").toString());
 		scaredGhostPNG2 = new Image(ClassLoader.getSystemResource(img + "scaredGhost-2.png").toString());
+		ghostBotPNG1 = new Image(ClassLoader.getSystemResource(img + "GhostBot1.png").toString());
+		ghostBotPNG2 = new Image(ClassLoader.getSystemResource(img + "GhostBot2.png").toString());
 		
 		pacManPNG1 = new Image(ClassLoader.getSystemResource(img + "pacman-1.png").toString());
 		pacManPNG2 = new Image(ClassLoader.getSystemResource(img + "pacman-2.png").toString());
