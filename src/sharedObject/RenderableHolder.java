@@ -49,6 +49,7 @@ public class RenderableHolder {
 	public static Image wallPNG;
 	public static Image spawnPNG;
 
+	public static Image pacManShieldPNG;
 	public static Image shieldPNG;
 	public static Image starvePNG;
 	public static Image revengePNG;
@@ -125,6 +126,7 @@ public class RenderableHolder {
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
 
+		pacManShieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
 		revengePNG = new Image(ClassLoader.getSystemResource(img + "revenge.png").toString(), 24, 24, false, false);
@@ -148,20 +150,22 @@ public class RenderableHolder {
 
 	public static void loadCharacter() {
 		String img = "image/";
+		String ghost = "ghost/";
+		String pacman = "pacman/";
 		String ghostColor = GameLogic.CharacterColorToString(GameLogic.ghostColor) + "/";
 		String pacManColor = GameLogic.CharacterColorToString(GameLogic.pacManColor) + "/";
 
-		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + "ghost/" + ghostColor + "ghost-1.png").toString());
-		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + "ghost/" + ghostColor + "ghost-2.png").toString());
+		ghostPNG1 = new Image(ClassLoader.getSystemResource(img + ghost + ghostColor + "ghost-1.png").toString());
+		ghostPNG2 = new Image(ClassLoader.getSystemResource(img + ghost + ghostColor + "ghost-2.png").toString());
 
 		pacManPNG1 = new Image(
-				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-1.png").toString());
+				ClassLoader.getSystemResource(img + pacman + pacManColor + "pacman-1.png").toString());
 		pacManPNG2 = new Image(
-				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-2.png").toString());
+				ClassLoader.getSystemResource(img + pacman + pacManColor + "pacman-2.png").toString());
 		pacManPNG3 = new Image(
-				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-3.png").toString());
+				ClassLoader.getSystemResource(img + pacman + pacManColor + "pacman-3.png").toString());
 		pacManPNG4 = new Image(
-				ClassLoader.getSystemResource(img + "pacman/" + pacManColor + "pacman-4.png").toString());
+				ClassLoader.getSystemResource(img + pacman + pacManColor + "pacman-4.png").toString());
 	}
 
 	public void add(IRenderable entity) {
