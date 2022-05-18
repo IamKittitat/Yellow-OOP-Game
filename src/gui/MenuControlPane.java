@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scene.BattleGameScene;
-import scene.CustomiseScene;
+import scene.CustomizeScene;
 import scene.MainMenuScene;
 import scene.PacManGameScene;
 import sharedObject.RenderableHolder;
@@ -56,6 +56,15 @@ public class MenuControlPane extends VBox {
 	private void initializeCustomizeButton() {
 		// TODO Auto-generated method stub
 		this.customizeButton = new MenuButton("Customize");
+		this.customizeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Main.sceneHolder.switchScene(new CustomizeScene());
+			}
+		});
+		
 	}
 
 	private void initializePacManGameButton() {

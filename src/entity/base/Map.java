@@ -62,9 +62,7 @@ public class Map implements IRenderable {
 				// System.out.println(getTerrain(x,y));
 				switch (getTerrain(x, y)) {
 				case "W":
-					gc.setFill(Color.ORANGE);
 					gc.drawImage(RenderableHolder.wallPNG, x*24, y*24);
-//					gc.fillRect(x * 24, y * 24, 24, 24);
 					break;
 				case "G":
 					gc.setFill(Color.BLACK);
@@ -73,7 +71,6 @@ public class Map implements IRenderable {
 				case "X":
 					gc.setFill(Color.PINK);
 					gc.drawImage(RenderableHolder.spawnPNG, x*24, y*24);
-//					gc.fillRect(x * 24, y * 24, 24, 24);
 					break;
 				default:
 					gc.setFill(Color.YELLOW);

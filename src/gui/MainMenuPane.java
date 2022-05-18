@@ -19,7 +19,7 @@ public class MainMenuPane extends HBox {
 		this.setStyle("-fx-background-color: black; ");
 
 		this.menuControlPane = new MenuControlPane();
-		BorderPane imagePane = new BorderPane(new ImageView(RenderableHolder.MainMenuGIF));
+		BorderPane imagePane = new BorderPane(new ImageView(RenderableHolder.mainMenuGIF));
 		
 		this.getChildren().addAll(menuControlPane,imagePane);
 		// TODO Auto-generated constructor stub

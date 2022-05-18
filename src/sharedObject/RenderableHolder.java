@@ -26,7 +26,15 @@ public class RenderableHolder {
 	public static Image pacManPNG2;
 	public static Image pacManPNG3;
 	public static Image pacManPNG4;
-	public static Image MainMenuGIF;
+	
+	public static Image mainMenuGIF;
+	public static Image yellowPacManGIF;
+	public static Image bluePacManGIF;
+	public static Image pinkPacManGIF;
+	public static Image pinkGhostGIF;
+	public static Image greenGhostGIF;
+	public static Image purpleGhostGIF;
+	
 	public static Image heartPNG;
 	public static Image pauseButtonPNG;
 	public static Image playButtonPNG;
@@ -70,6 +78,7 @@ public class RenderableHolder {
 
 	public static void loadResource() {
 		String img = "image/";
+		String gif = "gif/";
 		String audio = "audio/";
 		String font = "font/";
 
@@ -81,7 +90,7 @@ public class RenderableHolder {
 		pacManPNG2 = new Image(ClassLoader.getSystemResource(img + "pacman-2.png").toString());
 		pacManPNG3 = new Image(ClassLoader.getSystemResource(img + "pacman-3.png").toString());
 		pacManPNG4 = new Image(ClassLoader.getSystemResource(img + "pacman-4.png").toString());
-		MainMenuGIF = new Image(ClassLoader.getSystemResource(img + "MainMenu.gif").toString(), 400, 400, false, false);
+		
 		heartPNG = new Image(ClassLoader.getSystemResource(img + "heart.png").toString(), 30, 30, false, false);
 
 		pauseButtonPNG = new Image(ClassLoader.getSystemResource(img + "pause-button.png").toString(), 50, 50, false,
@@ -90,6 +99,14 @@ public class RenderableHolder {
 				false);
 		menuButtonPNG = new Image(ClassLoader.getSystemResource(img + "menu-button.png").toString(), 50, 50, false,
 				false);
+		
+		mainMenuGIF = new Image(ClassLoader.getSystemResource(gif + "main-menu.gif").toString(), 400, 400, false, false);
+		yellowPacManGIF = new Image(ClassLoader.getSystemResource(gif + "yellow-pacman.gif").toString(), 100, 100, false, false);
+		bluePacManGIF = new Image(ClassLoader.getSystemResource(gif + "blue-pacman.gif").toString(), 100, 100, false, false);
+		pinkPacManGIF = new Image(ClassLoader.getSystemResource(gif + "pink-pacman.gif").toString(), 100, 100, false, false);
+		pinkGhostGIF = new Image(ClassLoader.getSystemResource(gif + "pink-ghost.gif").toString(), 100, 100, false, false);
+		greenGhostGIF = new Image(ClassLoader.getSystemResource(gif + "green-ghost.gif").toString(), 100, 100, false, false);
+		purpleGhostGIF = new Image(ClassLoader.getSystemResource(gif + "purple-ghost.gif").toString(), 100, 100, false, false);
 
 		wallPNG = new Image(ClassLoader.getSystemResource(img + "wall.png").toString(), 24, 24, false, false);
 		spawnPNG = new Image(ClassLoader.getSystemResource(img + "spawn.png").toString(), 24, 24, false, false);
