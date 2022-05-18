@@ -56,6 +56,14 @@ public class MenuControlPane extends VBox {
 	private void initializeCustomizeButton() {
 		// TODO Auto-generated method stub
 		this.customizeButton = new MenuButton("Customize");
+		this.customizeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Main.sceneHolder.switchScene(new CustomiseScene());
+			}
+		});
 	}
 
 	private void initializePacManGameButton() {

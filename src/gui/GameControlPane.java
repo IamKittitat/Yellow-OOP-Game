@@ -71,6 +71,7 @@ public class GameControlPane extends BorderPane {
 		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
 
 		this.statPane = new VBox();
+		this.statPane.setPadding(new Insets(6));
 		this.statPane.getChildren().addAll(scoreText, livesPane);
 
 		this.controlPane = new HBox();
