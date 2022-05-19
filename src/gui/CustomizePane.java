@@ -84,7 +84,7 @@ public class CustomizePane extends BorderPane {
 	}
 
 	private void initializeMainMenuButton() {
-		this.mainMenuButton = new TextButton("MainMenu");
+		this.mainMenuButton = new TextButton("Main Menu");
 		this.mainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
