@@ -24,7 +24,7 @@ public class CustomizePane extends BorderPane {
 	private Button mainMenuButton;
 
 	public CustomizePane() {
-
+		super();
 		this.setPrefSize(912, 500);
 		this.setMaxSize(912, 500);
 		this.setStyle("-fx-background-color: black; ");
