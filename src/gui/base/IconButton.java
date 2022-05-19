@@ -8,9 +8,8 @@ public class IconButton extends GameButton {
 
 	public IconButton(Image iconImage) {
 		super();
-		this.setGraphic(iconImageView);
-		this.setStyle("-fx-background-color: transparent; ");
 		this.iconImageView = new ImageView(iconImage);
+		this.setGraphic(iconImageView);
 
 	}
 

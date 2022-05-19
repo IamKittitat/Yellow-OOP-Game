@@ -1,6 +1,5 @@
 package scene;
 
-
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -8,7 +7,6 @@ public class SceneHolder {
 	private Stage bindStage;
 	public MainMenuScene mainMenuScene;
 
-	// public PlayMenuScene playMenuScene;
 	public SceneHolder(final Stage bindStage) {
 		this.bindStage = bindStage;
 	}

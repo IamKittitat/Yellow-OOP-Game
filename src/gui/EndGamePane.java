@@ -26,7 +26,6 @@ public class EndGamePane extends BorderPane {
 
 	public EndGamePane() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;" + "-fx-border-color: yellow; " + "-fx-border-radius: 30;"
 				+ " -fx-border-width: 2px;");
 		this.setMaxSize(600, 400);

@@ -1,17 +1,12 @@
 package scene;
 
-import gui.BattleGamePane;
 import gui.HowToPlayPane;
 import gui.MainMenuPane;
-import gui.MenuControlPane;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import sharedObject.RenderableHolder;
 
@@ -29,6 +24,7 @@ public class MainMenuScene extends Scene {
 	public MainMenuScene() {
 		this((Parent) new StackPane());
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
+
 		startThemeSong = new AnimationTimer() {
 			public void handle(long now) {
 				if (!RenderableHolder.ThemeSong_music.isPlaying())
@@ -42,14 +38,13 @@ public class MainMenuScene extends Scene {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+
 				RenderableHolder.ClickedSound_music.play();
 				howToPlayPane.move();
 			}
 		});
 
 		this.howToPlayPane = new HowToPlayPane();
-
 		this.stackPane.getChildren().addAll(mainMenuPane, howToPlayPane);
 	}
 
