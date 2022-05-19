@@ -91,6 +91,8 @@ public class CustomizePane extends BorderPane {
 			public void handle(MouseEvent arg0) {
 
 				RenderableHolder.ClickedSound_music.play();
+				RenderableHolder.ThemeSong_music.stop();
+				MainMenuScene.startThemeSong.stop();
 				saveColor();
 				RenderableHolder.loadCharacter();
 				Main.sceneHolder.switchScene(new MainMenuScene());

@@ -21,9 +21,9 @@ public class BattleGameScene extends Scene {
 	public BattleGameScene() {
 		this((Parent) new StackPane());
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
-
 		RenderableHolder.ThemeSong_music.stop();
 		MainMenuScene.startThemeSong.stop();
+		
 		startPlayingSong = new AnimationTimer() {
 			public void handle(long now) {
 				if (!RenderableHolder.Playing_music.isPlaying())

@@ -59,6 +59,7 @@ public class GameController {
 	public void checkGameEnd() {
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
+			RenderableHolder.GameEnd_music.play();
 			BattleGamePane.endGamePane.setResult();
 			BattleGamePane.endGamePane.move();
 		}

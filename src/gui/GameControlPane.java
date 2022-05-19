@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
 import logic.GameLogic;
+import scene.BattleGameScene;
 import scene.MainMenuScene;
 import sharedObject.RenderableHolder;
 
@@ -99,7 +100,8 @@ public class GameControlPane extends BorderPane {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-
+				RenderableHolder.Playing_music.stop();
+				BattleGameScene.startPlayingSong.stop();
 				RenderableHolder.ClickedSound_music.play();
 				Main.sceneHolder.switchScene(new MainMenuScene());
 				GameLogic.restartGame();
