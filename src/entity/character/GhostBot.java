@@ -22,7 +22,6 @@ public class GhostBot extends Character {
 	public GhostBot() {
 		super();
 		this.name = GameConstant.GHOST_BOT_NAME;
-		this.detail = GameConstant.GHOST_BOT_DETAIL;
 		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
 		this.yPos = GameConstant.GHOST_BOT_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_BOT_SPEED);

@@ -15,7 +15,6 @@ public class StarvePower extends SpecialPower {
 	public StarvePower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.STARVE_BUFF_NAME;
-		this.detail = GameConstant.STARVE_BUFF_DETAIL;
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);
