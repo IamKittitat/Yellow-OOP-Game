@@ -63,7 +63,6 @@ public class Ghost extends ControlCharacter {
 			((SpecialPower) entity).gainPower(GameController.ghost, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
-			System.out.println("ghost, " + this.getPower().getName());
 		}
 	}
 
@@ -146,7 +145,6 @@ public class Ghost extends ControlCharacter {
 			}
 		}
 		if(this.getPower() instanceof ShieldPower) {
-			System.out.println("has shield");
 			gc.drawImage(RenderableHolder.pacManShieldPNG, xPos -this.radius*1.5, yPos -this.radius*1.5, this.radius * 3, this.radius * 3);
 		}
 	}

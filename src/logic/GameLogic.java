@@ -150,7 +150,6 @@ public class GameLogic {
 		int yRandomPos = randomPosition.get(1);
 		long startRandomSecondTime = System.nanoTime() / 1000000000;
 		SpecialPower randomPower = getPower(xRandomPos, yRandomPos, startRandomSecondTime);
-		System.out.println(randomPower.getName() + " , " + randomPower.getStartRandomSecondTime());
 		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
 	}
 
@@ -159,7 +158,6 @@ public class GameLogic {
 		ArrayList<Integer> randomPosition = new ArrayList<>();
 		randomPosition.add(Map.groundState[randomNum][0] * 24 + 12);
 		randomPosition.add(Map.groundState[randomNum][1] * 24 + 12);
-		System.out.println("hi " + randomPosition.toString());
 		return randomPosition;
 	}
 

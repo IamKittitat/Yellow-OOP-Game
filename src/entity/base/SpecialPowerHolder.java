@@ -42,7 +42,6 @@ public class SpecialPowerHolder extends Entity {
 			// specialPowerHolder
 			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
 				if (specialPower.getCollector() == null) { // no one collected
-					System.out.println("remove " + specialPower.getName());
 					// Prevent concurrent exception
 					Platform.runLater(new Runnable() {
 						@Override
@@ -58,7 +57,6 @@ public class SpecialPowerHolder extends Entity {
 			if (specialPower.getStartPowerSecondTime() != 0
 					&& (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
 					&& specialPower.getCollector() != null) {
-				System.out.println("clearPower " + specialPower.getName());
 				ArrayList<Character> otherCharacter = new ArrayList<Character>();
 				if (specialPower.getCollector() instanceof PacMan) {
 					otherCharacter.add(GameController.ghost);
