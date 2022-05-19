@@ -1,17 +1,12 @@
 package sharedObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import javax.swing.ImageIcon;
-
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
-import logic.GameController;
 import logic.GameLogic;
 
 public class RenderableHolder {

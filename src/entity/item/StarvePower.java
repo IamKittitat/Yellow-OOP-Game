@@ -7,7 +7,6 @@ import entity.base.Character;
 import entity.base.SpecialPower;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
 public class StarvePower extends SpecialPower {
@@ -24,18 +23,15 @@ public class StarvePower extends SpecialPower {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		gc.drawImage(RenderableHolder.starvePNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
 				this.radius * 2);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
-		System.out.println("Gain Starve Power");
 		setCollector(collector);
 		collector.setPower(this);
 		setStartPowerSecondTime(System.nanoTime() / 1000000000);
-//		System.out.println(this.getStartPowerSecondTime());
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
 		System.out.println(otherPacMan.CanEatPellet());
@@ -43,7 +39,7 @@ public class StarvePower extends SpecialPower {
 
 	@Override
 	public void clearPower(ArrayList<Character> other) {
-		PacMan otherPacMan = (PacMan) other.get(0);
+		PacMan otherPacMan = (PacMan) other.get(0); //There is only one PacMan in the game.
 		collector.setPower(null);
 		otherPacMan.setCanEatPellet(true);
 	}

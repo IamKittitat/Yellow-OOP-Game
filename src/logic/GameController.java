@@ -3,25 +3,16 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import constant.CharacterColor;
-import constant.GameConstant;
-import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Map;
-import entity.base.Pellet;
 import entity.base.PelletHolder;
-import entity.base.SpecialPower;
 import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
 import gui.BattleGamePane;
-import gui.EndGamePane;
 import gui.GameCanvas;
 import gui.GameControlPane;
-import javafx.application.Platform;
-import javafx.scene.paint.Color;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class GameController {
@@ -40,7 +31,7 @@ public class GameController {
 
 	public GameController() {
 		super();
-		this.gameObjectContainer = new ArrayList<Entity>();
+		GameController.gameObjectContainer = new ArrayList<Entity>();
 
 		Map map = new Map();
 		RenderableHolder.getInstance().add(map);

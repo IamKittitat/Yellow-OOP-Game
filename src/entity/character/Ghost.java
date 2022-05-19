@@ -8,16 +8,12 @@ import constant.GameConstant;
 import entity.base.Character;
 import entity.base.ControlCharacter;
 import entity.base.Entity;
-import entity.base.Item;
-import entity.base.Pellet;
+
 import entity.base.SpecialPower;
 import entity.item.ShieldPower;
 import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
@@ -72,8 +68,7 @@ public class Ghost extends ControlCharacter {
 	}
 
 	public void update() {
-		boolean alreadyTurned = false;
-
+		// Stop Ghost if player didn't give an input.
 		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
 			this.setSpeed(GameConstant.GHOST_SPEED);
 			this.setStarted(true);
@@ -81,19 +76,14 @@ public class Ghost extends ControlCharacter {
 
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
-//			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getSecondPlayerKeyPressed());
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
 				turn(turnDirection);
-				alreadyTurned = true;
 			}
 			for (Direction way : validWays) {
-//				System.out.println(way);
-//				System.out.println("direction " + this.direction);
 				if (way == this.direction) {
 					forward();
-//					System.out.println("forward");
 				}
 			}
 		}
@@ -101,8 +91,6 @@ public class Ghost extends ControlCharacter {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-//		gc.drawImage(RenderableHolder.ghostPNG, xPos-10, yPos-10,20,20);
 		int state = ((int) GameCanvas.counter / 5) % 4;
 		if (this.canBeEaten() && !this.canEatPacMan()) {
 			switch (state) {

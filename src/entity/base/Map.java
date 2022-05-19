@@ -2,7 +2,6 @@ package entity.base;
 
 import constant.GameConstant;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import logic.GameLogic;
 import sharedObject.IRenderable;
@@ -11,6 +10,7 @@ import sharedObject.RenderableHolder;
 public class Map implements IRenderable {
 
 	private static String map = "WWWWWWWWWWWWWWWWWWWGWWWWWWWWWWWWWWWWWWWGGGGGGGGGGGGGGGWWWGWWWGGGGWWWWWWWWWWWWGWWWGWWWGWWGWWGWWWGWWWGWWGGGGGGGGGGGWWGWWWGWWWGWWGWWGWWWGWWWGWWWWWWWGWWWWGWWGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGWWWWGWWGWWWGWWWGWWWWWWGWWGWWGWWWWWWWWGWWWWGWWGWWWGWWWGWWWWWWGGGGGGGWWWWWWWWGWWWWGWWGGGGGGGGGWWWWWWGXXGXXGWWWGGGGGGGGGGGWWGWGWWWGWGWWGGGGGXGGGXGWWWGWWWWGWWGWWWWGWGWWWGWGWWGWWWGXGGGXGWWWGWWWWGWWGWWWWGGGGGGGGGGGGWWWGXXXXXGGGGGGGGGGGGGGGWWGWWWWWWWGWWWWWWGGGGGGGWWWWWWWWGWWGWGWWGWWWWWWWGWWWWWWGWWGWWGWWWWWWWWGWWGWGWWGGGGGGGGGGGGGGGGGGGGGGGGGWWWWWGWWGWGWWGWWWWGWWGWWGWWGWWWGWWWGWGGGGGGGGGGGGWWGWWWWGWWGWWGWWGWWWGWWWGWWWWGWWGWWGWGWWGGGGGGGGGGGGGGGWWWGWWWGGGGGGWWGGGGGGWWWWWWWWWWWWWWWWWWWWGWWWWWWWWWWWWWWWWWW";
+	// Ground State for map
 	public static int[][] groundState = { { 1, 1 }, { 2, 1 }, { 3, 1 }, { 4, 1 }, { 5, 1 }, { 6, 1 }, { 7, 1 },
 			{ 8, 1 }, { 9, 1 }, { 10, 1 }, { 11, 1 }, { 12, 1 }, { 13, 1 }, { 14, 1 }, { 15, 1 }, { 19, 1 }, { 23, 1 },
 			{ 24, 1 }, { 25, 1 }, { 26, 1 }, { 1, 2 }, { 5, 2 }, { 9, 2 }, { 12, 2 }, { 15, 2 }, { 19, 2 }, { 23, 2 },
@@ -42,6 +42,7 @@ public class Map implements IRenderable {
 			{ 13, 16 }, { 14, 16 }, { 15, 16 }, { 19, 16 }, { 23, 16 }, { 24, 16 }, { 25, 16 }, { 26, 16 }, { 27, 16 },
 			{ 28, 16 }, { 31, 16 }, { 32, 16 }, { 33, 16 }, { 34, 16 }, { 35, 16 }, { 36, 16 } };
 
+	// Close to spanwn position >> not spawn pellet
 	public static int[][] closeToSpawnPosition = { { 17, 6 }, { 18, 6 }, { 19, 6 }, { 20, 6 }, { 21, 6 }, { 19, 7 },
 			{ 18, 8 }, { 19, 8 }, { 20, 8 }, { 18, 9 }, { 19, 9 }, { 20, 9 } };
 
@@ -53,16 +54,13 @@ public class Map implements IRenderable {
 
 	@Override
 	public int getZ() {
-		// TODO Auto-generated method stub
 		return -9999;
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		for (int y = 0; y <= GameConstant.SCREEN_PLAY_HEIGHT; y++) {
 			for (int x = 0; x <= GameConstant.SCREEN_PLAY_WIDTH; x++) {
-				// System.out.println(getTerrain(x,y));
 				switch (getTerrain(x, y)) {
 				case "W":
 					gc.drawImage(RenderableHolder.wallPNG, x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE);
@@ -87,7 +85,6 @@ public class Map implements IRenderable {
 
 	@Override
 	public boolean isRemoved() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -97,7 +94,6 @@ public class Map implements IRenderable {
 
 	@Override
 	public boolean isVisible() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
