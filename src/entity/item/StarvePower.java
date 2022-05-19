@@ -34,7 +34,6 @@ public class StarvePower extends SpecialPower {
 		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 		PacMan otherPacMan = (PacMan) other.get(0);
 		otherPacMan.setCanEatPellet(false);
-		System.out.println(otherPacMan.CanEatPellet());
 	}
 
 	@Override

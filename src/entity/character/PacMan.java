@@ -45,7 +45,6 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void die() {
-		System.out.println("life " + this.getLife());
 		this.setLife(this.getLife() - 1);
 		if (this.getLife() <= 0) {
 			return;

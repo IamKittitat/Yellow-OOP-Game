@@ -26,7 +26,7 @@ public class Ghost extends ControlCharacter {
 		this.name = GameConstant.GHOST_NAME;
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
-		setSpeed(GameConstant.GHOST_SPEED);
+		setSpeed(0);
 		setDirection(null);
 		setCanBeEaten(false);
 		setCanEatPacMan(true);
