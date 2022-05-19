@@ -18,19 +18,19 @@ public class MainMenuScene extends Scene {
 
 	public MainMenuScene(final Parent root) {
 		super(root);
-
 	}
 
 	public MainMenuScene() {
 		this((Parent) new StackPane());
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
-
+		
 		startThemeSong = new AnimationTimer() {
 			public void handle(long now) {
 				if (!RenderableHolder.ThemeSong_music.isPlaying())
 					RenderableHolder.ThemeSong_music.play();
 			}
 		};
+		
 		startThemeSong.start();
 
 		this.mainMenuPane = new MainMenuPane();

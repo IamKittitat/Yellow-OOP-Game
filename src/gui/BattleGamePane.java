@@ -15,8 +15,8 @@ public class BattleGamePane extends StackPane {
 	public BattleGamePane() {
 		super();
 		this.setStyle("-fx-background-color: black;");
-		this.setPrefSize(900, 500);
-		this.setMaxSize(900, 500);
+		this.setPrefSize(912, 500);
+		this.setMaxSize(912, 500);
 
 		this.gameCanvas = new GameCanvas();
 		this.gameControlPane = GameController.gameControlPane;
@@ -30,7 +30,7 @@ public class BattleGamePane extends StackPane {
 
 	}
 
-	public void addListerner() {
+	private void addListerner() {
 		this.setOnKeyPressed((KeyEvent event) -> {
 			InputUtility.setKeyPressed(event.getCode(), true);
 		});

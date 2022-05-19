@@ -3,25 +3,16 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import constant.CharacterColor;
-import constant.GameConstant;
-import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Map;
-import entity.base.Pellet;
 import entity.base.PelletHolder;
-import entity.base.SpecialPower;
 import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
 import gui.BattleGamePane;
-import gui.EndGamePane;
 import gui.GameCanvas;
 import gui.GameControlPane;
-import javafx.application.Platform;
-import javafx.scene.paint.Color;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class GameController {
@@ -30,17 +21,16 @@ public class GameController {
 	public static PacMan pacMan;
 	public static Ghost ghost;
 	public static GhostBot ghostBot1;
-	public static GhostBot ghostBot2;
 	public static PelletHolder pelletHolder;
 	public static SpecialPowerHolder specialPowerHolder;
 	public static GameControlPane gameControlPane;
 	public static boolean alreadyRandomPower = false;
-	final long startNanoTime = System.nanoTime();
-	final long startSecondTime = startNanoTime / 1000000000;
+	public final long startNanoTime = System.nanoTime();
+	public final long startSecondTime = startNanoTime / 1000000000;
 
 	public GameController() {
 		super();
-		this.gameObjectContainer = new ArrayList<Entity>();
+		GameController.gameObjectContainer = new ArrayList<Entity>();
 
 		Map map = new Map();
 		RenderableHolder.getInstance().add(map);
@@ -68,6 +58,7 @@ public class GameController {
 	public void checkGameEnd() {
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
+			RenderableHolder.GameEnd_music.play();
 			BattleGamePane.endGamePane.setResult();
 			BattleGamePane.endGamePane.move();
 		}

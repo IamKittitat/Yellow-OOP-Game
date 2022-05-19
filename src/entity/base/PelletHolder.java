@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import constant.GameConstant;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import logic.GameController;
 import logic.GameLogic;
-import sharedObject.IRenderable;
 
 public class PelletHolder extends Entity {
 	private static ArrayList<Pellet> allPellets;
@@ -24,12 +22,10 @@ public class PelletHolder extends Entity {
 				}
 			}
 		}
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		for (Pellet p : PelletHolder.getAllPellets()) {
 			if (p.isVisible() && !p.isRemoved()) {
 				p.draw(gc);

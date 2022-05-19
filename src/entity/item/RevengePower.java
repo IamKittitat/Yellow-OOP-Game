@@ -8,9 +8,7 @@ import entity.base.SpecialPower;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
-import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
 public class RevengePower extends SpecialPower {
@@ -27,13 +25,13 @@ public class RevengePower extends SpecialPower {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		gc.drawImage(RenderableHolder.revengePNG, xPos - this.radius * 0.6, yPos - this.radius, this.radius * 1.2,
 				this.radius * 2);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
+		// Set power for collector and Debuff all other character
 		setCollector(collector);
 		setStartPowerSecondTime(System.nanoTime() / 1000000000);
 		PacMan collectedPacMan = (PacMan) collector;
@@ -58,6 +56,7 @@ public class RevengePower extends SpecialPower {
 
 	@Override
 	public void clearPower(ArrayList<Character> other) {
+		// Debuff Collector and restore otherCharacter power back
 		PacMan collectedPacMan = (PacMan) collector;
 		collectedPacMan.setCanBeEaten(true);
 		collectedPacMan.setCanEatGhost(false);

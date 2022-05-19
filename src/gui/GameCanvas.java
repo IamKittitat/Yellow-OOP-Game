@@ -18,12 +18,8 @@ public class GameCanvas extends Canvas {
 		super();
 		this.setWidth(912);
 		this.setHeight(430);
-		this.setVisible(true);
 
 		GameCanvas.gc = this.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
-		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
 		GameCanvas.controller = new GameController();
 		GameCanvas.counter = 0;
 

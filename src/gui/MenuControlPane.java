@@ -18,7 +18,6 @@ public class MenuControlPane extends VBox {
 
 	private Text gameText;
 	public Button battleGameButton;
-	public Button pacManGameButton;
 	public Button customizeButton;
 	public Button howToPlayButton;
 	public Button quitButton;
@@ -40,9 +39,10 @@ public class MenuControlPane extends VBox {
 		this.getChildren().addAll(gameText, battleGameButton, customizeButton, howToPlayButton, quitButton);
 	}
 
-	private void initializeHowToPlayButton() {
-		this.howToPlayButton = new TextButton("How to play");
-
+	private void initializeGameText() {
+		this.gameText = new Text("YELLOW");
+		this.gameText.setFont(RenderableHolder.gameHeaderFont);
+		this.gameText.setFill(Color.YELLOW);
 	}
 
 	private void initializeCustomizeButton() {
@@ -56,7 +56,6 @@ public class MenuControlPane extends VBox {
 				Main.sceneHolder.switchScene(new CustomizeScene());
 			}
 		});
-
 	}
 
 	private void initializeBattleGameButton() {
@@ -73,10 +72,9 @@ public class MenuControlPane extends VBox {
 		});
 	}
 
-	private void initializeGameText() {
-		this.gameText = new Text("YELLOW");
-		this.gameText.setFont(RenderableHolder.gameHeaderFont);
-		this.gameText.setFill(Color.YELLOW);
+	private void initializeHowToPlayButton() {
+		this.howToPlayButton = new TextButton("How to play");
+
 	}
 
 	private void initializeQuitButton() {

@@ -1,10 +1,8 @@
 package entity.base;
 
 import constant.GameConstant;
-import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import sharedObject.RenderableHolder;
 
 public class Pellet extends Item {
 

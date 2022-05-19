@@ -5,14 +5,13 @@ import javafx.stage.Stage;
 
 public class SceneHolder {
 	private Stage bindStage;
-	public MainMenuScene mainMenuScene;
 
 	public SceneHolder(final Stage bindStage) {
 		this.bindStage = bindStage;
 	}
 
 	public void initialize() {
-		this.switchScene(this.mainMenuScene = new MainMenuScene());
+		this.switchScene(new MainMenuScene());
 	}
 
 	public void switchScene(final Scene nextScene) {

@@ -6,6 +6,7 @@ import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
 import entity.base.Map;
+import entity.base.PelletHolder;
 import entity.base.SpecialPower;
 import entity.base.SpecialPowerHolder;
 import entity.character.PacMan;
@@ -23,63 +24,36 @@ public class GameLogic {
 	public static CharacterColor ghostColor = CharacterColor.PINK;
 
 	public static int remainPellets() { // check if any pellets left in a map
-		return GameController.pelletHolder.getAllPellets().size();
+		return PelletHolder.getAllPellets().size();
 	}
 
 	public static ArrayList<Direction> validWay(double xPos, double yPos, Direction direction) {
 		// check with map + x pos,y pos : what way its not the wall
 		ArrayList<Direction> validDirection = new ArrayList<Direction>();
-//		System.out.println(xPos + "," + yPos);
-//		if (direction == Direction.SOUTH) {
-//			validDirection.add(Direction.NORTH);
-//		} else if (direction == Direction.NORTH) {
-//			validDirection.add(Direction.SOUTH);
-//		} else if (direction == Direction.EAST) {
-//			validDirection.add(Direction.WEST);
-//		} else if (direction == Direction.WEST) {
-//			validDirection.add(Direction.EAST);
-//		}
+
 		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos - 12.05).equals("G")) {
 			validDirection.add(Direction.NORTH);
 		}
 		if ((((xPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos, yPos + 12.05).equals("G")) {
 			validDirection.add(Direction.SOUTH);
 		}
-		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 12.05, yPos).equals("G")) {
-//			System.out.println("west");
+		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 12.05, yPos).equals("G")) {;
 			validDirection.add(Direction.WEST);
 		}
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
-//			System.out.println("east");
 			validDirection.add(Direction.EAST);
 		}
-//		System.out.println(validDirection.toString());
 		return validDirection;
 	}
 
 	public static String getMapStateFromXYPosition(double xPos, double yPos) {
-		// System.out.println((xPos-12)/24 + " " + (yPos-12)/24);
-//		int xPosToArrayIdx = (int) Math.max(0, (xPos-12)/24);
-//		int yPosToArrayIdx = (int) Math.max(0, (yPos-12)/24);
-//		double xPosToArrayIdx = Math.max(0, (xPos - 12) / 24);
-//		double yPosToArrayIdx = Math.max(0, (yPos - 12) / 24);
-//		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
-//		int xPosInInt = (int) Math.ceil(xPosToArrayIdx);
-//		int yPosInInt = (int) Math.ceil(yPosToArrayIdx);
-//		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
-//		System.out.println(xPosToArrayIdx+", "+yPosToArrayIdx);
-//		return String.valueOf(Map.getMap().charAt(yPosToArrayIdx*38+xPosToArrayIdx));
 
 		double xPosToArrayIdx = Math.max(0, (xPos - 12) / 24);
 		double yPosToArrayIdx = Math.max(0, (yPos - 12) / 24);
-//		System.out.println(xPosToArrayIdx + "," + yPosToArrayIdx);
 		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
-//		int xPosInInt = (int) Math.round(xPosToArrayIdx);
-//		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 		if (yPosInInt > 17) { // for warp spot
 			if (xPosInInt == 19) {
-//				System.out.println(xPosInInt  + ",, " + yPosInInt);
 				return "G";
 			} else {
 				return "W";
@@ -174,12 +148,8 @@ public class GameLogic {
 		ArrayList<Integer> randomPosition = randomPosition();
 		int xRandomPos = randomPosition.get(0);
 		int yRandomPos = randomPosition.get(1);
-//		int xRandomPos = 60;
-//		int yRandomPos = 36;
-//		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
 		long startRandomSecondTime = System.nanoTime() / 1000000000;
 		SpecialPower randomPower = getPower(xRandomPos, yRandomPos, startRandomSecondTime);
-		System.out.println(randomPower.getName() + " , " + randomPower.getStartRandomSecondTime());
 		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
 	}
 
@@ -188,7 +158,6 @@ public class GameLogic {
 		ArrayList<Integer> randomPosition = new ArrayList<>();
 		randomPosition.add(Map.groundState[randomNum][0] * 24 + 12);
 		randomPosition.add(Map.groundState[randomNum][1] * 24 + 12);
-		System.out.println("hi " + randomPosition.toString());
 		return randomPosition;
 	}
 
@@ -215,7 +184,6 @@ public class GameLogic {
 	}
 
 	public static boolean IsGameEnd() {
-//		System.out.println(remainPellets());
 		if (GameController.pacMan.getLife() <= 0) {
 			return true;
 		}
@@ -226,7 +194,7 @@ public class GameLogic {
 	}
 
 	public static boolean pacManWin() {
-		return GameController.pelletHolder.getAllPellets().size() <= 0;
+		return PelletHolder.getAllPellets().size() <= 0;
 	}
 
 	public static boolean GhostWin() {

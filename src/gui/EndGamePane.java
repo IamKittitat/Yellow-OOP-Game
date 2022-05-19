@@ -48,33 +48,6 @@ public class EndGamePane extends BorderPane {
 		this.setBottom(buttonPane);
 	}
 
-	public void move() {
-		TranslateTransition transition = new TranslateTransition();
-		transition.setDuration(Duration.seconds(0.3));
-		transition.setNode(this);
-		if (isHidden) {
-			transition.setToY(0);
-			transition.setToX(0);
-			isHidden = false;
-		} else {
-			transition.setToY(600);
-			isHidden = true;
-		}
-		transition.play();
-	}
-
-	public void setResult() {
-		if (GameLogic.pacManWin()) {
-			this.resultText.setText("Pac-Man WIN!");
-			this.setRight(new ImageView(RenderableHolder.pinkPacManGIF));
-			this.setLeft(new ImageView(RenderableHolder.yellowPacManGIF));
-		} else if (GameLogic.GhostWin()) {
-			this.resultText.setText("Ghost WIN!");
-			this.setRight(new ImageView(RenderableHolder.pinkGhostGIF));
-			this.setLeft(new ImageView(RenderableHolder.greenGhostGIF));
-		}
-	}
-
 	private void initializeResultText() {
 		this.resultText = new Text();
 		this.resultText.setFont(RenderableHolder.gameHeaderFont);
@@ -106,5 +79,32 @@ public class EndGamePane extends BorderPane {
 				System.exit(0);
 			}
 		});
+	}
+
+	public void move() {
+		TranslateTransition transition = new TranslateTransition();
+		transition.setDuration(Duration.seconds(0.3));
+		transition.setNode(this);
+		if (isHidden) {
+			transition.setToY(0);
+			transition.setToX(0);
+			isHidden = false;
+		} else {
+			transition.setToY(600);
+			isHidden = true;
+		}
+		transition.play();
+	}
+
+	public void setResult() {
+		if (GameLogic.pacManWin()) {
+			this.resultText.setText("Pac-Man WIN!");
+			this.setRight(new ImageView(RenderableHolder.pinkPacManGIF));
+			this.setLeft(new ImageView(RenderableHolder.yellowPacManGIF));
+		} else if (GameLogic.GhostWin()) {
+			this.resultText.setText("Ghost WIN!");
+			this.setRight(new ImageView(RenderableHolder.pinkGhostGIF));
+			this.setLeft(new ImageView(RenderableHolder.greenGhostGIF));
+		}
 	}
 }

@@ -8,7 +8,6 @@ import constant.GameConstant;
 import entity.base.Character;
 import entity.base.ControlCharacter;
 import entity.base.Entity;
-import entity.base.Item;
 import entity.base.Pellet;
 import entity.base.SpecialPower;
 import entity.item.ShieldPower;
@@ -18,9 +17,6 @@ import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.shape.ArcType;
-import javafx.scene.paint.Color;
 
 public class PacMan extends ControlCharacter {
 	private int life;
@@ -49,10 +45,8 @@ public class PacMan extends ControlCharacter {
 	}
 
 	public void die() {
-		System.out.println("life " + this.getLife());
 		this.setLife(this.getLife() - 1);
 		if (this.getLife() <= 0) {
-			// call endgame
 			return;
 		}
 		this.reborn();
@@ -78,7 +72,7 @@ public class PacMan extends ControlCharacter {
 				((Character) entity).die();
 				RenderableHolder.PacManEatGhost_music.play();
 			} else {
-				if(entity instanceof Ghost) {
+				if (entity instanceof Ghost) {
 					if (canBeEaten() || ((Ghost) entity).canEatPacMan()) {
 						this.die();
 						RenderableHolder.PacManDie_music.play();
@@ -89,14 +83,12 @@ public class PacMan extends ControlCharacter {
 						RenderableHolder.PacManDie_music.play();
 					}
 				}
-				
+
 			}
 		} else if (entity instanceof Pellet) {
 			if (canEatPellet) {
 				((Pellet) entity).setRemoved(true);
-//				RenderableHolder.EatPellet_music.play();
 				this.setScore(this.getScore() + 1);
-				System.out.println(this.getScore());
 			}
 		} else if (entity instanceof SpecialPower) {
 			ArrayList<Character> otherCharacter = new ArrayList<Character>();
@@ -106,26 +98,22 @@ public class PacMan extends ControlCharacter {
 			((SpecialPower) entity).gainPower(GameController.pacMan, otherCharacter);
 			((SpecialPower) entity).setRemoved(true);
 			this.setPower((SpecialPower) entity);
-			System.out.println(this.getPower().getName());
-			// ((SpecialPower) entity).gainPower(null, null);
 		}
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		int state = ((int) GameCanvas.counter / 5) % 4;
 
-		int angle = GameLogic.directionToInt(getDirection()) + 270; // plus for make east =0;
-//		System.out.println(angle);
+		// Normalize angle to east=0 to be same as gc.
+		int angle = GameLogic.directionToInt(getDirection()) + 270;
 		gc.translate(xPos, yPos);
 		gc.rotate(angle);
+		
+		// Xpos to draw = -this.radius because already translate to xPos, yPos.
 		switch (state) {
 		case 0: {
-//			gc.drawImage(RenderableHolder.pacManPNG1, xPos - this.radius, yPos - this.radius, this.radius * 2,
-//					this.radius * 2);
 			gc.drawImage(RenderableHolder.pacManPNG1, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
-
 			break;
 		}
 		case 1: {
@@ -141,48 +129,43 @@ public class PacMan extends ControlCharacter {
 			break;
 		}
 		}
-		if(this.getPower() instanceof ShieldPower) {
-			gc.drawImage(RenderableHolder.pacManShieldPNG, -this.radius*1.5, -this.radius*1.5, this.radius * 3, this.radius * 3);
+		
+		// Draw shield image if has ShieldPower.
+		if (this.getPower() instanceof ShieldPower) {
+			gc.drawImage(RenderableHolder.pacManShieldPNG, -this.radius * 1.5, -this.radius * 1.5, this.radius * 3,
+					this.radius * 3);
 		}
-		if(this.CanEatPellet() == false) {
-			gc.drawImage(RenderableHolder.pacManStarvePNG, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+		
+		// Draw mask image if has Starve Debuff.
+		if (this.CanEatPellet() == false) {
+			gc.drawImage(RenderableHolder.pacManStarvePNG, -this.radius, -this.radius, this.radius * 2,
+					this.radius * 2);
 		}
-//		gc.translate(xPos, yPos);
-//		gc.rotate(angle);
-//		gc.setFill(Color.YELLOW);
-//		int gunSize = (int) (this.radius / 5);
-//		gc.fillRect(0, -gunSize, radius * 3 / 2, gunSize * 2);
+
+		// rotate and translate back like before rotate.
 		gc.rotate(-angle);
 		gc.translate(-xPos, -yPos);
 	}
 
 	public void update() {
-		boolean alreadyTurned = false;
-//		System.out.println(xPos + ", "+yPos);
+		
+		// Stop PacMan if player didn't give an input.
 		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
-			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
 			this.setStarted(true);
 		}
 
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
-//			System.out.println(validWays);
-//			System.out.println(validWays);
 			Direction turnDirection = GameLogic.KeyCodeToDirection(this.name, InputUtility.getFirstPlayerKeyPressed());
 
 			this.checkWarp();
 			if (validWays.contains(turnDirection)) {
-//				System.out.println(turnDirection);
 				turn(turnDirection);
-				alreadyTurned = true;
 			}
 			for (Direction way : validWays) {
-//				System.out.println(way);
-//				System.out.println("direction " + this.direction);
 				if (way == this.direction) {
 					forward();
-//					System.out.println("forward");
 				}
 			}
 		}

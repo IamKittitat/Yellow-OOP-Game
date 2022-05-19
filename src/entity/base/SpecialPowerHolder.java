@@ -5,20 +5,16 @@ import java.util.ArrayList;
 import constant.GameConstant;
 import entity.character.Ghost;
 import entity.character.PacMan;
-import entity.item.RevengePower;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import logic.GameController;
-import logic.GameLogic;
-import sharedObject.IRenderable;
 
 public class SpecialPowerHolder extends Entity {
 	private static ArrayList<SpecialPower> allSpecialPowers;
 
 	public SpecialPowerHolder() {
 		super();
-		// TODO Auto-generated constructor stub
-		this.allSpecialPowers = new ArrayList<SpecialPower>();
+		SpecialPowerHolder.allSpecialPowers = new ArrayList<SpecialPower>();
 	}
 
 	@Override
@@ -34,24 +30,18 @@ public class SpecialPowerHolder extends Entity {
 		long currentSecondtime = System.nanoTime() / 1000000000;
 
 		for (SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
-			boolean taken = false;
-
-			// Check if PacMan/Ghost has collide any specialPower
 			if (!specialPower.isRemoved() && GameController.pacMan.isCollide(specialPower)
 					&& specialPower.getEatenBy().contains(GameController.pacMan.getName())) {
 				GameController.pacMan.collideWith(specialPower);
-				taken = true;
 			} else if (!specialPower.isRemoved() && GameController.ghost.isCollide(specialPower)
 					&& specialPower.getEatenBy().contains(GameController.ghost.getName())) {
 				GameController.ghost.collideWith(specialPower);
-				taken = true;
 			}
 
-			// If Special Power not collected in time > remove it from the map and
+			// If Special Power not collected in time > remove it from the map
 			// specialPowerHolder
 			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
 				if (specialPower.getCollector() == null) { // no one collected
-					System.out.println("remove " + specialPower.getName());
 					// Prevent concurrent exception
 					Platform.runLater(new Runnable() {
 						@Override
@@ -67,7 +57,6 @@ public class SpecialPowerHolder extends Entity {
 			if (specialPower.getStartPowerSecondTime() != 0
 					&& (currentSecondtime - specialPower.getStartPowerSecondTime()) > specialPower.getDuration()
 					&& specialPower.getCollector() != null) {
-				System.out.println("clearPower " + specialPower.getName());
 				ArrayList<Character> otherCharacter = new ArrayList<Character>();
 				if (specialPower.getCollector() instanceof PacMan) {
 					otherCharacter.add(GameController.ghost);

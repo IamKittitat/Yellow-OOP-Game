@@ -24,7 +24,7 @@ public class CustomizePane extends BorderPane {
 	private Button mainMenuButton;
 
 	public CustomizePane() {
-
+		super();
 		this.setPrefSize(912, 500);
 		this.setMaxSize(912, 500);
 		this.setStyle("-fx-background-color: black; ");
@@ -84,13 +84,15 @@ public class CustomizePane extends BorderPane {
 	}
 
 	private void initializeMainMenuButton() {
-		this.mainMenuButton = new TextButton("MainMenu");
+		this.mainMenuButton = new TextButton("Main Menu");
 		this.mainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 
 				RenderableHolder.ClickedSound_music.play();
+				RenderableHolder.ThemeSong_music.stop();
+				MainMenuScene.startThemeSong.stop();
 				saveColor();
 				RenderableHolder.loadCharacter();
 				Main.sceneHolder.switchScene(new MainMenuScene());
@@ -98,7 +100,7 @@ public class CustomizePane extends BorderPane {
 		});
 	}
 
-	public void saveColor() {
+	private void saveColor() {
 		GameLogic.setPacManColor(pacManSwitchColorPane.getColorList().get(pacManSwitchColorPane.getIdx()));
 		GameLogic.setGhostColor(ghostSwitchColorPane.getColorList().get(ghostSwitchColorPane.getIdx()));
 	}

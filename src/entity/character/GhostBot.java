@@ -10,8 +10,6 @@ import entity.base.Entity;
 import gui.GameCanvas;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
 import logic.GameController;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
@@ -31,22 +29,12 @@ public class GhostBot extends Character {
 		setRadius(GameConstant.GHOST_BOT_RADIUS);
 	}
 
-	protected void forward() {
-		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-	}
-
-	protected void turn(Direction direction) {
-		this.setDirection(direction);
-	}
-
 	public void die() {
 		this.reborn();
 	}
 
 	@Override
 	protected void reborn() {
-		// TODO Auto-generated method stub
 		this.xPos = GameConstant.GHOST_BOT_SPAWN_X;
 		this.yPos = GameConstant.GHOST_BOT_SPAWN_Y;
 		setDirection(GameConstant.FIRST_GHOST_BOT_DIRECTION);
@@ -71,9 +59,6 @@ public class GhostBot extends Character {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-//		gc.setFill(Color.GREEN);
-//		gc.fillRoundRect(xPos-5, yPos-5, 10, 10, 10, 10);
 		int state = ((int) GameCanvas.counter / 5) % 4;
 		if (this.canBeEaten()) {
 			switch (state) {
@@ -131,8 +116,8 @@ public class GhostBot extends Character {
 	}
 
 	public void update() {
-		boolean alreadyTurned = false;
 		this.checkWarp();
+		// Stop GhostBot if GhostPlayer didn't give an input.
 		if (!this.isStarted() && (InputUtility.getSecondPlayerKeyPressed() != null)) {
 			this.setSpeed(GameConstant.GHOST_BOT_SPEED);
 			this.moveOutFromSpawn();
@@ -140,31 +125,19 @@ public class GhostBot extends Character {
 
 		if (this.isStarted()) {
 			ArrayList<Direction> validWays = GameLogic.validWay(this.xPos, this.yPos, this.direction);
-//			System.out.println(validWays);
 			Direction turnDirection = calculateDirection(validWays);
-//			System.out.println(this.direction);
-//			System.out.println(turnDirection);
 			if ((validWays.contains(turnDirection) && canTurn(validWays)) || (validWays.size() == 1)) {
 				turn(turnDirection);
-				alreadyTurned = true;
 			}
 			for (Direction way : validWays) {
-//				System.out.println(way);
-//				System.out.println("direction " + this.direction);
 				if (way == this.direction) {
 					forward();
-//					System.out.println("forward");
 				}
 			}
 		}
-//		if ((this.canBeEaten() != LastCanBeEaten) && (this.canBeEaten() == true)) {
-//			changeDirection();
-//		}
-
 	}
 
 	private void moveOutFromSpawn() {
-		// TODO Auto-generated method stub
 		this.forward();
 		if (this.yPos == 156) { // to get out from spawn
 			this.direction = Direction.WEST;
@@ -198,7 +171,6 @@ public class GhostBot extends Character {
 		double diffY = ghostBotYPos - pacManYPos;
 		ArrayList<Direction> validTurnDirection = new ArrayList<Direction>();
 
-//		System.out.println(diffX + ", " + diffY);
 		if ((diffX >= 0) && (diffY >= 0)) { // pacman up left
 			if (validWays.contains(Direction.NORTH)) {
 				validTurnDirection.add(Direction.NORTH);
@@ -239,19 +211,6 @@ public class GhostBot extends Character {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, validTurnDirection.size());
 		return validTurnDirection.get(randomNum);
 
-	}
-
-	private void changeDirection() {
-		System.out.println("change");
-		if (this.direction == Direction.NORTH) {
-			this.direction = Direction.SOUTH;
-		} else if (this.direction == Direction.EAST) {
-			this.direction = Direction.WEST;
-		} else if (this.direction == Direction.SOUTH) {
-			this.direction = Direction.NORTH;
-		} else {
-			this.direction = Direction.EAST;
-		}
 	}
 
 	public boolean canEatPacMan() {
