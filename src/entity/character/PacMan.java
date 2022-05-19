@@ -152,7 +152,6 @@ public class PacMan extends ControlCharacter {
 		
 		// Stop PacMan if player didn't give an input.
 		if (!this.isStarted() && (InputUtility.getFirstPlayerKeyPressed() != null)) {
-			System.out.println("chc");
 			this.setSpeed(GameConstant.PACMAN_SPEED);
 			this.setStarted(true);
 		}
