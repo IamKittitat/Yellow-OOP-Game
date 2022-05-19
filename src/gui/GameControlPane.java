@@ -37,7 +37,8 @@ public class GameControlPane extends BorderPane {
 		super();
 		initilize();
 		this.setPrefWidth(900);
-		this.setPrefHeight(50);
+		this.setPrefHeight(100);
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -101,6 +102,8 @@ public class GameControlPane extends BorderPane {
 
 	public void initilizeLivesPane() {
 		this.livesPane = new HBox(5);
+		this.livesPane.setPrefHeight(30);
+		this.livesPane.setMinHeight(30);
 		this.lives = GameController.pacMan.getLife();
 		for (int i = 0; i < this.lives; i++) {
 			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));
