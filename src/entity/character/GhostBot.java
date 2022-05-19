@@ -29,15 +29,6 @@ public class GhostBot extends Character {
 		setRadius(GameConstant.GHOST_BOT_RADIUS);
 	}
 
-	protected void forward() {
-		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-	}
-
-	protected void turn(Direction direction) {
-		this.setDirection(direction);
-	}
-
 	public void die() {
 		this.reborn();
 	}

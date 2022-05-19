@@ -12,15 +12,6 @@ public abstract class ControlCharacter extends Character {
 		setColor(color);
 	}
 
-	protected void forward() {
-		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
-	}
-
-	protected void turn(Direction direction) {
-		this.setDirection(direction);
-	}
-
 	public CharacterColor getColor() {
 		return color;
 	}

@@ -2,6 +2,7 @@ package entity.base;
 
 import constant.Direction;
 import constant.GameConstant;
+import logic.GameLogic;
 
 public abstract class Character extends Entity {
 	protected double speed;
@@ -16,9 +17,14 @@ public abstract class Character extends Entity {
 		setStarted(false);
 	}
 
-	protected abstract void forward();
+	protected void forward() {
+		this.xPos += Math.sin(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
+		this.yPos -= Math.cos(Math.toRadians(GameLogic.directionToInt(direction))) * this.speed;
+	}
 
-	protected abstract void turn(Direction direction);
+	protected void turn(Direction direction) {
+		this.setDirection(direction);
+	}
 
 	public abstract void die();
 

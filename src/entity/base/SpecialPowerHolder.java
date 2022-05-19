@@ -38,7 +38,7 @@ public class SpecialPowerHolder extends Entity {
 				GameController.ghost.collideWith(specialPower);
 			}
 
-			// If Special Power not collected in time > remove it from the map and
+			// If Special Power not collected in time > remove it from the map
 			// specialPowerHolder
 			if ((currentSecondtime - specialPower.getStartRandomSecondTime()) > GameConstant.BUFF_DISSAPEAR_TIME) {
 				if (specialPower.getCollector() == null) { // no one collected

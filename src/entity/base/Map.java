@@ -71,7 +71,6 @@ public class Map implements IRenderable {
 							GameConstant.BLOCK_SIZE);
 					break;
 				case "X":
-					gc.setFill(Color.PINK);
 					gc.drawImage(RenderableHolder.spawnPNG, x * GameConstant.BLOCK_SIZE, y * GameConstant.BLOCK_SIZE);
 					break;
 				default:

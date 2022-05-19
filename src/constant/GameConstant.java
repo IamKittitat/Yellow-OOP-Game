@@ -30,15 +30,12 @@ public class GameConstant {
 	// Pellet Constant
 	public static final String PELLET_NAME = "Pellet";
 	public static final double PELLET_RADIUS = 1.5;
-	public static final int TOTAL_PELLET = 100;
 	
 	// SpecialPower Constant
 	public static final String REVENGE_BUFF_NAME = "REVENGE_BUFF";
 	public static final String SHIELD_BUFF_NAME = "SHIELD_BUFF";
 	public static final String STARVE_BUFF_NAME = "STARVE_BUFF";
-	public static final int BUFF_SPEED = 4;
 	public static final int DEBUFF_SPEED = 1;
-	public static final int BUFF_SPAWN_TIME = 5;
 	public static final int REVENGE_BUFF_DURATION = 8;
 	public static final int SPEED_BUFF_DURATION = 3;
 	public static final int SHIELD_BUFF_DURATION = 4;
@@ -53,7 +50,6 @@ public class GameConstant {
 	public static final int WARP_POINT_2_Y = 444;
 	
 	// Game Constant
-	public static final int GAME_TIMER = 600;
 	public static final int BUFF_SPAWN_DURATION = 6;
 	public static final int BUFF_DISSAPEAR_TIME = 5;
 
