@@ -1,8 +1,11 @@
 package gui;
 
+import application.Main;
 import entity.character.PacMan;
+import gui.base.IconButton;
 import gui.base.MenuButton;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -11,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
 import scene.MainMenuScene;
@@ -36,35 +40,46 @@ public class GameControlPane extends BorderPane {
 	}
 
 	private void initilize() {
+		
+		this.setPadding(new Insets(6));
 
 		initilizeLivesPane();
 
 		this.scoreText = new Text("Score : 0");
+		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
+		this.scoreText.setFill(Color.YELLOW);
+		this.scoreText.setStyle("-fx-font-size:20;");
 
 		this.isPaused = false;
 
-		this.pauseButton = new MenuButton("Pause");
+		this.pauseButton = new IconButton(RenderableHolder.pauseButtonPNG);
 		this.pauseButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if (!isPaused) {
-					GameCanvas.gameLoop.stop();
-					isPaused = true;
-				} else {
-					GameCanvas.gameLoop.start();
-					isPaused = false;
-				}
+				RenderableHolder.ClickedSound_music.play();
+				
+				MainMenuScene forBack = new MainMenuScene();
+				Main.sceneHolder.switchScene(forBack);
+//				if (!isPaused) {
+//					GameCanvas.gameLoop.stop();
+//					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
+//					isPaused = true;
+//				} else {
+//					GameCanvas.gameLoop.start();
+//					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
+//					isPaused = false;
+//				}
 			}
 		});
-		this.menuButton = new MenuButton("Menu");
 
 		this.statPane = new VBox();
+		this.statPane.setPadding(new Insets(6));
 		this.statPane.getChildren().addAll(scoreText, livesPane);
 
 		this.controlPane = new HBox();
-		this.controlPane.getChildren().addAll(pauseButton, menuButton);
+		this.controlPane.getChildren().addAll(pauseButton);
 
 		this.setLeft(statPane);
 		this.setRight(controlPane);
@@ -74,7 +89,7 @@ public class GameControlPane extends BorderPane {
 	}
 
 	public void initilizeLivesPane() {
-		this.livesPane = new HBox();
+		this.livesPane = new HBox(5);
 		this.lives = GameController.pacMan.getLife();
 		for (int i = 0; i < this.lives; i++) {
 			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));
@@ -88,7 +103,7 @@ public class GameControlPane extends BorderPane {
 
 	public void updateLives() {
 		this.lives = GameController.pacMan.getLife();
-		while (this.livesPane.getChildren().size() > this.lives)
+		while (this.livesPane.getChildren().size() > this.lives && this.lives >= 0)
 			this.livesPane.getChildren().remove(0);
 	}
 }

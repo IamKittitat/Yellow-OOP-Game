@@ -20,9 +20,12 @@ import entity.item.StarvePower;
 import javafx.scene.input.KeyCode;
 
 public class GameLogic {
+	public static int counter = 0;
+	public static CharacterColor pacManColor = CharacterColor.YELLOW;
+	public static CharacterColor ghostColor = CharacterColor.PINK;
 
-	public static boolean pelletsRemain(PacMan pacMan) { // check if any pellets left in a map
-		return pacMan.getScore() < GameConstant.TOTAL_PELLET;
+	public static int remainPellets() { // check if any pellets left in a map
+		return GameController.pelletHolder.getAllPellets().size();
 	}
 
 	public static ArrayList<Direction> validWay(double xPos, double yPos, Direction direction) {
@@ -45,9 +48,11 @@ public class GameLogic {
 			validDirection.add(Direction.SOUTH);
 		}
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos - 12.05, yPos).equals("G")) {
+//			System.out.println("west");
 			validDirection.add(Direction.WEST);
 		}
 		if ((((yPos - 12) / 24) % 1 == 0) && getMapStateFromXYPosition(xPos + 12.05, yPos).equals("G")) {
+//			System.out.println("east");
 			validDirection.add(Direction.EAST);
 		}
 //		System.out.println(validDirection.toString());
@@ -74,6 +79,15 @@ public class GameLogic {
 		int yPosInInt = (int) Math.round(yPosToArrayIdx);
 //		int xPosInInt = (int) Math.round(xPosToArrayIdx);
 //		int yPosInInt = (int) Math.round(yPosToArrayIdx);
+		if (yPosInInt > 17) { // for warp spot
+			if (xPosInInt == 19) {
+//				System.out.println(xPosInInt  + ",, " + yPosInInt);
+				return "G";
+			} else {
+				return "W";
+			}
+
+		}
 		return String.valueOf(Map.getMap().charAt(yPosInInt * 38 + xPosInInt));
 	}
 
@@ -130,8 +144,8 @@ public class GameLogic {
 	public static ArrayList<Integer> getLocationNearPacMan(PacMan pacMan) {
 		int startedX = Math.max((int) (Math.round((pacMan.getXPos() - 12) / 24) - 2), 0);
 		int endedX = Math.min((int) (Math.round((pacMan.getXPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_WIDTH);
-		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2),0);
-		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2),GameConstant.SCREEN_PLAY_HEIGHT);
+		int startedY = Math.max((int) (Math.round((pacMan.getYPos() - 12) / 24) - 2), 0);
+		int endedY = Math.min((int) (Math.round((pacMan.getYPos() - 12) / 24) + 2), GameConstant.SCREEN_PLAY_HEIGHT);
 		ArrayList<Integer> location = new ArrayList<>();
 		location.add(startedX);
 		location.add(endedX);
@@ -140,77 +154,111 @@ public class GameLogic {
 		return location;
 	}
 
-	public static Color CharacterColorToColor(CharacterColor color) {
-		switch (color) {
-		case YELLOW:
-			return Color.yellow;
-		}
-		return null;
+	public static String CharacterColorToString(CharacterColor color) {
+		return (color+"").toLowerCase();
 	}
-	
-	public static boolean timeToRandomNewPower(long currentSecondtime,long startSecondTime) {
+
+	public static boolean timeToRandomNewPower(long currentSecondtime, long startSecondTime) {
 		long diffTime = currentSecondtime - startSecondTime;
-		if((diffTime)%5 == 0 && diffTime !=0 && !GameController.alreadyRandomPower) {
+		if ((diffTime) % GameConstant.BUFF_SPAWN_DURATION == 0 && diffTime != 0 && !GameController.alreadyRandomPower) {
 			GameController.alreadyRandomPower = true;
 			return true;
 		}
-		if((diffTime)%5 != 0) {
+		if ((diffTime) % GameConstant.BUFF_SPAWN_DURATION != 0) {
 			GameController.alreadyRandomPower = false;
 			return false;
 		}
 		return false;
-		
+
 	}
 
 	public static void spawnNewPower() {
-		int xRandomPos = 132;
-		int yRandomPos = 36;
-		SpecialPower randomPower = randomPower(xRandomPos,yRandomPos);
-		System.out.println(randomPower.getName());
+		ArrayList<Integer> randomPosition = randomPosition();
+		int xRandomPos = randomPosition.get(0);
+		int yRandomPos = randomPosition.get(1);
+//		int xRandomPos = 60;
+//		int yRandomPos = 36;
+//		System.out.println("xyinspawn " + xRandomPos + " " + yRandomPos);
+		long startRandomSecondTime = System.nanoTime() / 1000000000;
+		SpecialPower randomPower = getPower(xRandomPos, yRandomPos, startRandomSecondTime);
+		System.out.println(randomPower.getName() + " , " + randomPower.getStartRandomSecondTime());
 		SpecialPowerHolder.getAllSpecialPowers().add(randomPower);
 	}
-	
 
-	public static SpecialPower randomPower(int x, int y) {
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
-		switch (randomNum) {
+	public static ArrayList<Integer> randomPosition() {
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 276 + 1);
+		ArrayList<Integer> randomPosition = new ArrayList<>();
+		randomPosition.add(Map.groundState[randomNum][0] * 24 + 12);
+		randomPosition.add(Map.groundState[randomNum][1] * 24 + 12);
+		System.out.println("hi " + randomPosition.toString());
+		return randomPosition;
+	}
+
+	public static SpecialPower getPower(int x, int y, long startRandomTime) {
+		switch (counter%4) {
 		case 0:
-			RevengePower revengePower = new RevengePower(x,y);
+			RevengePower revengePower = new RevengePower(x, y, startRandomTime);
+			counter++;
 			return revengePower;
 		case 1:
-			ShieldPower shieldPower = new ShieldPower(x,y);
+			ShieldPower shieldPower = new ShieldPower(x, y, startRandomTime);
+			counter++;
 			return shieldPower;
 		case 2:
-			SpeedPower speedPower = new SpeedPower(x,y);
-			return speedPower;
+			ShieldPower shieldPower1 = new ShieldPower(x, y, startRandomTime);
+			counter++;
+			return shieldPower1;
 		case 3:
-			StarvePower starvePower = new StarvePower(x,y);
+			StarvePower starvePower = new StarvePower(x, y, startRandomTime);
+			counter++;
 			return starvePower;
-
 		}
 		return null;
 	}
 
-	public static ArrayList<Integer> randomPosition() {
-		// random from arraylist of map that is ground state
-		return null;
-	}
-
-	private static boolean ghostWin() {
-		// pacman life <= 0;
-		return false;
-
-	}
-
-	private static boolean pacManWin() {
-		// all pellet collected
+	public static boolean IsGameEnd() {
+//		System.out.println(remainPellets());
+		if (GameController.pacMan.getLife() <= 0) {
+			return true;
+		}
+		if (remainPellets() <= 0) {
+			return true;
+		}
 		return false;
 	}
+	
+	public static boolean pacManWin() {
+		return GameController.pelletHolder.getAllPellets().size() <= 0;
+	}
+	
+	public static boolean GhostWin() {
+		return GameController.pacMan.getLife() <= 0;
+	}
+	
 
-	public static boolean gameEnd() {
-		// check pacman or ghost win
-		// ???????
+	public static boolean closeToSpawn(int x, int y) {
+		for (int[] close : Map.closeToSpawnPosition) {
+			if (x == close[0] && y == close[1]) {
+				return true;
+			}
+		}
 		return false;
+	}
+
+	public static CharacterColor getPacManColor() {
+		return pacManColor;
+	}
+
+	public static void setPacManColor(CharacterColor pacManColor) {
+		GameLogic.pacManColor = pacManColor;
+	}
+
+	public static CharacterColor getGhostColor() {
+		return ghostColor;
+	}
+
+	public static void setGhostColor(CharacterColor ghostColor) {
+		GameLogic.ghostColor = ghostColor;
 	}
 
 }

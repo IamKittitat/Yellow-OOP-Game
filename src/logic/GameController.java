@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constant.CharacterColor;
+import constant.GameConstant;
+import entity.base.Character;
 import entity.base.Entity;
 import entity.base.Map;
 import entity.base.Pellet;
@@ -13,13 +15,16 @@ import entity.base.SpecialPowerHolder;
 import entity.character.Ghost;
 import entity.character.GhostBot;
 import entity.character.PacMan;
+import gui.BattleGamePane;
+import gui.EndGamePane;
 import gui.GameCanvas;
 import gui.GameControlPane;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
 public class GameController {
-	private List<Entity> gameObjectContainer;
+	public static List<Entity> gameObjectContainer;
 
 	public static PacMan pacMan;
 	public static Ghost ghost;
@@ -39,21 +44,18 @@ public class GameController {
 		Map map = new Map();
 		RenderableHolder.getInstance().add(map);
 
-		pacMan = new PacMan(CharacterColor.YELLOW);
-		ghost = new Ghost(CharacterColor.YELLOW);
+		pacMan = new PacMan(GameLogic.pacManColor);
+		ghost = new Ghost(GameLogic.ghostColor);
 		ghostBot1 = new GhostBot();
-		ghostBot2 = new GhostBot();
 		pelletHolder = new PelletHolder();
 		specialPowerHolder = new SpecialPowerHolder();
 		gameControlPane = new GameControlPane();
 
 		addNewObject(pacMan);
 		addNewObject(ghost);
-
 		addNewObject(pelletHolder);
 		addNewObject(specialPowerHolder);
-//		addNewObject(ghostBot1);
-//		addNewObject(ghostBot2);
+		addNewObject(ghostBot1);
 
 		// TODO Auto-generated constructor stub
 	}
@@ -66,44 +68,28 @@ public class GameController {
 	public void logicUpdate(long currentSecondtime) {
 		pacMan.update();
 		ghost.update();
-		gameControlPane.updateLives();
-		gameControlPane.updateScore();
-//		ghostBot1.update();
-//		ghostBot2.update();
-		if (GameLogic.timeToRandomNewPower(currentSecondtime,startSecondTime)) {
+		ghostBot1.update();
+//		System.out.println("check");
+		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
 			GameLogic.spawnNewPower();
 		}
 
 		if (pacMan.isCollide(ghost)) {
-//			System.out.println("collide");
 			pacMan.collideWith(ghost);
 		}
-		for(Pellet pellet : pelletHolder.getAllPellets()) {
-//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			if(!pellet.isRemoved() && pacMan.isCollide(pellet)) {
-//				System.out.println("pellets");
-				pacMan.collideWith(pellet);				
-			}
+		if (pacMan.isCollide(ghostBot1)) {
+			pacMan.collideWith(ghostBot1);
 		}
-		for(SpecialPower specialPower : SpecialPowerHolder.getAllSpecialPowers()) {
-//			System.out.println(pellet.getXPos()+", "+pellet.getYPos());
-			if(!specialPower.isRemoved() && pacMan.isCollide(specialPower) && specialPower.getEatenBy().contains(pacMan.getName())) {
-//				System.out.println("pellets");
-				pacMan.collideWith(specialPower);				
-			} else if(!specialPower.isRemoved() && ghost.isCollide(specialPower) && specialPower.getEatenBy().contains(ghost.getName()))  {
-//				System.out.println("pellets");
-				ghost.collideWith(specialPower);				
-			}
+		gameControlPane.updateLives();
+		gameControlPane.updateScore();
+
+		pelletHolder.update();
+		specialPowerHolder.update();
+
+		if (GameLogic.IsGameEnd()) {
+			GameCanvas.gameLoop.stop();
+			BattleGamePane.endGamePane.setResult();
+			BattleGamePane.endGamePane.enter();
 		}
-
-//		System.out.println(pacMan.getXPos()+", "+pacMan.getYPos());
-//		ArrayList<Integer> LocationNearPacMan = GameLogic.getLocationNearPacMan(pacMan);
-//		System.out.println(LocationNearPacMan.toString());
-//		for(int x=LocationNearPacMan.get(0);x<=LocationNearPacMan.get(1);x++) {
-//			for(int y=LocationNearPacMan.get(2);y<=LocationNearPacMan.get(3);y++) {
-//				pelletHolder.getAllPellets()
-//			}
-//		}
-
 	}
 }

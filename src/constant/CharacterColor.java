@@ -2,5 +2,9 @@ package constant;
 
 public enum CharacterColor {
 	// Color to change for pacman and ghost
-	YELLOW
+	YELLOW,
+	PINK,
+	BLUE,
+	PURPLE,
+	GREEN
 }

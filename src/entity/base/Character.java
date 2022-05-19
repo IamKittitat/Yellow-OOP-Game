@@ -1,35 +1,44 @@
 package entity.base;
 
 import constant.Direction;
-import logic.GameLogic;
-import constant.CharacterColor;
+import constant.GameConstant;
 
 public abstract class Character extends Entity {
-	protected int speed;
+	protected double speed;
 	protected Direction direction;
 	private SpecialPower power;
 	private boolean canBeEaten;
+	private boolean isStarted;
 
 	public Character() {
 		super();
 		this.setZ(10);
+		setStarted(false);
 	}
-	
+
 	protected abstract void forward();
 
 	protected abstract void turn(Direction direction);
-	
+
 	public abstract void die();
-	
+
 	protected abstract void reborn();
 
+	public void checkWarp() {
+		if (this.xPos == GameConstant.WARP_POINT_1_X && this.yPos <= GameConstant.WARP_POINT_1_Y) { // Up warp point
+			this.setYPos(GameConstant.WARP_POINT_2_Y);
+		} else if(this.xPos == GameConstant.WARP_POINT_1_X && this.yPos >= GameConstant.WARP_POINT_2_Y) { // Down warp point
+			this.setYPos(GameConstant.WARP_POINT_1_Y);
+		}
+	}
+	
 	public abstract void collideWith(Entity entity);
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
@@ -57,4 +66,11 @@ public abstract class Character extends Entity {
 		this.canBeEaten = canBeEaten;
 	}
 
+	public boolean isStarted() {
+		return isStarted;
+	}
+
+	public void setStarted(boolean isStarted) {
+		this.isStarted = isStarted;
+	}
 }

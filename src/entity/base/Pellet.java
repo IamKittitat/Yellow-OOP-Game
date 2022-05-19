@@ -20,7 +20,6 @@ public class Pellet extends Item {
 	
 	@Override
 	public void draw(GraphicsContext gc) {
-		// gc.drawImage( RenderableHolder.pellets, this.xPos, this.yPos);
 		gc.setFill(Color.WHITE);
 		gc.fillRect(xPos-this.radius, yPos-this.radius, this.radius*2, this.radius*2);
 	}

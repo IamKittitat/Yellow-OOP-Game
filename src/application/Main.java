@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scene.MainMenuScene;
 import scene.SceneHolder;
+import sharedObject.RenderableHolder;
 
 public class Main extends Application {
 	public static SceneHolder sceneHolder;
@@ -25,7 +26,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		(sceneHolder = new SceneHolder(primaryStage)).initialize();
-		primaryStage.setTitle("Pac-Man");
+		primaryStage.setTitle("Yellow");
+		primaryStage.getIcons().add(RenderableHolder.gameIconPNG);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 

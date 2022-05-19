@@ -6,14 +6,16 @@ import constant.GameConstant;
 import entity.base.Character;
 import entity.base.SpecialPower;
 import entity.character.Ghost;
+import entity.character.GhostBot;
 import entity.character.PacMan;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class ShieldPower extends SpecialPower {
 
-	public ShieldPower(int x, int y) {
-		super();
+	public ShieldPower(int x, int y, long startRandomSecondTime) {
+		super(startRandomSecondTime);
 		this.name = GameConstant.SHIELD_BUFF_NAME;
 		this.detail = GameConstant.SHIELD_BUFF_DETAIL;
 		this.xPos = x;
@@ -27,21 +29,34 @@ public class ShieldPower extends SpecialPower {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.GREENYELLOW);
-		gc.fillRoundRect(xPos, yPos, 5, 5, 5, 5);
+		gc.drawImage(RenderableHolder.shieldPNG, xPos - this.radius, yPos - this.radius, this.radius * 2,
+				this.radius * 2);
 	}
 
 	@Override
 	public void gainPower(Character collector, ArrayList<Character> other) {
 		System.out.println("Gain Shield Power");
+		setCollector(collector);
+		setStartPowerSecondTime(System.nanoTime() / 1000000000);
+//		System.out.println(this.getStartPowerSecondTime());
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
-			Ghost otherGhost = (Ghost) other.get(0);
-
 			collectedPacMan.setCanBeEaten(false);
-			otherGhost.setCanEatPacMan(false);
+			collectedPacMan.setPower(this);
+			for(Character otherCharacter : other) {
+				if(otherCharacter instanceof Ghost) {
+					Ghost otherGhost = (Ghost) otherCharacter;					
+					otherGhost.setCanEatPacMan(false);
+				} else if(otherCharacter instanceof GhostBot) {
+					GhostBot otherGhost = (GhostBot) otherCharacter;
+					otherGhost.setCanEatPacMan(false);
+				}
+			}
 		} else if (collector instanceof Ghost) {
 			Ghost collectedGhost = (Ghost) collector;
+			collectedGhost.setPower(this);
+//			System.out.println("++ " + collectedGhost.getPower().getName());
+//			System.out.println(collectedGhost.getPower() instanceof ShieldPower);
 			PacMan otherPacMan = (PacMan) other.get(0);
 
 			collectedGhost.setCanBeEaten(false);
@@ -50,15 +65,18 @@ public class ShieldPower extends SpecialPower {
 	}
 
 	@Override
-	public void clearPower(Character collector, ArrayList<Character> other) {
+	public void clearPower(ArrayList<Character> other) {
+//		System.out.println("clear shield");
 		if (collector instanceof PacMan) {
 			PacMan collectedPacMan = (PacMan) collector;
+			collectedPacMan.setPower(null);
 			Ghost otherGhost = (Ghost) other.get(0);
-			
+
 			collectedPacMan.setCanBeEaten(true);
 			otherGhost.setCanEatPacMan(true);
-		} else if (collector instanceof Ghost) { //Not sure here
+		} else if (collector instanceof Ghost) { // Not sure here
 			Ghost collectedGhost = (Ghost) collector;
+			collectedGhost.setPower(null);
 			PacMan otherPacMan = (PacMan) other.get(0);
 
 			collectedGhost.setCanBeEaten(false);

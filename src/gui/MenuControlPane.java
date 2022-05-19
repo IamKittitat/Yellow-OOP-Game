@@ -8,24 +8,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scene.BattleGameScene;
-import scene.CustomiseScene;
+import scene.CustomizeScene;
 import scene.MainMenuScene;
 import scene.PacManGameScene;
+import sharedObject.RenderableHolder;
 import application.Main;
 
 public class MenuControlPane extends VBox {
 
 	private Text gameText;
-	private Button battleGameButton;
-	private Button pacManGameButton;
-	private Button customizeButton;
-	private Button howToPlayButton;
-	private Button quitButton;
-	private HowToPlayPane howToPlayPane;
-	private static Stage primaryStage;
+	public Button battleGameButton;
+	public Button pacManGameButton;
+	public Button customizeButton;
+	public Button howToPlayButton;
+	public Button quitButton;
 
 	public MenuControlPane() {
 		super();
@@ -37,37 +37,40 @@ public class MenuControlPane extends VBox {
 
 		initializeGameText();
 		initializeBattleGameButton();
-		initializePacManGameButton();
+//		initializePacManGameButton();
 		initializeCustomizeButton();
 		initializeHowToPlayButton();
 		initializeQuitButton();
 
-		this.getChildren().addAll(gameText, battleGameButton, pacManGameButton, customizeButton, howToPlayButton,
-				quitButton);
+//		this.getChildren().addAll(gameText, battleGameButton, pacManGameButton, customizeButton, howToPlayButton,
+//				quitButton);
+		this.getChildren().addAll(gameText, battleGameButton, customizeButton, howToPlayButton, quitButton);
 	}
 
 	private void initializeHowToPlayButton() {
 		// TODO Auto-generated method stub
 		this.howToPlayButton = new MenuButton("How to play");
-		this.howToPlayPane = new HowToPlayPane();
-		this.howToPlayButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				howToPlayPane.enter();
-			}
-		});
 	}
 
 	private void initializeCustomizeButton() {
 		// TODO Auto-generated method stub
 		this.customizeButton = new MenuButton("Customize");
+		this.customizeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new CustomizeScene());
+			}
+		});
+
 	}
 
 	private void initializePacManGameButton() {
 		// TODO Auto-generated method stub
-		this.pacManGameButton = new MenuButton("Pac-man vs Pac-man");
+		this.pacManGameButton = new MenuButton("Classic Pac-man");
 
 	}
 
@@ -81,14 +84,17 @@ public class MenuControlPane extends VBox {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Main.sceneHolder.switchScene(new Scene(new BattleGameScene()));
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new BattleGameScene());
 			}
 		});
 	}
 
 	private void initializeGameText() {
 		// TODO Auto-generated method stub
-		this.gameText = new Text("PAC-MAN");
+		this.gameText = new Text("YELLOW");
+		this.gameText.setFont(RenderableHolder.gameHeaderFont);
+		this.gameText.setFill(Color.YELLOW);
 	}
 
 	private void initializeQuitButton() {
@@ -99,6 +105,7 @@ public class MenuControlPane extends VBox {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
 				System.exit(0);
 			}
 		});

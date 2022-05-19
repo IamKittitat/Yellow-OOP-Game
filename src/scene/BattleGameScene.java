@@ -1,42 +1,47 @@
 package scene;
 
+import gui.BattleGamePane;
 import gui.GameCanvas;
 import gui.GameControlPane;
 import input.InputUtility;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.GameController;
+import sharedObject.RenderableHolder;
 
-public class BattleGameScene extends VBox {
-	private GameControlPane gameControlPane;
-	private GameCanvas gameCanvas;
+public class BattleGameScene extends Scene {
 
-	public BattleGameScene() {
-		super();
-		// TODO Auto-generated constructor stub
-		this.setStyle("-fx-background-color: white;");
-		this.setPrefSize(900, 500);
+	private BattleGamePane battleGamePane;
+	private StackPane stackPane;
+	public static AnimationTimer startPlayingSong;
 
-		this.gameCanvas = new GameCanvas();
-		this.gameControlPane = GameController.gameControlPane;
-
-		this.addListerner();
-
-		this.getChildren().addAll(gameControlPane, gameCanvas);
-		gameCanvas.requestFocus();
+	public BattleGameScene(final Parent root) {
+		super(root);
 
 	}
 
-	public void addListerner() {
-		this.setOnKeyPressed((KeyEvent event) -> {
-			InputUtility.setKeyPressed(event.getCode(), true);
-
-		});
-		this.setOnMousePressed((MouseEvent event) -> {
-			System.out.println("mouse pressed");
-		});
+	public BattleGameScene() {
+		this((Parent) new StackPane());
+		RenderableHolder.ThemeSong_music.stop();
+		MainMenuScene.startThemeSong.stop();
+		this.setRoot((Parent) (this.stackPane = new StackPane()));
+		startPlayingSong = new AnimationTimer() {
+			public void handle(long now) {
+				if (!RenderableHolder.Playing_music.isPlaying())
+					RenderableHolder.Playing_music.play();
+			}
+		};
+		startPlayingSong.start();
+		
+		this.battleGamePane = new BattleGamePane();
+		this.stackPane.getChildren().add(battleGamePane);
 	}
 
 }

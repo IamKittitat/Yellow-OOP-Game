@@ -16,28 +16,30 @@ import sharedObject.RenderableHolder;
 public class GameCanvas extends Canvas {
 	private static GraphicsContext gc;
 	public static AnimationTimer gameLoop;
-	private GameController controller;
+	public static GameController controller;
 	public static int counter;
 
 	public GameCanvas() {
-		super(500, 400);
+		super();
 		// TODO Auto-generated constructor stub
 		GameCanvas.gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-		this.setWidth(900);
-		this.setHeight(450);
+		this.setWidth(912);
+		this.setHeight(430);
 		this.setVisible(true);
 
 		GameCanvas.counter = 0;
 
 		controller = new GameController();
+		RenderableHolder.loadCharacter();
 		this.loop();
 	}
 
 	public void paintComponent() {
-		gc.setFill(Color.BLUE);
+		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+		
 		counter++;
 		if (counter > 20) {
 			counter -= 20;
@@ -51,7 +53,7 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void loop() {
-		(this.gameLoop = new AnimationTimer() {
+		(GameCanvas.gameLoop = new AnimationTimer() {
 			public void handle(final long currentNanotime) {
 				long currentSecondTime = currentNanotime/1000000000;
 				controller.logicUpdate(currentSecondTime);
