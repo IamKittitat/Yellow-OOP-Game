@@ -1,15 +1,10 @@
 package gui;
 
-import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import logic.GameController;
-import logic.GameLogic;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
@@ -21,17 +16,17 @@ public class GameCanvas extends Canvas {
 
 	public GameCanvas() {
 		super();
-		// TODO Auto-generated constructor stub
-		GameCanvas.gc = this.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
-		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		this.setWidth(912);
 		this.setHeight(430);
 		this.setVisible(true);
 
+		GameCanvas.gc = this.getGraphicsContext2D();
+		gc.setFill(Color.BLACK);
+		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+		GameCanvas.controller = new GameController();
 		GameCanvas.counter = 0;
 
-		controller = new GameController();
 		RenderableHolder.loadCharacter();
 		this.loop();
 	}
@@ -39,7 +34,7 @@ public class GameCanvas extends Canvas {
 	public void paintComponent() {
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-		
+
 		counter++;
 		if (counter > 20) {
 			counter -= 20;
@@ -48,14 +43,13 @@ public class GameCanvas extends Canvas {
 			if (entity.isVisible() && !entity.isRemoved()) {
 				entity.draw(gc);
 			}
-//			entity.draw(gc);
 		}
 	}
 
 	public void loop() {
 		(GameCanvas.gameLoop = new AnimationTimer() {
 			public void handle(final long currentNanotime) {
-				long currentSecondTime = currentNanotime/1000000000;
+				long currentSecondTime = currentNanotime / 1000000000;
 				controller.logicUpdate(currentSecondTime);
 				paintComponent();
 			}

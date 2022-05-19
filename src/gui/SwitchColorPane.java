@@ -5,14 +5,10 @@ import java.util.ArrayList;
 import constant.CharacterColor;
 import gui.base.IconButton;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import sharedObject.RenderableHolder;
 
 public class SwitchColorPane extends BorderPane {
@@ -22,28 +18,18 @@ public class SwitchColorPane extends BorderPane {
 	private Button nextButton;
 	private Button prevButton;
 
-	public SwitchColorPane(ArrayList<Image> arrayImages,ArrayList<CharacterColor> arrayColors) {
+	public SwitchColorPane(ArrayList<Image> arrayImages, ArrayList<CharacterColor> arrayColors) {
 
 		this.setColorImageList(arrayImages);
 		this.setColorList(arrayColors);
 		this.setPrefSize(600, 100);
 		this.setPadding(new Insets(30, 100, 0, 100));
 
-		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
-		this.prevButton = new IconButton(RenderableHolder.previousButtonPNG);
+		this.initializeButton();
+		this.change();
+
 		this.setLeft(prevButton);
 		this.setRight(nextButton);
-		this.change();
-		nextButton.setOnMouseClicked(e -> {
-			RenderableHolder.ClickedSound_music.play();
-			idx = (idx + 1) % ColorList.size();
-			change();
-		});
-		prevButton.setOnMouseClicked(e -> {
-			RenderableHolder.ClickedSound_music.play();
-			idx = (idx + 2) % ColorList.size();
-			change();
-		});
 
 	}
 
@@ -56,6 +42,22 @@ public class SwitchColorPane extends BorderPane {
 			image.setFitHeight(100);
 		}
 		this.setCenter(image);
+	}
+
+	private void initializeButton() {
+		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
+		this.nextButton.setOnMouseClicked(e -> {
+			RenderableHolder.ClickedSound_music.play();
+			idx = (idx + 1) % ColorList.size();
+			change();
+		});
+
+		this.prevButton = new IconButton(RenderableHolder.previousButtonPNG);
+		this.prevButton.setOnMouseClicked(e -> {
+			RenderableHolder.ClickedSound_music.play();
+			idx = (idx + 2) % ColorList.size();
+			change();
+		});
 	}
 
 	public ArrayList<Image> getColorImageList() {
@@ -81,5 +83,5 @@ public class SwitchColorPane extends BorderPane {
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	
+
 }

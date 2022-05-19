@@ -11,7 +11,7 @@ import logic.GameLogic;
 import sharedObject.IRenderable;
 
 public class PelletHolder extends Entity {
-	private ArrayList<Pellet> allPellets;
+	private static ArrayList<Pellet> allPellets;
 
 	public PelletHolder() {
 		super();
@@ -30,7 +30,7 @@ public class PelletHolder extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		for (Pellet p : this.getAllPellets()) {
+		for (Pellet p : PelletHolder.getAllPellets()) {
 			if (p.isVisible() && !p.isRemoved()) {
 				p.draw(gc);
 			}
@@ -38,14 +38,14 @@ public class PelletHolder extends Entity {
 	}
 	
 	public void update() {
-		for (Pellet pellet : GameController.pelletHolder.getAllPellets()) {
+		for (Pellet pellet : PelletHolder.getAllPellets()) {
 			if (!pellet.isRemoved() && GameController.pacMan.isCollide(pellet)) {
 				GameController.pacMan.collideWith(pellet);
 				if (pellet.isRemoved()) {
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							GameController.pelletHolder.getAllPellets().remove(pellet);
+							PelletHolder.getAllPellets().remove(pellet);
 						}
 					});
 				}
@@ -53,7 +53,7 @@ public class PelletHolder extends Entity {
 		}
 	}
 
-	public ArrayList<Pellet> getAllPellets() {
+	public static ArrayList<Pellet> getAllPellets() {
 		return allPellets;
 	}
 

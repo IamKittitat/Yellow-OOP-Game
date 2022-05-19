@@ -28,7 +28,6 @@ public class Ghost extends ControlCharacter {
 	public Ghost(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.GHOST_NAME;
-		this.detail = GameConstant.GHOST_DETAIL;
 		this.xPos = GameConstant.GHOST_SPAWN_X;
 		this.yPos = GameConstant.GHOST_SPAWN_Y;
 		setSpeed(GameConstant.GHOST_SPEED);

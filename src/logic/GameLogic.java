@@ -1,23 +1,21 @@
 package logic;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
-import entity.base.ControlCharacter;
 import entity.base.Map;
 import entity.base.SpecialPower;
 import entity.base.SpecialPowerHolder;
-import entity.character.Ghost;
 import entity.character.PacMan;
 import entity.item.RevengePower;
 import entity.item.ShieldPower;
-import entity.item.SpeedPower;
 import entity.item.StarvePower;
+import gui.GameCanvas;
+import input.InputUtility;
 import javafx.scene.input.KeyCode;
+import sharedObject.RenderableHolder;
 
 public class GameLogic {
 	public static int counter = 0;
@@ -155,7 +153,7 @@ public class GameLogic {
 	}
 
 	public static String CharacterColorToString(CharacterColor color) {
-		return (color+"").toLowerCase();
+		return (color + "").toLowerCase();
 	}
 
 	public static boolean timeToRandomNewPower(long currentSecondtime, long startSecondTime) {
@@ -195,7 +193,7 @@ public class GameLogic {
 	}
 
 	public static SpecialPower getPower(int x, int y, long startRandomTime) {
-		switch (counter%4) {
+		switch (counter % 4) {
 		case 0:
 			RevengePower revengePower = new RevengePower(x, y, startRandomTime);
 			counter++;
@@ -226,15 +224,22 @@ public class GameLogic {
 		}
 		return false;
 	}
-	
+
 	public static boolean pacManWin() {
 		return GameController.pelletHolder.getAllPellets().size() <= 0;
 	}
-	
+
 	public static boolean GhostWin() {
 		return GameController.pacMan.getLife() <= 0;
 	}
-	
+
+	public static void restartGame() {
+		GameCanvas.gameLoop.stop();
+		RenderableHolder.getInstance().getEntities().clear();
+		InputUtility.setFirstPlayerKeyNull();
+		InputUtility.setSecondPlayerKeyNull();
+
+	}
 
 	public static boolean closeToSpawn(int x, int y) {
 		for (int[] close : Map.closeToSpawnPosition) {

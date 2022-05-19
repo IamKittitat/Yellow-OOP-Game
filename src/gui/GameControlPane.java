@@ -1,12 +1,9 @@
 package gui;
 
 import application.Main;
-import entity.character.PacMan;
 import gui.base.IconButton;
-import gui.base.MenuButton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
+import logic.GameLogic;
 import scene.MainMenuScene;
 import sharedObject.RenderableHolder;
 
@@ -33,67 +31,80 @@ public class GameControlPane extends BorderPane {
 
 	public GameControlPane() {
 		super();
-		initilize();
 		this.setPrefWidth(900);
-		this.setPrefHeight(50);
-		// TODO Auto-generated constructor stub
-	}
-
-	private void initilize() {
-		
+		this.setPrefHeight(100);
 		this.setPadding(new Insets(6));
-
-		initilizeLivesPane();
-
-		this.scoreText = new Text("Score : 0");
-		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
-		this.scoreText.setFill(Color.YELLOW);
-		this.scoreText.setStyle("-fx-font-size:20;");
-
 		this.isPaused = false;
 
+		this.initilizeLivesPane();
+		this.initilizeScoreText();
+		this.initilizePauseButton();
+		this.initilizeMenuButton();
+
+		this.statPane = new VBox();
+		this.statPane.setPadding(new Insets(6));
+		this.statPane.getChildren().addAll(scoreText, livesPane);
+		this.updateScore();
+		this.updateLives();
+
+		this.controlPane = new HBox();
+		this.controlPane.getChildren().addAll(pauseButton, menuButton);
+
+		this.setLeft(statPane);
+		this.setRight(controlPane);
+
+	}
+
+	public void initilizeLivesPane() {
+		this.livesPane = new HBox(5);
+		this.livesPane.setMinHeight(25);
+		this.lives = GameController.pacMan.getLife();
+		for (int i = 0; i < this.lives; i++) {
+			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));
+		}
+	}
+
+	public void initilizeScoreText() {
+		this.scoreText = new Text("Score : 0");
+		this.scoreText.setStyle("-fx-font-size:20;");
+		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
+		this.scoreText.setFill(Color.YELLOW);
+	}
+
+	public void initilizeMenuButton() {
+		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
+		this.menuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new MainMenuScene());
+				GameLogic.restartGame();
+			}
+		});
+	}
+
+	public void initilizePauseButton() {
 		this.pauseButton = new IconButton(RenderableHolder.pauseButtonPNG);
 		this.pauseButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+
 				RenderableHolder.ClickedSound_music.play();
-				
-				MainMenuScene forBack = new MainMenuScene();
-				Main.sceneHolder.switchScene(forBack);
-//				if (!isPaused) {
-//					GameCanvas.gameLoop.stop();
-//					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
-//					isPaused = true;
-//				} else {
-//					GameCanvas.gameLoop.start();
-//					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
-//					isPaused = false;
-//				}
+
+				if (!isPaused) {
+					GameCanvas.gameLoop.stop();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
+					isPaused = true;
+				} else {
+					GameCanvas.gameLoop.start();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
+					isPaused = false;
+				}
 			}
 		});
-
-		this.statPane = new VBox();
-		this.statPane.setPadding(new Insets(6));
-		this.statPane.getChildren().addAll(scoreText, livesPane);
-
-		this.controlPane = new HBox();
-		this.controlPane.getChildren().addAll(pauseButton);
-
-		this.setLeft(statPane);
-		this.setRight(controlPane);
-
-		this.updateScore();
-		this.updateLives();
-	}
-
-	public void initilizeLivesPane() {
-		this.livesPane = new HBox(5);
-		this.lives = GameController.pacMan.getLife();
-		for (int i = 0; i < this.lives; i++) {
-			this.livesPane.getChildren().add(new ImageView(RenderableHolder.heartPNG));
-		}
 	}
 
 	public void updateScore() {

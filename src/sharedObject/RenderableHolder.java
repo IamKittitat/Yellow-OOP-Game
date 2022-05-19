@@ -64,7 +64,7 @@ public class RenderableHolder {
 
 	// Special Power Image
 	public static Image pacManShieldPNG;
-	public static Image pacManStarve;
+	public static Image pacManStarvePNG;
 	public static Image shieldPNG;
 	public static Image starvePNG;
 	public static Image revengePNG;
@@ -158,7 +158,7 @@ public class RenderableHolder {
 		// Special Power Image
 		pacManShieldPNG = new Image(ClassLoader.getSystemResource(img + "pacManShield.png").toString(), 24, 24, false,
 				false);
-		pacManStarve = new Image(ClassLoader.getSystemResource(img + "pacManStarve.png").toString(), 24, 24, false,
+		pacManStarvePNG = new Image(ClassLoader.getSystemResource(img + "pacManStarve.png").toString(), 24, 24, false,
 				false);
 		shieldPNG = new Image(ClassLoader.getSystemResource(img + "shield.png").toString(), 24, 24, false, false);
 		starvePNG = new Image(ClassLoader.getSystemResource(img + "starve.png").toString(), 24, 24, false, false);
