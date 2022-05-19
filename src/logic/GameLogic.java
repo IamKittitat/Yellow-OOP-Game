@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import application.Main;
 import constant.CharacterColor;
 import constant.Direction;
 import constant.GameConstant;
@@ -17,7 +18,11 @@ import entity.item.RevengePower;
 import entity.item.ShieldPower;
 import entity.item.SpeedPower;
 import entity.item.StarvePower;
+import gui.GameCanvas;
+import input.InputUtility;
 import javafx.scene.input.KeyCode;
+import scene.MainMenuScene;
+import sharedObject.RenderableHolder;
 
 public class GameLogic {
 	public static int counter = 0;
@@ -235,6 +240,13 @@ public class GameLogic {
 		return GameController.pacMan.getLife() <= 0;
 	}
 	
+	public static void restartGame() {
+		GameCanvas.gameLoop.stop();
+		RenderableHolder.getInstance().getEntities().clear();
+		InputUtility.setFirstPlayerKeyNull();
+		InputUtility.setSecondPlayerKeyNull();
+		
+	}
 
 	public static boolean closeToSpawn(int x, int y) {
 		for (int[] close : Map.closeToSpawnPosition) {

@@ -4,6 +4,7 @@ import application.Main;
 import entity.character.PacMan;
 import gui.base.IconButton;
 import gui.base.MenuButton;
+import input.InputUtility;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
+import logic.GameLogic;
 import scene.MainMenuScene;
 import sharedObject.RenderableHolder;
 
@@ -71,13 +73,24 @@ public class GameControlPane extends BorderPane {
 				}
 			}
 		});
+		
+		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
+		this.menuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new MainMenuScene());
+				GameLogic.restartGame();
+			}});
 
 		this.statPane = new VBox();
 		this.statPane.setPadding(new Insets(6));
 		this.statPane.getChildren().addAll(scoreText, livesPane);
 
 		this.controlPane = new HBox();
-		this.controlPane.getChildren().addAll(pauseButton);
+		this.controlPane.getChildren().addAll(pauseButton,menuButton);
 
 		this.setLeft(statPane);
 		this.setRight(controlPane);

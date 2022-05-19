@@ -6,6 +6,7 @@ import gui.base.MenuButton;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,11 +21,13 @@ import logic.GameController;
 import logic.GameLogic;
 import scene.BattleGameScene;
 import scene.CustomizeScene;
+import scene.MainMenuScene;
 import sharedObject.RenderableHolder;
 
 public class EndGamePane extends BorderPane {
 	private boolean isHidden;
 	private Text resultText;
+	private Button backToMainMenuButton;
 	private Button quitButton;
 
 	public EndGamePane() {
@@ -41,7 +44,18 @@ public class EndGamePane extends BorderPane {
 		this.resultText.setFill(Color.YELLOW);
 
 		this.setTranslateY(600);
-		
+
+		this.backToMainMenuButton = new MenuButton("Main Menu");
+		this.backToMainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new MainMenuScene());
+				GameLogic.restartGame();
+			}
+		});
 		
 		this.quitButton = new MenuButton("Quit");
 		this.quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -55,9 +69,11 @@ public class EndGamePane extends BorderPane {
 		});
 
 
-		Pane buttonPane = new HBox(5);
-		buttonPane.setPadding(new Insets(30, 30, 30, 400));
-		buttonPane.getChildren().add(quitButton);
+		VBox buttonPane = new VBox(10);
+		buttonPane.setPrefWidth(900);
+		buttonPane.setAlignment(Pos.CENTER);
+		buttonPane.setPadding(new Insets(30, 0, 30, 0));
+		buttonPane.getChildren().addAll(backToMainMenuButton,quitButton);
 
 		this.setBottom(buttonPane);
 	}
