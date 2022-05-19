@@ -16,7 +16,6 @@ import entity.character.Ghost;
 import entity.character.PacMan;
 import entity.item.RevengePower;
 import entity.item.ShieldPower;
-import entity.item.SpeedPower;
 import entity.item.StarvePower;
 import gui.GameCanvas;
 import input.InputUtility;

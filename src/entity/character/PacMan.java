@@ -213,7 +213,7 @@ public class PacMan extends ControlCharacter {
 		this.canEatPellet = canEatPellet;
 	}
 
-	public boolean isCanEatGhost() {
+	public boolean canEatGhost() {
 		return canEatGhost;
 	}
 
