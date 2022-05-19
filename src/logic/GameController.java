@@ -21,6 +21,7 @@ import gui.GameCanvas;
 import gui.GameControlPane;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
+import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class GameController {
@@ -57,7 +58,6 @@ public class GameController {
 		addNewObject(specialPowerHolder);
 		addNewObject(ghostBot1);
 
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void addNewObject(Entity entity) {
@@ -65,31 +65,45 @@ public class GameController {
 		RenderableHolder.getInstance().add(entity);
 	}
 
-	public void logicUpdate(long currentSecondtime) {
-		pacMan.update();
-		ghost.update();
-		ghostBot1.update();
-//		System.out.println("check");
-		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
-			GameLogic.spawnNewPower();
-		}
-
-		if (pacMan.isCollide(ghost)) {
-			pacMan.collideWith(ghost);
-		}
-		if (pacMan.isCollide(ghostBot1)) {
-			pacMan.collideWith(ghostBot1);
-		}
-		gameControlPane.updateLives();
-		gameControlPane.updateScore();
-
-		pelletHolder.update();
-		specialPowerHolder.update();
-
+	public void checkGameEnd() {
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
 			BattleGamePane.endGamePane.setResult();
 			BattleGamePane.endGamePane.move();
 		}
 	}
+
+	public void checkCollision() {
+		if (pacMan.isCollide(ghost)) {
+			pacMan.collideWith(ghost);
+		}
+		if (pacMan.isCollide(ghostBot1)) {
+			pacMan.collideWith(ghostBot1);
+		}
+	}
+
+	public void checkSpawnTime(long currentSecondtime) {
+		if (GameLogic.timeToRandomNewPower(currentSecondtime, startSecondTime)) {
+			GameLogic.spawnNewPower();
+		}
+	}
+
+	public void logicUpdate(long currentSecondtime) {
+
+		pacMan.update();
+		ghost.update();
+		ghostBot1.update();
+
+		this.checkSpawnTime(currentSecondtime);
+		this.checkCollision();
+
+		gameControlPane.updateLives();
+		gameControlPane.updateScore();
+
+		pelletHolder.update();
+		specialPowerHolder.update();
+
+		this.checkGameEnd();
+	}
+
 }
