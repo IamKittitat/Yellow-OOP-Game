@@ -21,13 +21,12 @@ public class GameController {
 	public static PacMan pacMan;
 	public static Ghost ghost;
 	public static GhostBot ghostBot1;
-	public static GhostBot ghostBot2;
 	public static PelletHolder pelletHolder;
 	public static SpecialPowerHolder specialPowerHolder;
 	public static GameControlPane gameControlPane;
 	public static boolean alreadyRandomPower = false;
-	final long startNanoTime = System.nanoTime();
-	final long startSecondTime = startNanoTime / 1000000000;
+	public final long startNanoTime = System.nanoTime();
+	public final long startSecondTime = startNanoTime / 1000000000;
 
 	public GameController() {
 		super();
