@@ -39,8 +39,8 @@ public class HowToPlayPane extends BorderPane {
 		buttonPane.getChildren().addAll(prevButton, nextButton);
 
 		Pane closeButtonPane = new HBox();
-		closeButtonPane.getChildren().add(closeButton);
 		closeButtonPane.setPadding(new Insets(30, 10, 0, 600));
+		closeButtonPane.getChildren().add(closeButton);
 
 		this.setCenter(howToPlayDetails1);
 		this.setBottom(buttonPane);
