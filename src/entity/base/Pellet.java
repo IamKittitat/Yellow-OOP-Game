@@ -10,7 +10,6 @@ public class Pellet extends Item {
 
 	public Pellet(int x, int y) {
 		this.name = GameConstant.PELLET_NAME;
-		this.detail = GameConstant.PELLET_DETAIL;
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);

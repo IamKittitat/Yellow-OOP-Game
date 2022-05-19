@@ -18,7 +18,6 @@ public class RevengePower extends SpecialPower {
 	public RevengePower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.REVENGE_BUFF_NAME;
-		this.detail = GameConstant.REVENGE_BUFF_DETAIL;
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);

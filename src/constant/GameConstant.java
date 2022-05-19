@@ -4,7 +4,6 @@ public class GameConstant {
 	
 	// PacMan Constant
 	public static final String PACMAN_NAME = "PacMan";
-	public static final String PACMAN_DETAIL = "The PacMan";
 	public static final double PACMAN_SPEED = 2;
 	public static final int PACMAN_LIFE = 3;
 	public static final int PACMAN_SPAWN_X = 36;
@@ -14,7 +13,6 @@ public class GameConstant {
 
 	// Ghost Constant
 	public static final String GHOST_NAME = "Ghost";
-	public static final String GHOST_DETAIL = "The BoogeyMan";
 	public static final double GHOST_SPEED = 2;
 	public static final int GHOST_SPAWN_X = 468;
 	public static final int GHOST_SPAWN_Y = 156;
@@ -23,7 +21,6 @@ public class GameConstant {
 	
 	// GhostBot Constant
 	public static final String GHOST_BOT_NAME = "Ghost";
-	public static final String GHOST_BOT_DETAIL = "The BoogeyMan";
 	public static final int GHOST_BOT_SPEED = 2;
 	public static final int GHOST_BOT_SPAWN_X = 468;
 	public static final int GHOST_BOT_SPAWN_Y = 204;
@@ -32,19 +29,13 @@ public class GameConstant {
 
 	// Pellet Constant
 	public static final String PELLET_NAME = "Pellet";
-	public static final String PELLET_DETAIL = "THE Pellet";
 	public static final double PELLET_RADIUS = 1.5;
 	public static final int TOTAL_PELLET = 100;
 	
 	// SpecialPower Constant
 	public static final String REVENGE_BUFF_NAME = "REVENGE_BUFF";
-	public static final String REVENGE_BUFF_DETAIL = "THE REVENGE_BUFF";
-	public static final String SPEED_BUFF_NAME = "SPEED_BUFF";
-	public static final String SPEED_BUFF_DETAIL = "THE SPEED_BUFF";
 	public static final String SHIELD_BUFF_NAME = "SHIELD_BUFF";
-	public static final String SHIELD_BUFF_DETAIL = "THE SHIELD_BUFF";
 	public static final String STARVE_BUFF_NAME = "STARVE_BUFF";
-	public static final String STARVE_BUFF_DETAIL = "THE STARVE_BUFF";
 	public static final int BUFF_SPEED = 4;
 	public static final int DEBUFF_SPEED = 1;
 	public static final int BUFF_SPAWN_TIME = 5;

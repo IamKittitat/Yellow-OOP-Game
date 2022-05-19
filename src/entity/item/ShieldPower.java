@@ -17,7 +17,6 @@ public class ShieldPower extends SpecialPower {
 	public ShieldPower(int x, int y, long startRandomSecondTime) {
 		super(startRandomSecondTime);
 		this.name = GameConstant.SHIELD_BUFF_NAME;
-		this.detail = GameConstant.SHIELD_BUFF_DETAIL;
 		this.xPos = x;
 		this.yPos = y;
 		setEaten(false);

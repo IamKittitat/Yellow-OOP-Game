@@ -31,7 +31,6 @@ public class PacMan extends ControlCharacter {
 	public PacMan(CharacterColor color) {
 		super(color);
 		this.name = GameConstant.PACMAN_NAME;
-		this.detail = GameConstant.PACMAN_DETAIL;
 		this.xPos = GameConstant.PACMAN_SPAWN_X;
 		this.yPos = GameConstant.PACMAN_SPAWN_Y;
 		setSpeed(0);
@@ -146,7 +145,7 @@ public class PacMan extends ControlCharacter {
 			gc.drawImage(RenderableHolder.pacManShieldPNG, -this.radius*1.5, -this.radius*1.5, this.radius * 3, this.radius * 3);
 		}
 		if(this.CanEatPellet() == false) {
-			gc.drawImage(RenderableHolder.pacManStarve, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+			gc.drawImage(RenderableHolder.pacManStarvePNG, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
 		}
 //		gc.translate(xPos, yPos);
 //		gc.rotate(angle);
