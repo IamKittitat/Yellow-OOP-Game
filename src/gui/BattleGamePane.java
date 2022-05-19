@@ -30,7 +30,7 @@ public class BattleGamePane extends StackPane {
 
 	}
 
-	public void addListerner() {
+	private void addListerner() {
 		this.setOnKeyPressed((KeyEvent event) -> {
 			InputUtility.setKeyPressed(event.getCode(), true);
 		});

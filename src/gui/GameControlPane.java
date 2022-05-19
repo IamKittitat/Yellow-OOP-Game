@@ -55,7 +55,14 @@ public class GameControlPane extends BorderPane {
 
 	}
 
-	public void initilizeLivesPane() {
+	private void initilizeScoreText() {
+		this.scoreText = new Text("Score : 0");
+		this.scoreText.setStyle("-fx-font-size:20;");
+		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
+		this.scoreText.setFill(Color.YELLOW);
+	}
+
+	private void initilizeLivesPane() {
 		this.livesPane = new HBox(5);
 		this.livesPane.setMinHeight(25);
 		this.lives = GameController.pacMan.getLife();
@@ -64,28 +71,7 @@ public class GameControlPane extends BorderPane {
 		}
 	}
 
-	public void initilizeScoreText() {
-		this.scoreText = new Text("Score : 0");
-		this.scoreText.setStyle("-fx-font-size:20;");
-		this.scoreText.setFont(RenderableHolder.gameHeaderFont);
-		this.scoreText.setFill(Color.YELLOW);
-	}
-
-	public void initilizeMenuButton() {
-		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
-		this.menuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-
-				RenderableHolder.ClickedSound_music.play();
-				Main.sceneHolder.switchScene(new MainMenuScene());
-				GameLogic.restartGame();
-			}
-		});
-	}
-
-	public void initilizePauseButton() {
+	private void initilizePauseButton() {
 		this.pauseButton = new IconButton(RenderableHolder.pauseButtonPNG);
 		this.pauseButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -103,6 +89,20 @@ public class GameControlPane extends BorderPane {
 					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
 					isPaused = false;
 				}
+			}
+		});
+	}
+
+	private void initilizeMenuButton() {
+		this.menuButton = new IconButton(RenderableHolder.menuButtonPNG);
+		this.menuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new MainMenuScene());
+				GameLogic.restartGame();
 			}
 		});
 	}

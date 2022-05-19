@@ -47,7 +47,7 @@ public class HowToPlayPane extends BorderPane {
 		this.setTop(closeButtonPane);
 	}
 
-	public void initializeButton() {
+	private void initializeButton() {
 		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
 		this.nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

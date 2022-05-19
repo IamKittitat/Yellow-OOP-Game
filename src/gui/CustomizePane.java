@@ -98,7 +98,7 @@ public class CustomizePane extends BorderPane {
 		});
 	}
 
-	public void saveColor() {
+	private void saveColor() {
 		GameLogic.setPacManColor(pacManSwitchColorPane.getColorList().get(pacManSwitchColorPane.getIdx()));
 		GameLogic.setGhostColor(ghostSwitchColorPane.getColorList().get(ghostSwitchColorPane.getIdx()));
 	}
