@@ -89,7 +89,7 @@ public class GameController {
 		if (GameLogic.IsGameEnd()) {
 			GameCanvas.gameLoop.stop();
 			BattleGamePane.endGamePane.setResult();
-			BattleGamePane.endGamePane.enter();
+			BattleGamePane.endGamePane.move();
 		}
 	}
 }

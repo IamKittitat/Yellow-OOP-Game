@@ -14,26 +14,22 @@ public class BattleGamePane extends StackPane {
 
 	public BattleGamePane() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;");
 		this.setPrefSize(900, 500);
 		this.setMaxSize(900, 500);
 
 		this.gameCanvas = new GameCanvas();
 		this.gameControlPane = GameController.gameControlPane;
-		
-		this.endGamePane = new EndGamePane();
+		BattleGamePane.endGamePane = new EndGamePane();
 
-		this.addListerner();
-		
 		Pane gamePane = new VBox();
-		
 		gamePane.getChildren().addAll(gameControlPane, gameCanvas);
-		gameCanvas.requestFocus();
-		
-		this.getChildren().addAll(gamePane,endGamePane);
+
+		this.getChildren().addAll(gamePane, endGamePane);
+		this.addListerner();
+
 	}
-	
+
 	public void addListerner() {
 		this.setOnKeyPressed((KeyEvent event) -> {
 			InputUtility.setKeyPressed(event.getCode(), true);

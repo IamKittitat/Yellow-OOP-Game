@@ -1,8 +1,7 @@
 package gui;
 
 import application.Main;
-import gui.base.IconButton;
-import gui.base.MenuButton;
+import gui.base.TextButton;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,16 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import logic.GameController;
 import logic.GameLogic;
-import scene.BattleGameScene;
-import scene.CustomizeScene;
 import scene.MainMenuScene;
 import sharedObject.RenderableHolder;
 
@@ -35,50 +29,27 @@ public class EndGamePane extends BorderPane {
 		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;" + "-fx-border-color: yellow; " + "-fx-border-radius: 30;"
 				+ " -fx-border-width: 2px;");
-		setMaxSize(600, 400);
-		this.setPadding(new Insets(120,30,0,30));
-		this.isHidden = true;
-		
-		this.resultText = new Text();
-		this.resultText.setFont(RenderableHolder.gameHeaderFont);
-		this.resultText.setFill(Color.YELLOW);
-
+		this.setMaxSize(600, 400);
+		this.setPadding(new Insets(120, 30, 0, 30));
 		this.setTranslateY(600);
 
-		this.backToMainMenuButton = new MenuButton("Main Menu");
-		this.backToMainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		this.isHidden = true;
 
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				RenderableHolder.ClickedSound_music.play();
-				Main.sceneHolder.switchScene(new MainMenuScene());
-				GameLogic.restartGame();
-			}
-		});
-		
-		this.quitButton = new MenuButton("Quit");
-		this.quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				RenderableHolder.ClickedSound_music.play();
-				System.exit(0);
-			}
-		});
-
+		this.initializeResultText();
+		this.initializeBackToMainMenuButton();
+		this.initializeQuitButton();
 
 		VBox buttonPane = new VBox(10);
 		buttonPane.setPrefWidth(900);
 		buttonPane.setAlignment(Pos.CENTER);
 		buttonPane.setPadding(new Insets(30, 0, 30, 0));
-		buttonPane.getChildren().addAll(backToMainMenuButton,quitButton);
+		buttonPane.getChildren().addAll(backToMainMenuButton, quitButton);
 
+		this.setCenter(resultText);
 		this.setBottom(buttonPane);
 	}
 
-	public void enter() {
+	public void move() {
 		TranslateTransition transition = new TranslateTransition();
 		transition.setDuration(Duration.seconds(0.3));
 		transition.setNode(this);
@@ -92,17 +63,49 @@ public class EndGamePane extends BorderPane {
 		}
 		transition.play();
 	}
-	
+
 	public void setResult() {
-		if(GameLogic.pacManWin()) {
+		if (GameLogic.pacManWin()) {
 			this.resultText.setText("Pac-Man WIN!");
 			this.setRight(new ImageView(RenderableHolder.pinkPacManGIF));
 			this.setLeft(new ImageView(RenderableHolder.yellowPacManGIF));
-		}else if(GameLogic.GhostWin()) {
+		} else if (GameLogic.GhostWin()) {
 			this.resultText.setText("Ghost WIN!");
 			this.setRight(new ImageView(RenderableHolder.pinkGhostGIF));
 			this.setLeft(new ImageView(RenderableHolder.greenGhostGIF));
 		}
-		this.setCenter(resultText);
+	}
+
+	private void initializeResultText() {
+		this.resultText = new Text();
+		this.resultText.setFont(RenderableHolder.gameHeaderFont);
+		this.resultText.setFill(Color.YELLOW);
+	}
+
+	private void initializeBackToMainMenuButton() {
+		this.backToMainMenuButton = new TextButton("Main Menu");
+		this.backToMainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				RenderableHolder.ClickedSound_music.play();
+				Main.sceneHolder.switchScene(new MainMenuScene());
+				GameLogic.restartGame();
+			}
+		});
+	}
+
+	private void initializeQuitButton() {
+		this.quitButton = new TextButton("Quit");
+		this.quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				RenderableHolder.ClickedSound_music.play();
+				System.exit(0);
+			}
+		});
 	}
 }

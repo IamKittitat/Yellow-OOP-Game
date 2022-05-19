@@ -1,7 +1,6 @@
 package gui;
 
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -20,9 +19,8 @@ public class MainMenuPane extends HBox {
 
 		this.menuControlPane = new MenuControlPane();
 		BorderPane imagePane = new BorderPane(new ImageView(RenderableHolder.mainMenuGIF));
-		
-		this.getChildren().addAll(menuControlPane,imagePane);
-		// TODO Auto-generated constructor stub
+
+		this.getChildren().addAll(menuControlPane, imagePane);
 
 	}
 }

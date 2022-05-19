@@ -15,17 +15,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import sharedObject.RenderableHolder;
 
-public class MainMenuScene extends Scene{
+public class MainMenuScene extends Scene {
 	private MainMenuPane mainMenuPane;
 	private StackPane stackPane;
 	private HowToPlayPane howToPlayPane;
 	public static AnimationTimer startThemeSong;
-	
+
 	public MainMenuScene(final Parent root) {
 		super(root);
 
 	}
-	
+
 	public MainMenuScene() {
 		this((Parent) new StackPane());
 		this.setRoot((Parent) (this.stackPane = new StackPane()));
@@ -36,7 +36,7 @@ public class MainMenuScene extends Scene{
 			}
 		};
 		startThemeSong.start();
-		
+
 		this.mainMenuPane = new MainMenuPane();
 		this.mainMenuPane.menuControlPane.howToPlayButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -44,13 +44,13 @@ public class MainMenuScene extends Scene{
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				RenderableHolder.ClickedSound_music.play();
-				howToPlayPane.enter();
+				howToPlayPane.move();
 			}
 		});
-		
+
 		this.howToPlayPane = new HowToPlayPane();
-		
-		this.stackPane.getChildren().addAll(mainMenuPane,howToPlayPane);
+
+		this.stackPane.getChildren().addAll(mainMenuPane, howToPlayPane);
 	}
-	
+
 }

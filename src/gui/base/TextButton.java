@@ -2,9 +2,9 @@ package gui.base;
 
 import sharedObject.RenderableHolder;
 
-public class MenuButton extends GameButton {
+public class TextButton extends GameButton {
 
-	public MenuButton(String arg0) {
+	public TextButton(String arg0) {
 		super(arg0);
 		this.setPrefWidth(300);
 		this.setPrefHeight(50);
