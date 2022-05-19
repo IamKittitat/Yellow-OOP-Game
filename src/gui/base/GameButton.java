@@ -8,6 +8,10 @@ import javafx.scene.paint.Color;
 
 public class GameButton extends Button {
 
+	public GameButton() {
+		this(null);
+	}
+
 	public GameButton(String arg0) {
 		super(arg0);
 		this.setStyle("-fx-background-color: transparent; ");
@@ -19,7 +23,6 @@ public class GameButton extends Button {
 		setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-
 				DropShadow shadow = new DropShadow();
 				shadow.setColor(Color.YELLOW);
 				shadow.setSpread(0.4);
@@ -31,7 +34,6 @@ public class GameButton extends Button {
 		setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-
 				setEffect(null);
 			}
 		});
