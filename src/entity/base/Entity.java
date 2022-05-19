@@ -4,11 +4,6 @@ import sharedObject.IRenderable;
 
 public abstract class Entity implements IRenderable {
 	protected String name;
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	protected String detail;
 	protected double xPos, yPos;
 	protected double radius;
@@ -43,6 +38,10 @@ public abstract class Entity implements IRenderable {
 		this.z = z;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
