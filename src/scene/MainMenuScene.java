@@ -18,7 +18,6 @@ public class MainMenuScene extends Scene {
 
 	public MainMenuScene(final Parent root) {
 		super(root);
-
 	}
 
 	public MainMenuScene() {

@@ -33,17 +33,6 @@ public class SwitchColorPane extends BorderPane {
 
 	}
 
-	public void change() {
-		ImageView image = new ImageView(this.ColorImageList.get(idx));
-		image.setFitWidth(100);
-		image.setFitHeight(100);
-		if (idx == 0) {
-			image.setFitWidth(100);
-			image.setFitHeight(100);
-		}
-		this.setCenter(image);
-	}
-
 	private void initializeButton() {
 		this.nextButton = new IconButton(RenderableHolder.nextButtonPNG);
 		this.nextButton.setOnMouseClicked(e -> {
@@ -58,6 +47,17 @@ public class SwitchColorPane extends BorderPane {
 			idx = (idx + 2) % ColorList.size();
 			change();
 		});
+	}
+
+	private void change() {
+		ImageView image = new ImageView(this.ColorImageList.get(idx));
+		image.setFitWidth(100);
+		image.setFitHeight(100);
+		if (idx == 0) {
+			image.setFitWidth(100);
+			image.setFitHeight(100);
+		}
+		this.setCenter(image);
 	}
 
 	public ArrayList<Image> getColorImageList() {

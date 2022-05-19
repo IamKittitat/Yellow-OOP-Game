@@ -23,7 +23,6 @@ public class HowToPlayPane extends BorderPane {
 
 	public HowToPlayPane() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.setStyle("-fx-background-color: black;" + "-fx-border-color: yellow; " + "-fx-border-radius: 30;"
 				+ " -fx-border-width: 2px;");
 		this.setMaxSize(600, 400);
@@ -46,21 +45,6 @@ public class HowToPlayPane extends BorderPane {
 		this.setCenter(howToPlayDetails1);
 		this.setBottom(buttonPane);
 		this.setTop(closeButtonPane);
-	}
-
-	public void move() {
-		TranslateTransition transition = new TranslateTransition();
-		transition.setDuration(Duration.seconds(0.3));
-		transition.setNode(this);
-		if (isHidden) {
-			transition.setToY(0);
-			transition.setToX(0);
-			isHidden = false;
-		} else {
-			transition.setToY(600);
-			isHidden = true;
-		}
-		transition.play();
 	}
 
 	public void initializeButton() {
@@ -101,5 +85,20 @@ public class HowToPlayPane extends BorderPane {
 				move();
 			}
 		});
+	}
+
+	public void move() {
+		TranslateTransition transition = new TranslateTransition();
+		transition.setDuration(Duration.seconds(0.3));
+		transition.setNode(this);
+		if (isHidden) {
+			transition.setToY(0);
+			transition.setToX(0);
+			isHidden = false;
+		} else {
+			transition.setToY(600);
+			isHidden = true;
+		}
+		transition.play();
 	}
 }
