@@ -53,10 +53,6 @@ public class SwitchColorPane extends BorderPane {
 		ImageView image = new ImageView(this.ColorImageList.get(idx));
 		image.setFitWidth(100);
 		image.setFitHeight(100);
-		if (idx == 0) {
-			image.setFitWidth(100);
-			image.setFitHeight(100);
-		}
 		this.setCenter(image);
 	}
 
