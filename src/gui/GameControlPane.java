@@ -60,17 +60,15 @@ public class GameControlPane extends BorderPane {
 				// TODO Auto-generated method stub
 				RenderableHolder.ClickedSound_music.play();
 				
-				MainMenuScene forBack = new MainMenuScene();
-				Main.sceneHolder.switchScene(forBack);
-//				if (!isPaused) {
-//					GameCanvas.gameLoop.stop();
-//					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
-//					isPaused = true;
-//				} else {
-//					GameCanvas.gameLoop.start();
-//					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
-//					isPaused = false;
-//				}
+				if (!isPaused) {
+					GameCanvas.gameLoop.stop();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.playButtonPNG));
+					isPaused = true;
+				} else {
+					GameCanvas.gameLoop.start();
+					pauseButton.setGraphic(new ImageView(RenderableHolder.pauseButtonPNG));
+					isPaused = false;
+				}
 			}
 		});
 
