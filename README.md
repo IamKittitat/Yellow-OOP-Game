@@ -9,4 +9,4 @@ Yellow is a two-player game that got inspired from “PacMan”. The objective o
 1. Run by JAR file
 - Download Yellow.jar
 - Open command prompt
-- java -jar --module-path <Javafx path> --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml
+- java -jar --module-path [Javafx path] --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml
